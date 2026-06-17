@@ -97,8 +97,73 @@ To run the tool locally:
 git clone https://github.com/cysteger/Meta-CD
 cd Meta-CD
 ```
+---
 
+# Validation Test Suite (MBARC‑26)
+
+Meta‑CD includes a fully reproducible validation suite based on the **MBARC‑26 mock community**, a defined mixture of 26 microbial genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation. This dataset was published by Singer et al. (2016) as a benchmark for evaluating metagenomic sequencing and analysis tools.
+
+The MBARC‑26 test suite allows users to verify that Meta‑CD’s calculations match experimentally measured sequencing outcomes.
+
+## What the test suite contains
+
+The directory [`tests/`](tests/) includes:
+
+### **1. `mbarc26_numeric_expectations.csv`**
+A machine‑generated table containing the **expected numeric outputs** for all 26 MBARC‑26 organisms, including:
+
+- Genome size (bp, Mb)  
+- Relative abundance (% mapped reads)  
+- Sequencing depth (155.8 Gb)  
+- Bases sequenced  
+- Achieved coverage  
+- Required depth for 5×  
+- Minimum detectable relative abundance  
+- DNA mass (ng)  
+- DNA‑limited coverage  
+
+These values were computed using the exact formulas implemented in Meta‑CD.
+
+### **2. `generate_mbarc26_csv.py`**
+A fully reproducible Python script that regenerates the CSV from:
+
+- Genome sizes (Table 1 of Singer et al.)  
+- Illumina % mapped genome (Supplementary Table 1)  
+- Genome copies per µL (Supplementary Table 1)  
+- Sequencing depth (Table 2)  
+
+This ensures the test suite is transparent, auditable, and scientifically defensible.
+
+### **3. `README_tests.md`**
+Documentation describing:
+
+- The formulas used  
+- How each expected value is computed  
+- How to validate Meta‑CD against the MBARC‑26 dataset  
+
+---
+
+## How to use the test suite
+
+1. Open Meta‑CD (web or local).  
+2. Select any organism from the MBARC‑26 dataset.  
+3. Enter the values from `mbarc26_numeric_expectations.csv`:  
+   - Genome size  
+   - Relative abundance  
+   - Sequencing depth  
+   - DNA quantity (optional)  
+4. Compare Meta‑CD’s outputs to the expected values in the CSV.
+
+Meta‑CD should match the expected values within rounding error.
+
+This provides a formal validation for users.
+
+---
 
 # References
 
-ADD THESE!!!
+Singer, E., Andreopoulos, B., Bowers, R.M. *et al.* (2016). **Next generation sequencing data of a defined microbial mock community.** *Scientific Data* 3:160081.  
+https://doi.org/10.1038/sdata.2016.81
+
+ADD MORE OF THESE!!!!
+
