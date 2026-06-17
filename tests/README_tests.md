@@ -72,7 +72,8 @@ Let:
 - \( C_{\text{target}} = 5 \) (target coverage)  
 - \( N \) = genome copies per µL  
 
-### **1. Bases sequenced**
+### 1. Bases sequenced
+
 
 
 \[
@@ -81,7 +82,8 @@ B = D \times 10^9 \times \frac{p}{100}
 
 
 
-### **2. Coverage**
+### 2. Coverage
+
 
 
 \[
@@ -90,18 +92,20 @@ C = \frac{B}{G}
 
 
 
-### **3. Required depth for 5×**
+### 3. Required depth for 5×
+
 If \( p = 0 \), this is undefined → `"NA"`.
 
 
 
 \[
-D_{\text{req}} = \frac{5 \times G}{(p/100)} \div 10^9
+D_{\text{req}} = \frac{5 \times G}{\left(\frac{p}{100}\right)} \div 10^9
 \]
 
 
 
-### **4. Minimum detectable RA at 5×**
+### 4. Minimum detectable RA at 5×
+
 
 
 \[
@@ -110,25 +114,24 @@ p_{\min} = \frac{5 \times G}{D \times 10^9} \times 100
 
 
 
-### **5. DNA mass (ng)**
+### 5. DNA mass (ng)
+
 
 
 \[
-\text{DNA mass (ng)} = N \times \frac{G \times 660}{6.022\times10^{23}} \times 10^9
+\text{DNA mass (ng)} = N \times \frac{G \times 660}{6.022 \times 10^{23}} \times 10^9
 \]
 
 
 
-### **6. DNA‑limited coverage**
+### 6. DNA‑limited coverage
+
 
 
 \[
-C_{\text{DNA}} = \frac{\text{DNA mass (ng)} \times 10^{-9} \times 6.022\times10^{23}}{G \times 660}
+C_{\text{DNA}} = \frac{\text{DNA mass (ng)} \times 10^{-9} \times 6.022 \times 10^{23}}{G \times 660}
 \]
 
-
-
-This equals the number of unique genome copies present.
 
 ---
 
