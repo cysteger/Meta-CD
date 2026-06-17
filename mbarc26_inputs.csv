@@ -1,0 +1,26 @@
+species,genome_size_bp,genome_size_mb,relative_abundance_percent,sequencing_depth_gb,platform
+Terriglobus roseus,5227858,5.23,1.0,155.8,Illumina
+Corynebacterium glutamicum,3309401,3.31,1.0,155.8,Illumina
+Clostridium perfringens,3256683,3.26,1.0,155.8,Illumina
+Clostridium thermocellum,3843301,3.84,1.0,155.8,Illumina
+Desulfosporosinus acidiphilus,4991181,4.99,1.0,155.8,Illumina
+Desulfosporosinus meridiei,4873567,4.87,1.0,155.8,Illumina
+Desulfotomaculum gibsoniae,4855529,4.86,1.0,155.8,Illumina
+Streptococcus pyogenes,1852441,1.85,1.0,155.8,Illumina
+Thermobacillus composti,4355525,4.36,1.0,155.8,Illumina
+Escherichia coli,4639675,4.64,1.0,155.8,Illumina
+Frateuria aurantia,3603458,3.60,1.0,155.8,Illumina
+Hirschia baltica,3540114,3.54,1.0,155.8,Illumina
+Pseudomonas stutzeri,4600489,4.60,1.0,155.8,Illumina
+Salmonella bongori,4460105,4.46,1.0,155.8,Illumina
+Salmonella enterica,4600800,4.60,1.0,155.8,Illumina
+Spirochaeta smaragdinae,4653970,4.65,1.0,155.8,Illumina
+Fervidobacterium pennivorans,2166381,2.17,1.0,155.8,Illumina
+Meiothermus silvanus,3721669,3.72,1.0,155.8,Illumina
+Echinicola vietnamensis,5608040,5.61,1.0,155.8,Illumina
+Olsenella uli,2051896,2.05,1.0,155.8,Illumina
+Segniliparus rotundus,3157527,3.16,1.0,155.8,Illumina
+Coraliomargarita akajimensis,3750771,3.75,1.0,155.8,Illumina
+Halovivax ruber,3223876,3.22,1.0,155.8,Illumina
+Natronobacterium gregoryi,3788356,3.79,1.0,155.8,Illumina
+Natronococcus occultus,4314118,4.31,1.0,155.8,Illumina
