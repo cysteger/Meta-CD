@@ -1,42 +1,161 @@
-# MBARC-26 Test Suite for Meta-CD
+# MBARC‑26 Validation Test Suite for Meta‑CD
 
-This directory contains a validation dataset based on the **MBARC-26 mock community** described in:
+This directory contains a complete, reproducible validation dataset based on the **MBARC‑26 mock community**, as described in:
 
-Singer et al. (2016). *Next generation sequencing data of a defined microbial mock community.* Scientific Data 3:160081. DOI: https://doi.org/10.1038/sdata.2016.81.
+Singer et al. (2016). *Next generation sequencing data of a defined microbial mock community.* Scientific Data 3:160081.  
+DOI https://doi.org/10.1038/sdata.2016.81
 
-> “We here report the next generation metagenomic sequence data of a defined mock community (Mock Bacteria ARchaea Community; MBARC-26), composed of 23 bacterial and 3 archaeal strains with finished genomes. These strains span 10 phyla and 14 classes, a range of GC contents, genome sizes, repeat content and encompass a diverse abundance profile.”  
+> “MBARC‑26 consists of 23 bacterial and 3 archaeal strains… Genome sizes span 1.8–6.5 Mbp… All genomes are available as finished sequences.”  
+>  
+> “Samples were pooled at varying ratios to generate the mock community (Fig. 2, Supplementary Table 1).”
 
-## Files
+The purpose of this test suite is to provide **confident numeric expectations** for all Meta‑CD calculations, enabling users to confirm that the tool produces correct and biologically consistent results.
 
-- `mbarc26_inputs.csv`  
-  Genome sizes, relative abundances, and sequencing depth for each MBARC-26 member (Illumina dataset).
+---
 
-- `mbarc26_expected_outputs.csv`  
-  Expected fold coverage (×) for each genome, matching the Illumina coverage reported in Fig. 3b.
+## Contents
 
-## Data Sources
+### **1. `mbarc26_numeric_expectations.csv`**
+A table containing **all expected Meta‑CD outputs** for each of the 26 MBARC‑26 organisms.
 
-- **Genome size**: Table 1 — “Genome statistics of each mock community member. Genome size includes chromosomes and plasmids.”  
-- **Sequencing depth**: Table 2 — Illumina HiSeq 2000 run with 355,875,608 raw reads and average insert size 219 ± 43 bp (2×150 bp), yielding ~155.8 Gb total sequence.  
-- **Relative abundance**: Fig. 2 and Supplementary Table 1 — community composition and relative abundance distribution based on mapped reads and molarity.  
-- **Fold coverage**: Fig. 3b — “Percent chromosome coverage and fold coverage of each mock community genome by sequencing platform using unassembled sequences.”
+Columns include:
 
-## How to Use with Meta-CD
+| Column | Description |
+|--------|-------------|
+| `species` | Organism name (Table 1) |
+| `genome_size_bp` | Genome size in base pairs (Table 1) |
+| `genome_size_mb` | Genome size in megabases |
+| `molarity` | DNA molarity from Supplementary Table 1 |
+| `genome_copies_per_ul` | Genome copies per µL (Supplementary Table 1) |
+| `ra_percent` | Illumina % mapped genome (used as relative abundance) |
+| `depth_gb` | Total sequencing depth (155.8 Gb; Table 2) |
+| `bases_sequenced_bp` | Expected bases sequenced for the organism |
+| `coverage_x` | Expected fold coverage |
+| `target_coverage_x` | Target coverage (set to 5×) |
+| `required_depth_gb` | Depth required to reach 5× at observed RA |
+| `min_detectable_ra_percent` | Minimum RA detectable at 5× given 155.8 Gb |
+| `dna_mass_ng` | DNA mass (ng) computed from genome copies |
+| `dna_limited_coverage_x` | Maximum theoretical coverage limited by DNA molecules |
 
-1. Open the Meta-CD web tool or local `index.html`.
-2. For a given species (e.g., *Escherichia coli*):
-   - Set **Genome size (Mb)** to the `genome_size_mb` value from `mbarc26_inputs.csv`.
-   - Set **Relative abundance (%)** to `relative_abundance_percent`.
-   - Set **Sequencing depth (Gb)** to `sequencing_depth_gb`.
-   - Leave DNA quantity blank or set to a sufficiently high value if you want to ignore DNA-limited effects.
-3. Run the post-sequencing analysis.
-4. Compare the **coverage (×)** reported by Meta-CD to the `expected_coverage_x` in `mbarc26_expected_outputs.csv`.
+All values are computed using the formulas described below.
 
-Meta-CD should reproduce the reported fold coverage values (within rounding), confirming that its coverage calculations are consistent with a well-characterized, published mock community dataset.
+---
 
-## Purpose
+## How the expected values were calculated
 
-This test suite is intended to:
+### **Sequencing depth**
+From Table 2 of the paper:
 
-- Demonstrate that Meta-CD’s coverage calculations match real, experimentally measured metagenomic data.
-- Anchor Meta-CD’s outputs to a benchmark dataset explicitly designed for method evaluation and reproducibility.
+> “355,875,608 raw reads… average insert size 219 ± 43 bp…”
+
+Total sequenced bases:
+
+
+
+\[
+155.8\ \text{Gb}
+\]
+
+
+
+This value is used for all organisms.
+
+---
+
+## Core formulas (matching Meta‑CD)
+
+Let:
+
+- \( G \) = genome size (bp)  
+- \( D \) = total sequencing depth (Gb)  
+- \( p \) = relative abundance (%)  
+- \( C_{\text{target}} = 5 \) (target coverage)  
+- \( N \) = genome copies per µL  
+
+### **1. Bases sequenced**
+
+
+\[
+B = D \times 10^9 \times \frac{p}{100}
+\]
+
+
+
+### **2. Coverage**
+
+
+\[
+C = \frac{B}{G}
+\]
+
+
+
+### **3. Required depth for 5×**
+If \( p = 0 \), this is undefined → `"NA"`.
+
+
+
+\[
+D_{\text{req}} = \frac{5 \times G}{(p/100)} \div 10^9
+\]
+
+
+
+### **4. Minimum detectable RA at 5×**
+
+
+\[
+p_{\min} = \frac{5 \times G}{D \times 10^9} \times 100
+\]
+
+
+
+### **5. DNA mass (ng)**
+
+
+\[
+\text{DNA mass (ng)} = N \times \frac{G \times 660}{6.022\times10^{23}} \times 10^9
+\]
+
+
+
+### **6. DNA‑limited coverage**
+
+
+\[
+C_{\text{DNA}} = \frac{\text{DNA mass (ng)} \times 10^{-9} \times 6.022\times10^{23}}{G \times 660}
+\]
+
+
+
+This equals the number of unique genome copies present.
+
+---
+
+## How to use this test suite
+
+### **1. Open Meta‑CD**
+Use the web interface or local `index.html`.
+
+### **2. For any organism (e.g., *Terriglobus roseus*) enter:**
+- Genome size (Mb)  
+- Relative abundance (%)  
+- Sequencing depth (Gb)  
+- DNA quantity (optional)  
+- Target coverage (5×)
+
+### **3. Compare Meta‑CD’s outputs to the CSV**
+Meta‑CD should match:
+
+- Coverage  
+- Bases sequenced  
+- Required depth  
+- Minimum detectable RA  
+- DNA‑limited coverage  
+
+within rounding error.
+
+---
+
+
+
