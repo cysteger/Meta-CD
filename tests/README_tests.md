@@ -126,4 +126,89 @@ within rounding error.
 ---
 
 
+---
+
+## Python Script: `generate_mbarc26_csv.py`
+
+This directory includes a fully reproducible Python script that generates the file  
+`generate_mbarc26_expected_outcomes_csv.py` using only values reported in the MBARC‑26 publication.
+
+### Purpose of the script
+
+The script computes all expected Meta‑CD outputs for each of the 26 MBARC‑26 organisms, including:
+
+- Bases sequenced  
+- Achieved coverage  
+- Required depth for 5×  
+- Minimum detectable relative abundance  
+- DNA mass (ng)  
+- DNA‑limited coverage  
+
+These values are calculated using the exact formulas implemented in Meta‑CD, ensuring that the test suite is:
+
+- Transparent  
+- Reproducible  
+- Auditable  
+- Scientifically defensible  
+
+### Inputs used by the script
+
+The script pulls its inputs from the MBARC‑26 paper:
+
+- **Genome size (bp)** — Table 1  
+- **Illumina % mapped genome (relative abundance)** — Supplementary Table 1  
+- **Genome copies per µL** — Supplementary Table 1  
+- **Sequencing depth (155.8 Gb)** — Table 2  
+- **Target coverage (5×)** — defined for this validation suite  
+
+All values are hard‑coded into the script for reproducibility.
+
+### What the script produces
+
+Running the script generates: `mbarc26_expected_outcomes.csv`
+
+
+This CSV contains one row per organism and includes:
+
+- Genome size (bp, Mb)  
+- Molarity  
+- Genome copies per µL  
+- Relative abundance (%)  
+- Sequencing depth (Gb)  
+- Bases sequenced  
+- Achieved coverage  
+- Required depth for 5×  
+- Minimum detectable RA at 5×  
+- DNA mass (ng)  
+- DNA‑limited coverage  
+
+These values represent the **ground‑truth numeric expectations** that Meta‑CD should reproduce.
+
+### How to run the script
+
+From the repository root:
+
+```bash
+cd tests
+python generate_mbarc26_csv.py
+```
+
+---
+
+## Citation
+
+If you use this test suite in a publication, please cite:
+
+Singer et al. (2016). *Next generation sequencing data of a defined microbial mock community.* Scientific Data 3:160081.
+
+---
+
+## Contact
+
+For questions about this validation dataset or Meta‑CD, please contact:
+
+**Callie — NC State University**  
+Bioinformatics
+cysteger@ncsu.edu
+
 
