@@ -207,7 +207,7 @@ Singer et al. (2016). *Next generation sequencing data of a defined microbial mo
 
 For questions about this validation dataset or Meta‑CD, please contact:
 
-**Callie — NC State University**  
+**Callie Claiborne — NC State University**  
 Bioinformatics
 cysteger@ncsu.edu
 
