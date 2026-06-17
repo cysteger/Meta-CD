@@ -78,13 +78,13 @@ A depth × abundance matrix is generated to help users quickly evaluate:
 
 ---
 
-# Demo
+# How To Use Meta-CD
 
-A live, interactive version of Meta‑CD is available at:
+Meta‑CD is live, free to use, and is available at:
 
 **https://cysteger.github.io/Meta-CD/**
 
-This version requires no installation and runs entirely in the browser.
+This web-based tool requires no installation or registration to use.
 
 ---
 
