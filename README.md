@@ -23,7 +23,7 @@ Meta‑CD is designed for microbial ecologists, metagenomic researchers, and seq
 
 ---
 
-# Scientific Overview
+# Overview
 
 Meta‑CD integrates four key parameters:
 
