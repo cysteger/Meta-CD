@@ -466,21 +466,21 @@ th {
 
   <button onclick="generateAll()">Generate All Results</button>
 
-<div class="footnote">
-  <strong>Footnote — How to Use These Inputs</strong><br><br>
+<div class="footnote" style="margin-top: 22px;">
+  <strong>Input Parameter Description</strong><br><br>
 
-  <em>Pre‑sequencing parameters</em> estimate what is theoretically required before you sequence:<br>
+  <strong>Pre‑sequencing parameters</strong> estimate what is theoretically required before you sequence:<br>
   • <strong>Relative abundance (%)</strong> — the expected abundance of the species in the community before sequencing. Used to estimate how much sequencing depth is needed to detect or assemble the species.<br>
   • <strong>Target coverage for minimum RA (×)</strong> — the minimum coverage you want the species to reach at its lowest expected abundance. This defines the detection threshold.<br>
   • <strong>Genome size (Mb)</strong> — the genome length of the species you are evaluating. Larger genomes require more sequencing to reach the same coverage.<br>
   • <strong>DNA quantity (ng)</strong> — the amount of DNA entering library prep. This limits the maximum effective depth because low DNA input reduces library complexity.<br><br>
 
-  <em>Post‑sequencing parameters</em> calculate what was actually achieved after sequencing:<br>
+  <strong>Post‑sequencing parameters</strong> calculate what was actually achieved after sequencing:<br>
   • <strong>Relative abundance (%) (Post‑processing RA)</strong> — the observed abundance of the species in the final metagenomic dataset.<br>
   • <strong>Sequencing depth (Gb)</strong> — the total number of gigabases sequenced for the community. Used to compute species‑specific bases and coverage.<br>
   • <strong>Target coverage (×)</strong> — the coverage you want to evaluate for the species using the observed abundance and sequencing depth.<br><br>
 
-  <strong>How to use them:</strong><br>
+  <strong>Uses and Interpretations</strong><br>
   • Use <em>pre‑sequencing inputs</em> when planning experiments, estimating feasibility, or determining how much sequencing is needed.<br>
   • Use <em>post‑sequencing inputs</em> when analyzing completed datasets to compute achieved coverage, minimum detectable abundance, and MAG recovery potential.<br><br>
 
