@@ -826,17 +826,17 @@ function updateLegend() {
 
     <div class="legend-item">
       <span style="display:inline-block;width:18px;height:18px;background:#d0ecff;border:1px solid #666;margin-right:6px;"></span>
-      Taxonomy (0.01×–0.1×)
+      Appropriate for Taxonomic Profiling (0.01×–0.1×)
     </div>
 
     <div class="legend-item">
       <span style="display:inline-block;width:18px;height:18px;background:#9EE7C9;border:1px solid #666;margin-right:6px;"></span>
-      Functional (1×–5×)
+      Appropriate for Functional Profiling (1×–5×)
     </div>
 
     <div class="legend-item">
       <span style="display:inline-block;width:18px;height:18px;background:#ffe2cc;border:1px solid #666;margin-right:6px;"></span>
-      MAG (10×–20×)
+      Appropriate for MAG Creation (10×–20×)
     </div>
   `;
 }
@@ -847,20 +847,17 @@ function updateLegend() {
    ============================================================ */
 function getColorClass(cov) {
 
-  // MAG: 10×–20× (orange)
-  if (cov >= 10 && cov <= 20) return "color-mag";
+  // MAG: 10× and above
+  if (cov >= 10) return "color-mag";          // orange
 
-  // Functional: 1×–5× (green)
-  if (cov >= 1 && cov <= 5) return "color-highres";
+  // Functional: 1×–10×
+  if (cov >= 1) return "color-highres";       // green
 
-  // Taxonomy: 0.01×–0.1× (blue)
-  if (cov >= 0.01 && cov <= 0.1) return "color-functional";
+  // Taxonomy: 0.01×–1×
+  if (cov >= 0.01) return "color-functional"; // blue
 
-  // Below threshold: <0.01× (white)
-  if (cov < 0.01) return "color-low";
-
-  // Everything else defaults to white
-  return "color-low";
+  // Below threshold: <0.01×
+  return "color-low";                         // white
 }
 
 
