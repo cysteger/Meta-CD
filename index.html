@@ -330,6 +330,38 @@ th {
   }
 }
 
+  .popup-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 18px;
+}
+
+  .popup-box {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+  background: white;
+  border: 1px solid #d4d9e2;
+  border-radius: 8px;
+  padding: 12px;
+  width: 260px;
+  box-shadow: var(--shadow-soft);
+  display: none;
+}
+
+.popup-box.visible {
+  display: block;
+}
+
+  
 </style>
 
 </head>
@@ -429,7 +461,7 @@ th {
       </div>
     </div>
 
-  <!-- DNA Quantity -->
+<!-- DNA Quantity -->
 <div class="input-field">
   <div class="input-label-row">
     <span class="main-label">DNA quantity (ng)</span>
@@ -438,32 +470,48 @@ th {
 
   <div class="input-inline">
     <input id="dnaInput" type="number" value="10" step="0.1">
-    <button type="button" class="info-btn" onclick="toggleDnaInfo()">?</button>
+
+    <!-- MATCHING POPUP BUTTON -->
+    <button id="dnaInfoBtn"
+            style="background:#2f6fde; color:white; border:none; border-radius:50%;
+                   width:18px; height:18px; font-size:12px; cursor:pointer; padding:0;">
+      ?
+    </button>
+
     <label><input type="checkbox" id="use_dna" checked> Use</label>
   </div>
 
-  <!-- Popup help box -->
-  <div id="dnaInfoPopup" class="info-popup">
-    <strong>How DNA Quantity Affects Sequencing</strong><br><br>
+  <!-- MATCHING POPUP BOX -->
+  <div id="dnaInfoPopup"
+       style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
+              background:white; border:1px solid #888; padding:20px; width:350px;
+              box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; border-radius:10px;">
 
-    DNA quantity determines the <strong>maximum possible unique sequencing depth</strong> you can achieve. 
-    Even if you sequence 50 Gb, you cannot exceed the number of unique molecules physically present 
-    in the sample. This calculator uses DNA quantity as a <strong>hard cap</strong> on effective depth.<br><br>
+    <h3>How DNA Quantity Affects Sequencing</h3>
 
-    <strong>How the cap works:</strong><br>
-    • 1 ng DNA ≈ 1 Gbp of unique sequence<br>
-    • Effective depth = min(nominal depth, DNA‑limited depth)<br>
-    • If you enter 5 ng DNA, your maximum possible unique depth is ~5 Gb<br><br>
+    <p style="font-size:14px; line-height:1.4;">
+      DNA quantity determines the <strong>maximum possible unique sequencing depth</strong>.
+      Even if you sequence 50 Gb, you cannot exceed the number of unique molecules in the sample.
+      This calculator uses DNA quantity as a <strong>hard cap</strong> on effective depth.
+    </p>
 
-    <strong>Why this matters:</strong><br>
-    • Low DNA input limits achievable coverage<br>
-    • Rare organisms are affected most strongly<br>
-    • MAG recovery becomes impossible if DNA input is too low<br>
-    • Sequencing more cannot overcome insufficient DNA<br><br>
+    <ul style="font-size:14px; line-height:1.4;">
+      <li>1 ng DNA ≈ 1 Gbp of unique sequence</li>
+      <li>Effective depth = min(nominal depth, DNA‑limited depth)</li>
+      <li>Low DNA input limits achievable coverage</li>
+      <li>Rare organisms are affected most strongly</li>
+      <li>MAG recovery becomes impossible if DNA is too low</li>
+    </ul>
 
-    <strong>Example:</strong><br>
-    If you enter 2 ng DNA and request 20 Gb sequencing, the calculator caps your 
-    effective depth at 2 Gb because only ~2 Gbp of unique molecules exist.
+    <p style="font-size:14px; line-height:1.4;">
+      <strong>Example:</strong>  
+      If you enter 2 ng DNA and sequence 20 Gb, the calculator caps your effective depth at 2 Gb.
+    </p>
+
+    <button id="closeDnaPopup"
+            style="margin-top:10px; padding:5px 10px; cursor:pointer;">
+      Close
+    </button>
   </div>
 </div>
 
@@ -1232,7 +1280,29 @@ window.addEventListener('load', function () {
     };
   }
 });
+  
 </script>
+
+<script>
+window.addEventListener('load', function () {
+  var dnaBtn   = document.getElementById("dnaInfoBtn");
+  var dnaPopup = document.getElementById("dnaInfoPopup");
+  var dnaClose = document.getElementById("closeDnaPopup");
+
+  if (dnaBtn && dnaPopup) {
+    dnaBtn.onclick = function () {
+      dnaPopup.style.display = "block";
+    };
+  }
+
+  if (dnaClose && dnaPopup) {
+    dnaClose.onclick = function () {
+      dnaPopup.style.display = "none";
+    };
+  }
+});
+</script>
+
 
       </div> <!-- end app-shell -->
 </body>
