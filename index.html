@@ -558,52 +558,55 @@ th {
   </p>
 </div>
 
-<!-- Coverage Estimation Table -->
-<div class="section-card">
-  <div class="section-title"><span>Coverage Estimation Table</span></div>
-
-  <p style="font-size:14px;">
-    Values are automatically adjusted based on genome size and DNA quantity.
-  </p>
-
-  <p>
-    This table uses genome size, DNA quantity, and a range of depths and abundances. 
-    It provides a quick reference for expected coverage across common sequencing depths 
-    and microbial abundances. Coverage values help determine whether taxonomic profiling, 
-    functional profiling, or MAG recovery is feasible. DNA quantity limits the effective depth, 
-    so deeper sequencing may not increase coverage if DNA quantity is limited.
-  </p>
-
-  <div class="scroll-table">
-    <table id="cheatTable">
-      <caption><strong>Coverage Estimation Table (Depth × Relative Abundance)</strong></caption>
-      <thead>
-        <tr>
-          <th>Depth (Gb)</th>
-          <th>RA 0.01%</th>
-          <th>RA 0.05%</th>
-          <th>RA 0.1%</th>
-          <th>RA 1%</th>
-          <th>RA 2.5%</th>
-          <th>RA 5%</th>
-          <th>RA 10%</th>
-          <th>RA 15%</th>
-          <th>RA 20%</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <div id="legendBox" class="legend-box"></div>
-
-</div> <!-- closes section-card -->
-
 </div> <!-- END COLUMN 2 -->
 
-</section>
+</section> <!-- END TWO-COLUMN WRAPPER -->
 
- 
+
+<!-- ============================
+     COVERAGE ESTIMATION TABLE — STANDALONE
+     ============================ -->
+<section>
+  <div class="section-card">
+    <div class="section-title"><span>Coverage Estimation Table</span></div>
+
+    <p style="font-size:14px;">
+      Values are automatically adjusted based on genome size and DNA quantity.
+    </p>
+
+    <p>
+      This table uses genome size, DNA quantity, and a range of depths and abundances. 
+      It provides a quick reference for expected coverage across common sequencing depths 
+      and microbial abundances. Coverage values help determine whether taxonomic profiling, 
+      functional profiling, or MAG recovery is feasible. DNA quantity limits the effective depth, 
+      so deeper sequencing may not increase coverage if DNA quantity is limited.
+    </p>
+
+    <div class="scroll-table">
+      <table id="cheatTable">
+        <caption><strong>Coverage Estimation Table (Depth × Relative Abundance)</strong></caption>
+        <thead>
+          <tr>
+            <th>Depth (Gb)</th>
+            <th>RA 0.01%</th>
+            <th>RA 0.05%</th>
+            <th>RA 0.1%</th>
+            <th>RA 1%</th>
+            <th>RA 2.5%</th>
+            <th>RA 5%</th>
+            <th>RA 10%</th>
+            <th>RA 15%</th>
+            <th>RA 20%</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="legendBox" class="legend-box"></div>
+
+  </div> <!-- closes section-card -->
+</section>
 
 <!-- ============================
      EXPLANATION & REFERENCES BOX
