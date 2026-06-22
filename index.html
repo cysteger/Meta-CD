@@ -451,77 +451,6 @@ th {
      ============================ -->
   <section class="two-col-wrapper">
   
-    <!-- ============================
-         COLUMN 1 — POST-SEQUENCING ANALYSIS
-         ============================ -->
-    <div class="analysis-box">
-  
-      <h2>Post‑Sequencing Analysis</h2>
-      <p class="explain">
-        These outputs describe what coverage was actually achieved based on the observed
-        sequencing depth, relative abundance, genome size, and DNA quantity.
-      </p>
-  
-      <!-- Bases Sequenced -->
-      <div class="section-card">
-        <div class="section-title"><span>Bases Sequenced for This Species</span></div>
-        <p id="speciesBases" class="result-value"></p>
-      </div>
-  
-      <!-- Coverage From Depth -->
-      <div class="section-card">
-        <div class="section-title"><span>Coverage From Sequencing Depth</span></div>
-        <p id="coverageResult" class="result-value"></p>
-        <p class="explain">
-          Uses relative abundance, genome size, sequencing depth, and DNA quantity. 
-          Coverage represents how many times each base of the genome is sequenced on average. Higher 
-          coverage increases confidence in detection, reduces false negatives, and improves assembly quality. 
-          DNA quantity acts as a cap on effective sequencing depth, limiting achievable coverage regardless of
-          nominal depth.
-        </p>
-      </div>
-  
-      <!-- MAG Recovery Table -->
-      <div class="section-card">
-        <div class="section-title"><span>MAG Recovery Potential</span></div>
-  
-        <p class="explain">
-          This table summarizes expected MAG recovery across sequencing depths and abundances.
-          MAG recovery requires high coverage, so only abundant organisms at high
-          sequencing depths reach the threshold.
-        </p>
-  
-        <table id="magRecoveryTable" class="depth-cheatsheet">
-          <caption><strong>Expected MAG Recovery Across Sequencing Depths and Relative Abundances</strong></caption>
-          <thead>
-            <tr>
-              <th>Sequencing Depth (Gb)</th>
-              <th colspan="6">Relative Abundance (fraction of community)</th>
-            </tr>
-            <tr>
-              <th></th>
-              <th>10%</th>
-              <th>5%</th>
-              <th>2.5%</th>
-              <th>1%</th>
-              <th>0.1%</th>
-              <th>0.01%</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-  
-        <div class="mag-legend-box">
-          <div><strong>How to read this table</strong></div>
-          <div class="mag-legend-item"><div class="mag-legend-color" style="background:#b7f7b7;"></div>High MAG recovery</div>
-          <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f7f7b7;"></div>Moderate</div>
-          <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f7d3b7;"></div>Low</div>
-          <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f2b7b7;"></div>Unlikely</div>
-        </div>
-      </div>
-  
-    </div> <!-- END COLUMN 1 -->
-  
   
     <!-- ============================
          COLUMN 2 — PRE-SEQUENCING ESTIMATION
@@ -559,6 +488,78 @@ th {
 </div>
 
 </div> <!-- END COLUMN 2 -->
+
+    <!-- ============================
+       COLUMN 1 — POST-SEQUENCING ANALYSIS
+       ============================ -->
+  <div class="analysis-box">
+  
+    <h2>Post‑Sequencing Analysis</h2>
+    <p class="explain">
+      These outputs describe what coverage was actually achieved based on the observed
+      sequencing depth, relative abundance, genome size, and DNA quantity.
+    </p>
+  
+    <!-- Bases Sequenced -->
+    <div class="section-card">
+      <div class="section-title"><span>Bases Sequenced for This Species</span></div>
+      <p id="speciesBases" class="result-value"></p>
+    </div>
+  
+    <!-- Coverage From Depth -->
+    <div class="section-card">
+      <div class="section-title"><span>Coverage From Sequencing Depth</span></div>
+      <p id="coverageResult" class="result-value"></p>
+      <p class="explain">
+        Uses relative abundance, genome size, sequencing depth, and DNA quantity. 
+        Coverage represents how many times each base of the genome is sequenced on average. Higher 
+        coverage increases confidence in detection, reduces false negatives, and improves assembly quality. 
+        DNA quantity acts as a cap on effective sequencing depth, limiting achievable coverage regardless of
+        nominal depth.
+      </p>
+    </div>
+  
+    <!-- MAG Recovery Table -->
+    <div class="section-card">
+      <div class="section-title"><span>MAG Recovery Potential</span></div>
+  
+      <p class="explain">
+        This table summarizes expected MAG recovery across sequencing depths and abundances.
+        MAG recovery requires high coverage, so only abundant organisms at high
+        sequencing depths reach the threshold.
+      </p>
+  
+      <table id="magRecoveryTable" class="depth-cheatsheet">
+        <caption><strong>Expected MAG Recovery Across Sequencing Depths and Relative Abundances</strong></caption>
+        <thead>
+          <tr>
+            <th>Sequencing Depth (Gb)</th>
+            <th colspan="6">Relative Abundance (fraction of community)</th>
+          </tr>
+          <tr>
+            <th></th>
+            <th>10%</th>
+            <th>5%</th>
+            <th>2.5%</th>
+            <th>1%</th>
+            <th>0.1%</th>
+            <th>0.01%</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+  
+      <div class="mag-legend-box">
+        <div><strong>How to read this table</strong></div>
+        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#b7f7b7;"></div>High MAG recovery</div>
+        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f7f7b7;"></div>Moderate</div>
+        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f7d3b7;"></div>Low</div>
+        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f2b7b7;"></div>Unlikely</div>
+      </div>
+    </div>
+  
+  </div> <!-- END COLUMN 1 -->
+  
 
 </section> <!-- END TWO-COLUMN WRAPPER -->
 
