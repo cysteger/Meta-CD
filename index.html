@@ -925,49 +925,70 @@ function updateCheatSheet() {
    MAG RECOVERY TABLE
    ============================================================ */
 function updateMagTable() {
-  const G = 3.5;
-  const depths = [1, 5, 10, 20, 40, 80];
-  const abundances = [
-    { val: 0.10 }, { val: 0.05 }, { val: 0.025 },
-    { val: 0.01 }, { val: 0.001 }, { val: 0.0001 }
-  ];
-
-  const MAG_THRESHOLD = 11400;
+  const G_raw = document.getElementById('genome').value;
+  const useG = document.getElementById('use_genome').checked;
 
   const tbody = document.querySelector("#magRecoveryTable tbody");
   tbody.innerHTML = "";
 
+  // If genome size is disabled or missing
+  if (!useG || G_raw === "") {
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 7;
+    cell.textContent = "Cannot compute MAG recovery — genome size is disabled or missing.";
+    row.appendChild(cell);
+    tbody.appendChild(row);
+    return;
+  }
+
+  const G = parseFloat(G_raw); // USER INPUT genome size (Mb)
+
+  // Depths to evaluate
+  const depths = [1, 5, 10, 20, 40, 80];
+
+  // Relative abundances (fractions)
+  const abundances = [
+    { val: 0.10 }, 
+    { val: 0.05 }, 
+    { val: 0.025 },
+    { val: 0.01 }, 
+    { val: 0.001 }, 
+    { val: 0.0001 }
+  ];
+
   depths.forEach(D_raw => {
     const row = document.createElement("tr");
+
+    // Depth label
     const depthCell = document.createElement("td");
     depthCell.textContent = D_raw;
     row.appendChild(depthCell);
 
+    // Apply DNA quantity cap
     const effective = getEffectiveDepth(D_raw);
 
     abundances.forEach(a => {
-      const cov = (effective * 1000 * a.val) / G;
-      let status = "";
+      const cov = (effective * 1000 * a.val) / G; // USER-DRIVEN COVERAGE
       const cell = document.createElement("td");
 
-     if (cov > 20) {
-  status = "Potentially High‑quality MAG";
-  cell.className = "mag-high";     // green
-} 
-else if (cov > 10) {
-  status = "Potentially Medium‑quality MAG";
-  cell.className = "mag-moderate"; // yellow
-} 
-else if (cov >= 1 && cov <= 5) {
-  status = "Potentially Low‑quality";
-  cell.className = "mag-low";      // orange
-} 
-else {
-  status = "Unlikely";
-  cell.className = "mag-unlikely"; // red
-}
+      // Show numeric coverage
+      cell.textContent = cov.toFixed(2) + "×";
 
-      cell.textContent = status;
+      // Apply your new MAG thresholds
+      if (cov > 20) {
+        cell.className = "mag-high";        // green
+      } 
+      else if (cov > 10) {
+        cell.className = "mag-moderate";    // yellow
+      } 
+      else if (cov >= 1 && cov <= 5) {
+        cell.className = "mag-low";         // orange
+      } 
+      else {
+        cell.className = "mag-unlikely";    // red
+      }
+
       row.appendChild(cell);
     });
 
