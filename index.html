@@ -550,13 +550,28 @@ th {
       </table>
   
       <div class="mag-legend-box">
-        <div><strong>How to read this table</strong></div>
-        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#b7f7b7;"></div>High MAG recovery</div>
-        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f7f7b7;"></div>Moderate</div>
-        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f7d3b7;"></div>Low</div>
-        <div class="mag-legend-item"><div class="mag-legend-color" style="background:#f2b7b7;"></div>Unlikely</div>
-      </div>
-    </div>
+  <div><strong>How to read this table</strong></div>
+
+  <div class="mag-legend-item">
+    <div class="mag-legend-color" style="background:#b7f7b7;"></div>
+    >20× — Potentially High‑quality MAG
+  </div>
+
+  <div class="mag-legend-item">
+    <div class="mag-legend-color" style="background:#f7f7b7;"></div>
+    >10× — Potentially Medium‑quality MAG
+  </div>
+
+  <div class="mag-legend-item">
+    <div class="mag-legend-color" style="background:#f7d3b7;"></div>
+    1×–5× — Potentially Low‑quality
+  </div>
+
+  <div class="mag-legend-item">
+    <div class="mag-legend-color" style="background:#f2b7b7;"></div>
+    <1× — Unlikely
+  </div>
+</div>
   
   </div> <!-- END COLUMN 1 -->
   
@@ -911,7 +926,7 @@ function updateCheatSheet() {
    ============================================================ */
 function updateMagTable() {
   const G = 3.5;
-  const depths = [5, 10, 20, 40, 80];
+  const depths = [1, 5, 10, 20, 40, 80];
   const abundances = [
     { val: 0.10 }, { val: 0.05 }, { val: 0.025 },
     { val: 0.01 }, { val: 0.001 }, { val: 0.0001 }
@@ -935,19 +950,22 @@ function updateMagTable() {
       let status = "";
       const cell = document.createElement("td");
 
-      if (cov >= MAG_THRESHOLD) {
-        status = "High MAG recovery";
-        cell.className = "mag-high";
-      } else if (cov >= MAG_THRESHOLD * 0.5) {
-        status = "Moderate";
-        cell.className = "mag-moderate";
-      } else if (cov >= MAG_THRESHOLD * 0.1) {
-        status = "Low";
-        cell.className = "mag-low";
-      } else {
-        status = "Unlikely";
-        cell.className = "mag-unlikely";
-      }
+     if (cov > 20) {
+  status = "Potentially High‑quality MAG";
+  cell.className = "mag-high";     // green
+} 
+else if (cov > 10) {
+  status = "Potentially Medium‑quality MAG";
+  cell.className = "mag-moderate"; // yellow
+} 
+else if (cov >= 1 && cov <= 5) {
+  status = "Potentially Low‑quality";
+  cell.className = "mag-low";      // orange
+} 
+else {
+  status = "Unlikely";
+  cell.className = "mag-unlikely"; // red
+}
 
       cell.textContent = status;
       row.appendChild(cell);
