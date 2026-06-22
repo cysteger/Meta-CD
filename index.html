@@ -564,13 +564,34 @@ th {
 
   <div class="mag-legend-item">
     <div class="mag-legend-color" style="background:#f7d3b7;"></div>
-    1×–5× — Potentially Low‑quality
+    1×–5× — Potentially Low‑quality MAG
   </div>
 
   <div class="mag-legend-item">
     <div class="mag-legend-color" style="background:#f2b7b7;"></div>
-    <1× — Unlikely
+    <1× — MAG Unlikely
   </div>
+
+<div class="explain" style="margin-top:16px; font-size:12px; line-height:1.45;">
+  <strong>Footnote — Interpreting MAG Recovery Requirements</strong><br><br>
+
+  To successfully recover high‑quality Metagenome‑Assembled Genomes (MAGs), the amount of sequencing 
+  required depends on sample complexity and the abundance of target organisms. Typical recommended 
+  sequencing depths per sample are:<br><br>
+
+  <strong>Suggested Data Outputs</strong><br>
+  • <em>Low complexity</em> (e.g., simplified mock communities, human gut): 5–10 Gb (~10–15M reads)<br>
+  • <em>Moderate complexity</em> (e.g., wastewater, typical gut samples): 10–20 Gb (~20–30M reads)<br>
+  • <em>High complexity</em> (e.g., soil, sediment, diverse environments): 30–50+ Gb (~60M+ reads)<br><br>
+
+  <strong>Key Factors for MAG Recovery</strong><br>
+  • <em>De novo assembly requires deep sequencing</em> — far more than taxonomic profiling.<br>
+  • <em>Per‑genome coverage</em> of ~10×–30× is typically needed for reliable MAG assembly.<br>
+  • <em>Abundance matters</em> — dominant organisms assemble at lower depths; rare taxa require much more data.<br>
+  • <em>Long‑read platforms</em> (PacBio HiFi, ONT) often achieve high‑quality MAGs with ~10–15 Gb due to longer contigs.
+</div>
+
+  
 </div>
   
   </div> <!-- END COLUMN 1 -->
