@@ -718,6 +718,29 @@ th {
     <div id="legendBox" class="legend-box"></div>
 
   </div> <!-- closes section-card -->
+
+<div class="section-title" style="margin-top: 22px;">
+  <span>Coverage Estimation Table Description</span>
+</div>
+
+<div class="footnote">
+  <strong>Community diversity and composition</strong> strongly influence the values shown in this table. Highly diverse communities distribute sequencing reads across many taxa, reducing the number of reads available for any individual species. In contrast, low‑diversity or enriched communities concentrate sequencing effort, increasing species‑specific coverage. Because of this, the same sequencing depth can produce very different coverage outcomes depending on the underlying community structure.<br><br>
+
+  <strong>Starting relative abundance</strong> is one of the most important drivers of achievable coverage. Species that begin at low abundance receive proportionally fewer reads, making them harder to detect and assemble. Even small shifts in starting abundance can dramatically change whether a species crosses key thresholds for detection, functional profiling, or MAG recovery.<br><br>
+
+  <strong>Targeted vs. untargeted metagenomic sequencing</strong> also affects interpretation:<br>
+  • In <em>untargeted metagenomics</em>, reads are distributed according to natural abundance, so rare species may remain below detection or assembly thresholds even at high sequencing depth.<br>
+  • In <em>targeted metagenomics</em> (e.g., enrichment, capture, or selective amplification), the effective abundance of the target organism increases, raising its achievable coverage and lowering the required sequencing depth.<br><br>
+
+  <strong>Uses and Interpretations</strong><br>
+  • Use this table to understand how sequencing depth, abundance, and genome size interact to determine species‑specific coverage.<br>
+  • Interpret thresholds flexibly: real‑world samples vary in diversity, DNA quality, and taxonomic composition, which can shift the depth required for detection or assembly.<br>
+  • Treat the values as <em>guidelines</em> rather than fixed rules — empirical performance depends on the biological context of the sample.<br><br>
+
+  Together, these considerations explain why coverage outcomes differ across sample types and why the same sequencing depth may yield different results depending on community structure, starting abundance, and sequencing strategy.
+</div>
+
+
 </section>
 
 <!-- ============================
