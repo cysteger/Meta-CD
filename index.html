@@ -818,33 +818,51 @@ function getEffectiveDepth(D_raw) {
 function updateLegend() {
   document.getElementById("legendBox").innerHTML = `
     <div class="legend-title"><strong>Coverage Tiers</strong></div>
-    <div class="legend-item"><span style="display:inline-block;width:18px;height:18px;background:#e3d7ff;border:1px solid #666;margin-right:6px;"></span>Ideal for Taxonomic Profiling</div>
-    <div class="legend-item"><span style="display:inline-block;width:18px;height:18px;background:#d0ecff;border:1px solid #666;margin-right:6px;"></span>Ideal for Functional Profiling</div>
-    <div class="legend-item"><span style="display:inline-block;width:18px;height:18px;background:#9EE7C9;border:1px solid #666;margin-right:6px;"></span>Ideal for High‑Resolution Functional Profiling</div>
-    <div class="legend-item"><span style="display:inline-block;width:18px;height:18px;background:#ffe2cc;border:1px solid #666;margin-right:6px;"></span>Ideal for MAG Creation</div>
-    <div class="legend-item"><span style="display:inline-block;width:18px;height:18px;background:#ffffff;border:1px solid #666;margin-right:6px;"></span>Below Recommended Threshold</div>
+
+    <div class="legend-item">
+      <span style="display:inline-block;width:18px;height:18px;background:#ffffff;border:1px solid #666;margin-right:6px;"></span>
+      Below Recommended Threshold (<0.01×)
+    </div>
+
+    <div class="legend-item">
+      <span style="display:inline-block;width:18px;height:18px;background:#d0ecff;border:1px solid #666;margin-right:6px;"></span>
+      Taxonomy (0.01×–0.1×)
+    </div>
+
+    <div class="legend-item">
+      <span style="display:inline-block;width:18px;height:18px;background:#9EE7C9;border:1px solid #666;margin-right:6px;"></span>
+      Functional (1×–5×)
+    </div>
+
+    <div class="legend-item">
+      <span style="display:inline-block;width:18px;height:18px;background:#ffe2cc;border:1px solid #666;margin-right:6px;"></span>
+      MAG (10×–20×)
+    </div>
   `;
 }
 
+
 /* ============================================================
-   COLOR CODING
+   COLOR CODING — UPDATED TO NEW COVERAGE TIERS
    ============================================================ */
 function getColorClass(cov) {
-  const G = parseFloat(document.getElementById('genome').value) || 2;
 
-  let t;
-  if (G <= 2.25) {
-    t = { taxonomy: 250, functional: 2500, highres: 10000, mag: 20000 };
-  } else {
-    t = { taxonomy: 140, functional: 1400, highres: 5700, mag: 11400 };
-  }
+  // MAG: 10×–20× (orange)
+  if (cov >= 10 && cov <= 20) return "color-mag";
 
-  if (cov >= t.mag) return "color-mag";
-  if (cov >= t.highres) return "color-highres";
-  if (cov >= t.functional) return "color-functional";
-  if (cov >= t.taxonomy) return "color-taxonomy";
+  // Functional: 1×–5× (green)
+  if (cov >= 1 && cov <= 5) return "color-highres";
+
+  // Taxonomy: 0.01×–0.1× (blue)
+  if (cov >= 0.01 && cov <= 0.1) return "color-functional";
+
+  // Below threshold: <0.01× (white)
+  if (cov < 0.01) return "color-low";
+
+  // Everything else defaults to white
   return "color-low";
 }
+
 
 /* ============================================================
    CHEAT SHEET
