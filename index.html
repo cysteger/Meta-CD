@@ -471,10 +471,11 @@ th {
   <div class="input-inline">
     <input id="dnaInput" type="number" value="10" step="0.1">
 
-    <!-- MATCHING POPUP BUTTON -->
+    <!-- MATCHING SQUARE POPUP BUTTON -->
     <button id="dnaInfoBtn"
-            style="background:#2f6fde; color:white; border:none; border-radius:50%;
-                   width:18px; height:18px; font-size:12px; cursor:pointer; padding:0;">
+            style="background:#2f6fde; color:white; border:none;
+                   width:20px; height:20px; border-radius:4px;
+                   font-size:12px; cursor:pointer; padding:0;">
       ?
     </button>
 
@@ -487,7 +488,7 @@ th {
               background:white; border:1px solid #888; padding:20px; width:350px;
               box-shadow:0 0 10px rgba(0,0,0,0.3); z-index:9999; border-radius:10px;">
 
-    <h3>How DNA Quantity Affects Sequencing</h3>
+    <h3>DNA Quantity Explained</h3>
 
     <p style="font-size:14px; line-height:1.4;">
       DNA quantity determines the <strong>maximum possible unique sequencing depth</strong>.
@@ -505,7 +506,7 @@ th {
 
     <p style="font-size:14px; line-height:1.4;">
       <strong>Example:</strong>  
-      If you enter 2 ng DNA and sequence 20 Gb, the calculator caps your effective depth at 2 Gb.
+      2 ng DNA + 20 Gb sequencing → effective depth = 2 Gb.
     </p>
 
     <button id="closeDnaPopup"
@@ -514,7 +515,6 @@ th {
     </button>
   </div>
 </div>
-
 
   </div> <!-- end .input-grid -->
 
