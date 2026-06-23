@@ -957,69 +957,11 @@ D<sub>max</sub> = DNA<sub>ng</sub>
 <p>
 If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because coverage scales linearly with D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced coverage across all entries in the table.
 </p>
-<h4>Color Coding</h4>
-<p>
-Each cell in the table is color-coded according to the expected coverage, providing an intuitive visual summary of analytical feasibility:
-</p>
-<ul style="margin-left:20px;">
-  <li><strong>&lt;0.01× coverage:</strong> Below recommended threshold (insufficient for reliable detection).</li>
-  <li><strong>0.01–1× coverage:</strong> Suitable for taxonomic profiling.</li>
-  <li><strong>1–10× coverage:</strong> Suitable for functional profiling.</li>
-  <li><strong>&gt;10× coverage:</strong> Suitable for MAG recovery.</li>
-</ul>
-<p>
-These thresholds reflect widely used benchmarks in metagenomic analysis and provide a practical framework for interpreting the coverage landscape across different sequencing and community composition scenarios.
-</p>
 <p>
 The coverage estimation table enables rapid assessment of how sequencing depth, genome size, relative abundance, and DNA quantity jointly determine achievable coverage. High-abundance organisms and small genomes achieve higher coverage for a given sequencing depth, while low-abundance organisms require substantially more sequencing to reach the same coverage thresholds. This table provides a quantitative foundation for study design, allowing users to evaluate the feasibility of taxonomic profiling, functional analysis, and genome assembly under a range of realistic conditions.
 </p>
 
 
-
-
-  <p><strong>1. Bases sequenced for the species</strong><br>
-     Total sequencing depth is measured in gigabases (Gb), where 1 Gb = 10<sup>9</sup> bases.
-     If a species has relative abundance A (e.g., 1% = 0.01), then the number of bases
-     sequenced for that species is:
-  </p>
-
-  <pre style="background:#eee; padding:10px;">
-Species bases = (D × 10⁹) × A
-  </pre>
-
-  <p>Where; D = Total sequencing depth (in gigabases, Gb).</p>
-
-  <p><strong>2. Genome size conversion</strong><br>
-     Genome size G is entered in megabases (Mb), where 1 Mb = 10<sup>6</sup> bases.
-  </p>
-
-  <pre style="background:#eee; padding:10px;">
-Genome bases = G × 10⁶
-  </pre>
-
-  <p><strong>3. Coverage formula</strong><br>
-     Coverage is defined as the number of sequenced bases divided by the genome size:
-  </p>
-
-  <pre style="background:#eee; padding:10px;">
-Coverage = (D × 10⁹ × A) / (G × 10⁶)
-         = (D × 1000 × A) / G
-  </pre>
-
-  <p>
-    In this tool, D is replaced by the DNA‑quantity–adjusted effective depth when DNA is limiting.
-    This is the standard definition of sequencing coverage used in genomics and metagenomics.
-  </p>
-
-  <p><strong>4. Required sequencing depth for a target coverage</strong><br>
-     Rearranging the coverage formula gives:
-  </p>
-
-  <pre style="background:#eee; padding:10px;">
-Required depth (Gb) = (Coverage × G) / (1000 × A)
-  </pre>
-
-  <p>This is commonly used in metagenomic sampling‑depth calculations for MAG recovery.</p>
 
   <!-- ============================
        GROUPED REFERENCES
