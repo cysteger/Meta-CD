@@ -814,7 +814,7 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
 A<sub>min</sub> = (C × G) / (1000 × D<sub>effective</sub>)
 </p>
 <p>
-This expression defines the minimum relative abundance (as a fraction) required for a genome of size G to reach the target coverage C under the available sequencing depth.
+This expression defines the minimum relative abundance required for a genome of size G to reach the target coverage C under the available sequencing depth.
 </p>
 <h4>DNA Quantity Constraint</h4>
 <p>
@@ -831,9 +831,68 @@ This formulation highlights the fundamental constraints governing detectability 
 </p>
 
 
+<h3>Bases Sequenced for This Species</h3>
+<p>
+The number of bases sequenced for a given species is determined by the total sequencing depth of the metagenomic sample and the relative abundance of the organism within the community. Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying taxonomic composition, the expected number of bases originating from a species is directly proportional to its abundance.
+</p>
+<p>
+If the total sequencing depth is expressed in gigabases (Gb), the total number of bases sequenced from the species is:
+</p>
+<p style="margin-left:20px;">
+Bases<sub>species</sub> = D<sub>community</sub> × 10<sup>9</sup> × A
+</p>
+<p>
+where D<sub>community</sub> is the total sequencing depth in gigabases, 10<sup>9</sup> converts gigabases to bases, and A is the relative abundance of the species expressed as a fraction. This formulation assumes uniform sampling of DNA fragments across the community, consistent with standard models of metagenomic read allocation.
+</p>
+<p>
+This calculation provides an estimate of the sequenced reads allocated to a specific organism. Higher relative abundance results in a proportionally larger share of the sequencing reads, while low-abundance organisms receive fewer reads and therefore fewer total bases. The number of bases sequenced for a species is a key determinant of downstream analytical sensitivity, influencing the ability to detect genes, estimate functional potential, and assemble contigs.
+</p>
+<p>
+Because this value scales linearly with both sequencing depth and relative abundance, it provides an intuitive measure of how deeply a species is represented in the dataset and serves as the foundation for coverage-based analyses.
+</p>
 
 
+<h3>Coverage From Sequencing Depth</h3>
+<p>
+Coverage represents the average number of times each base of a genome is represented in the sequencing data. In metagenomic sequencing, coverage for a specific organism depends on the total sequencing depth of the sample, the organism’s relative abundance, and the size of its genome. This relationship follows directly from the standard definition of genomic coverage.
+</p>
+<p>
+Coverage (C) is defined as:
+</p>
+<p style="margin-left:20px;">
+C = D<sub>species</sub> / G
+</p>
+<p>
+where D<sub>species</sub> is the total number of bases sequenced from the species (in Mb) and G is the genome size (in Mb). Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying community composition, the number of bases sequenced from a species is proportional to its relative abundance (A):
+</p>
+<p style="margin-left:20px;">
+D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, and the factor of 1000 converts gigabases (Gb) to megabases (Mb). Substituting this expression into the coverage equation yields:
+</p>
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+<p>
+This expression provides the expected average coverage for a genome of size G present at relative abundance A under an effective sequencing depth D<sub>effective</sub>.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because coverage scales linearly with D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced coverage across all organisms.
+</p>
+<p>
+This formulation captures the fundamental determinants of coverage in metagenomic sequencing. Coverage increases linearly with sequencing depth and relative abundance, and decreases with genome size. Because coverage is a primary determinant of analytical sensitivity—affecting taxonomic detection, functional profiling, and genome assembly—this calculation provides a quantitative basis for evaluating the feasibility of downstream analyses under different sequencing scenarios.
+</p>
 
+
+  
   
   <p><strong>1. Bases sequenced for the species</strong><br>
      Total sequencing depth is measured in gigabases (Gb), where 1 Gb = 10<sup>9</sup> bases.
