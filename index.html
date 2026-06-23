@@ -751,6 +751,53 @@ th {
     <span>How These Calculations Work</span>
   </div>
 
+<h3>Required Sequencing Depth</h3>
+<p>
+Estimating the sequencing depth required to achieve a target coverage for a specific microbial genome follows directly from the standard definition of coverage in metagenomics. Coverage (C) is defined as the ratio of the total number of bases sequenced from a species to the size of its genome. When the genome size, relative abundance, and desired coverage are known, the required community sequencing depth can be solved algebraically.
+</p>
+<p>
+Coverage is defined as:
+</p>
+<p style="margin-left:20px;">
+C = D<sub>species</sub> / G
+</p>
+<p>
+where D<sub>species</sub> is the total number of bases sequenced from the species (in Mb) and G is the genome size (in Mb). Because the number of bases sequenced from a species is proportional to its relative abundance (A), we express:
+</p>
+<p style="margin-left:20px;">
+D<sub>species</sub> = D<sub>community</sub> × 1000 × A
+</p>
+<p>
+where D<sub>community</sub> is the total sequencing depth in gigabases (Gb), and the factor of 1000 converts Gb to Mb. Substituting this expression into the coverage equation and solving for the required community depth yields:
+</p>
+<p style="margin-left:20px;">
+D<sub>required</sub> = (C × G) / (1000 × A)
+</p>
+<p>
+This expression provides the minimum sequencing depth (in Gb) required to achieve a target coverage C for a genome of size G present at relative abundance A.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If the user provides a DNA input amount, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the required depth exceeds this limit, the target coverage is not achievable with the available DNA, and the calculator reports the depth as DNA-limited.
+</p>
+<h4>Interpretation</h4>
+<p>
+This formulation captures the fundamental scaling relationships in metagenomic sequencing design: required depth increases linearly with genome size, increases inversely with relative abundance, and increases proportionally with the desired coverage. The DNA quantity constraint imposes a hard upper bound on achievable unique depth, reflecting empirical limits of library complexity.
+</p>
+
+
+
+
+
+
+
+  
   <p><strong>1. Bases sequenced for the species</strong><br>
      Total sequencing depth is measured in gigabases (Gb), where 1 Gb = 10<sup>9</sup> bases.
      If a species has relative abundance A (e.g., 1% = 0.01), then the number of bases
