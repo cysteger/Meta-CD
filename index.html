@@ -786,12 +786,49 @@ D<sub>max</sub> = DNA<sub>ng</sub>
 <p>
 If the required depth exceeds this limit, the target coverage is not achievable with the available DNA, and the calculator reports the depth as DNA-limited.
 </p>
-<h4>Interpretation</h4>
 <p>
 This formulation captures the fundamental scaling relationships in metagenomic sequencing design: required depth increases linearly with genome size, increases inversely with relative abundance, and increases proportionally with the desired coverage. The DNA quantity constraint imposes a hard upper bound on achievable unique depth, reflecting empirical limits of library complexity.
 </p>
 
 
+<h3>Minimum Relative Abundance Required</h3>
+<p>
+The minimum relative abundance required to achieve a target coverage is derived directly from the standard metagenomic coverage equation. Coverage (C) represents the ratio of the total number of bases sequenced from a species to the size of its genome. When the sequencing depth and genome size are known, the minimum abundance necessary to reach a specified coverage can be solved algebraically.
+</p>
+<p>
+Coverage is defined as:
+</p>
+<p style="margin-left:20px;">
+C = D<sub>species</sub> / G
+</p>
+<p>
+where D<sub>species</sub> is the number of bases sequenced from the species (in Mb) and G is the genome size (in Mb). Because the number of bases sequenced from a species is proportional to its relative abundance (A), we express:
+</p>
+<p style="margin-left:20px;">
+D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, and the factor of 1000 converts gigabases (Gb) to megabases (Mb). Substituting this expression into the coverage equation and solving for A yields:
+</p>
+<p style="margin-left:20px;">
+A<sub>min</sub> = (C × G) / (1000 × D<sub>effective</sub>)
+</p>
+<p>
+This expression defines the minimum relative abundance (as a fraction) required for a genome of size G to reach the target coverage C under the available sequencing depth.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the available sequencing depth exceeds this limit, the effective depth is capped accordingly. Because A<sub>min</sub> is inversely proportional to D<sub>effective</sub>, DNA-limited samples require higher minimum abundances to reach the same target coverage.
+</p>
+<p>
+This formulation highlights the fundamental constraints governing detectability in metagenomic sequencing. Minimum detectable abundance decreases with increasing sequencing depth and increases with genome size and target coverage. DNA quantity imposes an upper bound on effective depth, thereby raising the minimum abundance required for low-input samples. This relationship is consistent with established models of metagenomic detection sensitivity.
+</p>
 
 
 
