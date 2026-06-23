@@ -314,12 +314,39 @@ th {
   cursor: pointer !important;
 }
 
+.side-tab {
+  position: fixed;
+  left: 0;
+  top: 40%;
+  transform: translateY(-50%);
+  background: var(--accent);
+  padding: 12px 18px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: var(--shadow-soft);
+  z-index: 9999;
+}
+
+.side-tab a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  letter-spacing: 1px;
+}
+
+
 </style>
 
 </head>
 
 <body>
   <div class="app-shell">
+
+ <div class="side-tab">
+  <a href="calculations.html">Calculation Methods & References</a>
+</div>
+ 
 
 
 <h1>Meta-CD: Metagenomic Sequencing Coverage and Depth Calculator</h1>
