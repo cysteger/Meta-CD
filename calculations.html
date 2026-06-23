@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>How These Calculations Work</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="app-shell">
+    <h1>How These Calculations Work</h1>
+
+<!-- ============================
+     EXPLANATION & REFERENCES BOX
+     ============================ -->
+<div class="section-card">
+  <div class="section-title">
+    <span>How These Calculations Work</span>
+  </div>
+
+<h3>Required Sequencing Depth</h3>
+<p>
+Estimating the sequencing depth required to achieve a target coverage for a specific microbial genome follows directly from the standard definition of coverage in metagenomics. Coverage (C) is defined as the ratio of the total number of bases sequenced from a species to the size of its genome. When the genome size, relative abundance, and desired coverage are known, the required community sequencing depth can be solved algebraically.
+</p>
+<p>
+Coverage is defined as:
+</p>
+<p style="margin-left:20px;">
+C = D<sub>species</sub> / G
+</p>
+<p>
+where D<sub>species</sub> is the total number of bases sequenced from the species (in Mb) and G is the genome size (in Mb). Because the number of bases sequenced from a species is proportional to its relative abundance (A), we express:
+</p>
+<p style="margin-left:20px;">
+D<sub>species</sub> = D<sub>community</sub> × 1000 × A
+</p>
+<p>
+where D<sub>community</sub> is the total sequencing depth in gigabases (Gb), and the factor of 1000 converts Gb to Mb. Substituting this expression into the coverage equation and solving for the required community depth yields:
+</p>
+<p style="margin-left:20px;">
+D<sub>required</sub> = (C × G) / (1000 × A)
+</p>
+<p>
+This expression provides the minimum sequencing depth (in Gb) required to achieve a target coverage C for a genome of size G present at relative abundance A.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If the user provides a DNA input amount, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the required depth exceeds this limit, the target coverage is not achievable with the available DNA, and the calculator reports the depth as DNA-limited.
+</p>
+<p>
+This formulation captures the fundamental scaling relationships in metagenomic sequencing design: required depth increases linearly with genome size, increases inversely with relative abundance, and increases proportionally with the desired coverage. The DNA quantity constraint imposes a hard upper bound on achievable unique depth, reflecting empirical limits of library complexity.
+</p>
+
+
+<h3>Minimum Relative Abundance Required</h3>
+<p>
+The minimum relative abundance required to achieve a target coverage is derived directly from the standard metagenomic coverage equation. Coverage (C) represents the ratio of the total number of bases sequenced from a species to the size of its genome. When the sequencing depth and genome size are known, the minimum abundance necessary to reach a specified coverage can be solved algebraically.
+</p>
+<p>
+Coverage is defined as:
+</p>
+<p style="margin-left:20px;">
+C = D<sub>species</sub> / G
+</p>
+<p>
+where D<sub>species</sub> is the number of bases sequenced from the species (in Mb) and G is the genome size (in Mb). Because the number of bases sequenced from a species is proportional to its relative abundance (A), we express:
+</p>
+<p style="margin-left:20px;">
+D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, and the factor of 1000 converts gigabases (Gb) to megabases (Mb). Substituting this expression into the coverage equation and solving for A yields:
+</p>
+<p style="margin-left:20px;">
+A<sub>min</sub> = (C × G) / (1000 × D<sub>effective</sub>)
+</p>
+<p>
+This expression defines the minimum relative abundance required for a genome of size G to reach the target coverage C under the available sequencing depth.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the available sequencing depth exceeds this limit, the effective depth is capped accordingly. Because A<sub>min</sub> is inversely proportional to D<sub>effective</sub>, DNA-limited samples require higher minimum abundances to reach the same target coverage.
+</p>
+<p>
+This formulation highlights the fundamental constraints governing detectability in metagenomic sequencing. Minimum detectable abundance decreases with increasing sequencing depth and increases with genome size and target coverage. DNA quantity imposes an upper bound on effective depth, thereby raising the minimum abundance required for low-input samples. This relationship is consistent with established models of metagenomic detection sensitivity.
+</p>
+
+
+<h3>Bases Sequenced for This Species</h3>
+<p>
+The number of bases sequenced for a given species is determined by the total sequencing depth of the metagenomic sample and the relative abundance of the organism within the community. Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying taxonomic composition, the expected number of bases originating from a species is directly proportional to its abundance.
+</p>
+<p>
+If the total sequencing depth is expressed in gigabases (Gb), the total number of bases sequenced from the species is:
+</p>
+<p style="margin-left:20px;">
+Bases<sub>species</sub> = D<sub>community</sub> × 10<sup>9</sup> × A
+</p>
+<p>
+where D<sub>community</sub> is the total sequencing depth in gigabases, 10<sup>9</sup> converts gigabases to bases, and A is the relative abundance of the species expressed as a fraction. This formulation assumes uniform sampling of DNA fragments across the community, consistent with standard models of metagenomic read allocation.
+</p>
+<p>
+This calculation provides an estimate of the sequenced reads allocated to a specific organism. Higher relative abundance results in a proportionally larger share of the sequencing reads, while low-abundance organisms receive fewer reads and therefore fewer total bases. The number of bases sequenced for a species is a key determinant of downstream analytical sensitivity, influencing the ability to detect genes, estimate functional potential, and assemble contigs.
+</p>
+<p>
+Because this value scales linearly with both sequencing depth and relative abundance, it provides an intuitive measure of how deeply a species is represented in the dataset and serves as the foundation for coverage-based analyses.
+</p>
+
+
+<h3>Coverage From Sequencing Depth</h3>
+<p>
+Coverage represents the average number of times each base of a genome is represented in the sequencing data. In metagenomic sequencing, coverage for a specific organism depends on the total sequencing depth of the sample, the organism’s relative abundance, and the size of its genome. This relationship follows directly from the standard definition of genomic coverage.
+</p>
+<p>
+Coverage (C) is defined as:
+</p>
+<p style="margin-left:20px;">
+C = D<sub>species</sub> / G
+</p>
+<p>
+where D<sub>species</sub> is the total number of bases sequenced from the species (in Mb) and G is the genome size (in Mb). Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying community composition, the number of bases sequenced from a species is proportional to its relative abundance (A):
+</p>
+<p style="margin-left:20px;">
+D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, and the factor of 1000 converts gigabases (Gb) to megabases (Mb). Substituting this expression into the coverage equation yields:
+</p>
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+<p>
+This expression provides the expected average coverage for a genome of size G present at relative abundance A under an effective sequencing depth D<sub>effective</sub>.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because coverage scales linearly with D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced coverage across all organisms.
+</p>
+<p>
+This formulation captures the fundamental determinants of coverage in metagenomic sequencing. Coverage increases linearly with sequencing depth and relative abundance, and decreases with genome size. Because coverage is a primary determinant of analytical sensitivity—affecting taxonomic detection, functional profiling, and genome assembly—this calculation provides a quantitative basis for evaluating the feasibility of downstream analyses under different sequencing scenarios.
+</p>
+
+
+
+<h3>MAG Recovery Potential</h3>
+<p>
+Metagenome-assembled genome (MAG) recovery depends primarily on the sequencing coverage achieved for each organism in the community. Coverage determines the extent to which genomic regions are represented in the sequencing data, influencing both the contiguity and completeness of assembled genomes. Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying taxonomic composition, MAG recovery potential can be estimated directly from the expected coverage of each species.
+</p>
+<p>
+Coverage (C) for a species is computed as:
+</p>
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, A is the relative abundance of the organism (fraction), G is the genome size in megabases (Mb), and the factor of 1000 converts gigabases (Gb) to megabases (Mb). This formulation is consistent with standard definitions of metagenomic coverage and provides a quantitative basis for evaluating the feasibility of genome reconstruction.
+</p>
+<h4>Coverage Thresholds for MAG Recovery</h4>
+<p>
+Empirical studies indicate that successful MAG recovery requires substantially higher coverage than taxonomic or functional profiling. Although exact thresholds vary across studies and depend on factors such as strain heterogeneity and assembly algorithms, the following coverage ranges provide a practical framework for interpreting MAG recovery potential:
+</p>
+<ul style="margin-left:20px;">
+  <li><strong>&gt;20× coverage:</strong> High likelihood of recovering a near-complete MAG.</li>
+  <li><strong>10–20× coverage:</strong> Moderate likelihood; partial or moderately complete MAGs are common.</li>
+  <li><strong>1–5× coverage:</strong> Low likelihood; assemblies are typically fragmented and incomplete.</li>
+  <li><strong>&lt;1× coverage:</strong> Very unlikely; insufficient data for meaningful assembly.</li>
+</ul>
+<p>
+These thresholds reflect widely observed patterns in metagenomic assembly performance, where higher coverage improves contig length, reduces fragmentation, and increases the probability of recovering complete genomic features.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because MAG recovery potential depends directly on D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced assembly feasibility across all organisms.
+</p>
+<p>
+MAG recovery potential is determined by the interplay of sequencing depth, relative abundance, genome size, and DNA quantity. High-abundance organisms with small genomes achieve higher coverage and therefore exhibit greater assembly potential, while low-abundance organisms require substantially more sequencing to reach the same coverage thresholds. This framework provides a quantitative basis for evaluating the feasibility of genome reconstruction under different sequencing and community composition scenarios.
+</p>
+
+
+<h3>Coverage Estimation Table</h3>
+<p>
+The coverage estimation table provides a precomputed grid of expected coverage values across a range of sequencing depths and relative abundances. This table serves as a rapid reference for evaluating how sequencing effort and community composition jointly influence the coverage achieved for a genome of interest. The calculations follow directly from the standard metagenomic coverage equation and incorporate any DNA quantity constraints specified by the user.
+</p>
+<p>
+Coverage (C) for a species is computed as:
+</p>
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, A is the relative abundance of the organism (fraction), G is the genome size in megabases (Mb), and the factor of 1000 converts gigabases (Gb) to megabases (Mb). This formulation is applied to each combination of sequencing depth and relative abundance displayed in the table.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because coverage scales linearly with D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced coverage across all entries in the table.
+</p>
+<p>
+The coverage estimation table enables rapid assessment of how sequencing depth, genome size, relative abundance, and DNA quantity jointly determine achievable coverage. High-abundance organisms and small genomes achieve higher coverage for a given sequencing depth, while low-abundance organisms require substantially more sequencing to reach the same coverage thresholds. This table provides a quantitative foundation for study design, allowing users to evaluate the feasibility of taxonomic profiling, functional analysis, and genome assembly under a range of realistic conditions.
+</p>
+
+
+
+  <!-- ============================
+       GROUPED REFERENCES
+       ============================ -->
+  <h2>References</h2>
+
+  <!-- COVERAGE THEORY -->
+  <h3>Coverage Theory & Sequencing Mathematics</h3>
+  <ul>
+    <li>
+      Lander, E. S., & Waterman, M. S. (1988). Genomic mapping by fingerprinting random clones:
+      A mathematical analysis. <em>Genomics, 2</em>(3), 231–239.
+      https://doi.org/10.1016/0888-7543(88)90007-9
+    </li>
+  </ul>
+
+  <!-- METAGENOMIC COVERAGE, ABUNDANCE, GENOME SIZE -->
+  <h3>Metagenomic Coverage, Genome Size, and Abundance Relationships</h3>
+  <ul>
+    <li>
+      Nayfach, S., & Pollard, K. S. (2016). Average genome size estimation improves comparative
+      metagenomics and sheds light on the functional ecology of the human microbiome.
+      <em>Genome Biology, 16</em>, 51.
+      https://pmc.ncbi.nlm.nih.gov/articles/PMC4389708/
+    </li>
+    <li>
+      Nayfach, S., & Pollard, K. S. (2016). Toward accurate and quantitative comparative metagenomics.
+      <em>Cell, 166</em>(5), 1103–1116.
+      https://doi.org/10.1016/j.cell.2016.08.007
+    </li>
+  </ul>
+
+  <!-- HUMAN GUT MICROBIOME & LARGE-SCALE CATALOGS -->
+  <h3>Human Gut Microbiome & Large‑Scale Metagenomic Catalogs</h3>
+  <ul>
+    <li>
+      Qin, J., Li, R., Raes, J., et al. (2010). A human gut microbial gene catalogue established by
+      metagenomic sequencing. <em>Nature, 464</em>(7285), 59–65.
+      https://doi.org/10.1038/nature08821
+    </li>
+    <li>
+      Huttenhower, C., Gevers, D., Knight, R., et al. (2012). Structure, function and diversity of the
+      healthy human microbiome. <em>Nature, 486</em>(7402), 207–214.
+      https://doi.org/10.1038/nature11234
+    </li>
+    <li>
+      Almeida, A., Nayfach, S., Boland, M., et al. (2021). A unified catalog of 204,938 reference genomes
+      from the human gut microbiome. <em>Nature Biotechnology, 39</em>(1), 105–114.
+      https://doi.org/10.1038/s41587-020-0603-3
+    </li>
+    <li>
+      Almeida, A., Mitchell, A. L., Boland, M., et al. (2019). A new genomic blueprint of the human gut
+      microbiota. <em>Nature, 568</em>(7753), 499–504.
+      https://doi.org/10.1038/s41586-019-0965-1
+    </li>
+  </ul>
+
+  <!-- MAG RECOVERY & ASSEMBLY -->
+  <h3>MAG Recovery, Assembly, and Coverage Requirements</h3>
+  <ul>
+    <li>
+      Parks, D. H., Rinke, C., Chuvochina, M., et al. (2017). Recovery of nearly 8,000 metagenome‑assembled
+      genomes substantially expands the tree of life. <em>Nature Microbiology, 2</em>, 1533–1542.
+      https://doi.org/10.1038/s41564-017-0012-7
+    </li>
+    <li>
+      Nielsen, H. B., Almeida, M., Juncker, A. S., et al. (2014). Identification and assembly of genomes
+      and genetic elements in complex metagenomic samples without using reference genomes.
+      <em>Nature Biotechnology, 32</em>(8), 822–828.
+      https://doi.org/10.1038/nbt.2939
+    </li>
+    <li>
+      Stewart, R. D., Auffret, M. D., Warr, A., et al. (2018). Assembly of 913 microbial genomes from
+      metagenomic sequencing of the cow rumen. <em>Nature Communications, 9</em>(1), 870.
+      https://doi.org/10.1038/s41467-018-03317-6
+    </li>
+    <li>
+      Seshadri, R., Leahy, S. C., Attwood, G. T., et al. (2018). Cultivation and sequencing of rumen
+      microbiome members from the Hungate1000 Collection. <em>Nature Biotechnology, 36</em>(4), 359–367.
+      https://doi.org/10.1038/nbt.4110
+    </li>
+  </ul>
+
+  <!-- SHALLOW SHOTGUN & DEPTH BENCHMARKING -->
+  <h3>Shallow Shotgun Sequencing, Depth Benchmarking, and Protocol Evaluation</h3>
+  <ul>
+    <li>
+      Treichel, N. S., Pauvert, C., Séneca, J., et al. (2026). Benchmarking of shotgun sequencing depth
+      highlights limitations of strain‑level analysis and shallow metagenomics.
+      <em>bioRxiv</em>. https://doi.org/10.1101/2025.03.27.645659
+    </li>
+    <li>
+      Yu, K. H. O., Fang, X., Yao, H., et al. (2022). Evaluation of experimental protocols for shotgun
+      whole‑genome metagenomic discovery of antibiotic resistance genes.
+      <em>IEEE/ACM Transactions on Computational Biology and Bioinformatics, 19</em>(3), 1313–1321.
+      https://doi.org/10.1109/TCBB.2020.3004063
+    </li>
+    <li>
+      Tremblay, J., Schreiber, L., & Greer, C. W. (2022). High‑resolution shotgun metagenomics:
+      The more data, the better? <em>Briefings in Bioinformatics, 23</em>(6), bbac443.
+      https://doi.org/10.1093/bib/bbac443
+    </li>
+    <li>
+      Gaulke, C. A., Schmeltzer, E. R., Dasenko, M., et al. (2021). Evaluation of the effects of library
+      preparation procedure and sample characteristics on the accuracy of metagenomic profiles.
+      <em>mSystems, 6</em>(5). https://doi.org/10.1128/msystems.00440-21
+    </li>
+    <li>
+      Xu, W., Chen, T., Pei, Y., et al. (2021). Characterization of shallow whole‑metagenome shotgun
+      sequencing as a high‑accuracy and low‑cost method by complicated mock microbiomes.
+      <em>Frontiers in Microbiology, 12</em>, 678319.
+      https://doi.org/10.3389/fmicb.2021.678319
+    </li>
+    <li>
+      Hillmann, B., Al‑Ghalith, G. A., Shields‑Cutler, R. R., et al. (2018). Evaluating the information
+      content of shallow shotgun metagenomics. <em>mSystems, 3</em>(6).
+      https://doi.org/10.1128/msystems.00069-18
+    </li>
+    <li>
+      Cheng, W. Y., Liu, W. X., Ding, Y., et al. (2023). High sensitivity of shotgun metagenomic sequencing
+      in colon tissue biopsy by host DNA depletion. <em>Genomics, Proteomics & Bioinformatics, 21</em>(6),
+      1195–1205. https://doi.org/10.1016/j.gpb.2022.09
+    </li>
+  </ul>
+
+  <p>
+    These papers collectively support the mathematical definitions of coverage, the relationship
+    between sequencing depth and relative abundance, and the empirical coverage thresholds used
+    for MAG recovery, pathway inference, and taxonomic profiling.
+  </p>
+</div>
+
+
+
+  </div>
+</body>
+</html>
