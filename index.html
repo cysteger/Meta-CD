@@ -336,6 +336,38 @@ th {
   white-space: nowrap;
 }
 
+.input-explain {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.45;
+  background: #f9f9f9;
+  padding: 14px 18px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.input-explain h3 {
+  margin-top: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.input-explain h4 {
+  margin-bottom: 4px;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.input-explain ul {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 20px;
+}
+
+.input-explain li {
+  margin-bottom: 4px;
+}
 
 </style>
 
@@ -497,28 +529,37 @@ th {
 
   <button onclick="generateAll()">Generate All Results</button>
 
-<div class="section-title" style="margin-top: 22px;">
-  <span>Input Parameter Description</span>
+<div class="input-explain">
+  <h3>Input Parameter Description</h3>
+
+  <h4>Pre-Sequencing Parameters</h4>
+  <p>
+    Estimate what is theoretically required before sequencing:
+  </p>
+  <ul>
+    <li><strong>Relative abundance (%)</strong> — Expected abundance before sequencing; used to estimate required depth.</li>
+    <li><strong>Target coverage for minimum RA (x)</strong> — Minimum coverage required at the lowest expected abundance.</li>
+    <li><strong>Genome size (Mb)</strong> — Larger genomes require more sequencing to reach the same coverage.</li>
+    <li><strong>DNA quantity (ng)</strong> — Limits maximum effective depth due to library complexity.</li>
+  </ul>
+
+  <h4>Post-Sequencing Parameters</h4>
+  <p>
+    Calculate what was actually achieved after sequencing:
+  </p>
+  <ul>
+    <li><strong>Relative abundance (%)</strong> — Observed abundance in the final dataset.</li>
+    <li><strong>Sequencing depth (Gb)</strong> — Total gigabases sequenced for the community.</li>
+    <li><strong>Target coverage (x)</strong> — Coverage you want to evaluate using observed abundance and depth.</li>
+  </ul>
+
+  <h4>Uses and Interpretations</h4>
+  <p>
+    Use <em>pre-sequencing outputs</em> for planning and feasibility.  
+    Use <em>post-sequencing outputs</em> for evaluating achieved coverage, detection limits, and MAG recovery potential.
+  </p>
 </div>
 
-<div class="footnote">
-  <strong>Pre‑Sequencing Parameters</strong> - Estimate what is theoretically required before you sequence:<br>
-  • Relative abundance (%) — The expected abundance of the species in the community before sequencing. Used to estimate how much sequencing depth is needed to detect or assemble the species.<br>
-  • Target coverage for minimum RA (×) — The minimum coverage you want the species to reach at its lowest expected abundance. This defines the detection threshold.<br>
-  • Genome size (Mb) — The genome length of the species you are evaluating. Larger genomes require more sequencing to reach the same coverage.<br>
-  • DNA quantity (ng) — The amount of DNA entering library prep. This limits the maximum effective depth because low DNA input reduces library complexity.<br><br>
-
-  <strong>Post‑Sequencing Parameters</strong> - Calculate what was actually achieved after sequencing:<br>
-  • Relative abundance (%) (Post‑processing RA) — The observed abundance of the species in the final metagenomic dataset.<br>
-  • Sequencing depth (Gb) — The total number of gigabases sequenced for the community. Used to compute species‑specific bases and coverage.<br>
-  • Target coverage (×) — The coverage you want to evaluate for the species using the observed abundance and sequencing depth.<br><br>
-
-  <strong>Uses and Interpretations</strong><br>
-  • Use <em>pre‑sequencing inputs</em> When planning experiments, estimating feasibility, or determining how much sequencing is needed.<br>
-  • Use <em>post‑sequencing inputs</em> When analyzing completed datasets to compute achieved coverage, minimum detectable abundance, and MAG recovery potential.<br><br>
-
-  Together, these parameters link abundance, genome size, and sequencing depth to produce interpretable coverage estimates for species‑specific metagenomic evaluation.
-</div>
   
 </div> <!-- end .input-panel -->
 
