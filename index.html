@@ -892,8 +892,91 @@ This formulation captures the fundamental determinants of coverage in metagenomi
 </p>
 
 
-  
-  
+
+<h3>MAG Recovery Potential</h3>
+<p>
+Metagenome-assembled genome (MAG) recovery depends primarily on the sequencing coverage achieved for each organism in the community. Coverage determines the extent to which genomic regions are represented in the sequencing data, influencing both the contiguity and completeness of assembled genomes. Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying taxonomic composition, MAG recovery potential can be estimated directly from the expected coverage of each species.
+</p>
+<p>
+Coverage (C) for a species is computed as:
+</p>
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, A is the relative abundance of the organism (fraction), G is the genome size in megabases (Mb), and the factor of 1000 converts gigabases (Gb) to megabases (Mb). This formulation is consistent with standard definitions of metagenomic coverage and provides a quantitative basis for evaluating the feasibility of genome reconstruction.
+</p>
+<h4>Coverage Thresholds for MAG Recovery</h4>
+<p>
+Empirical studies indicate that successful MAG recovery requires substantially higher coverage than taxonomic or functional profiling. Although exact thresholds vary across studies and depend on factors such as strain heterogeneity and assembly algorithms, the following coverage ranges provide a practical framework for interpreting MAG recovery potential:
+</p>
+<ul style="margin-left:20px;">
+  <li><strong>&gt;20× coverage:</strong> High likelihood of recovering a near-complete MAG.</li>
+  <li><strong>10–20× coverage:</strong> Moderate likelihood; partial or moderately complete MAGs are common.</li>
+  <li><strong>1–5× coverage:</strong> Low likelihood; assemblies are typically fragmented and incomplete.</li>
+  <li><strong>&lt;1× coverage:</strong> Very unlikely; insufficient data for meaningful assembly.</li>
+</ul>
+<p>
+These thresholds reflect widely observed patterns in metagenomic assembly performance, where higher coverage improves contig length, reduces fragmentation, and increases the probability of recovering complete genomic features.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because MAG recovery potential depends directly on D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced assembly feasibility across all organisms.
+</p>
+<p>
+MAG recovery potential is determined by the interplay of sequencing depth, relative abundance, genome size, and DNA quantity. High-abundance organisms with small genomes achieve higher coverage and therefore exhibit greater assembly potential, while low-abundance organisms require substantially more sequencing to reach the same coverage thresholds. This framework provides a quantitative basis for evaluating the feasibility of genome reconstruction under different sequencing and community composition scenarios.
+</p>
+
+
+<h3>Coverage Estimation Table</h3>
+<p>
+The coverage estimation table provides a precomputed grid of expected coverage values across a range of sequencing depths and relative abundances. This table serves as a rapid reference for evaluating how sequencing effort and community composition jointly influence the coverage achieved for a genome of interest. The calculations follow directly from the standard metagenomic coverage equation and incorporate any DNA quantity constraints specified by the user.
+</p>
+<p>
+Coverage (C) for a species is computed as:
+</p>
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, A is the relative abundance of the organism (fraction), G is the genome size in megabases (Mb), and the factor of 1000 converts gigabases (Gb) to megabases (Mb). This formulation is applied to each combination of sequencing depth and relative abundance displayed in the table.
+</p>
+<h4>DNA Quantity Constraint</h4>
+<p>
+If a DNA input amount is provided, the calculator applies a library-complexity constraint based on the empirical approximation that 1 ng of DNA yields approximately 1 Gbp of unique sequence. This defines a maximum achievable depth:
+</p>
+<p style="margin-left:20px;">
+D<sub>max</sub> = DNA<sub>ng</sub>
+</p>
+<p>
+If the total sequencing depth exceeds this limit, the effective depth is capped accordingly. Because coverage scales linearly with D<sub>effective</sub>, DNA-limited samples exhibit proportionally reduced coverage across all entries in the table.
+</p>
+<h4>Color Coding</h4>
+<p>
+Each cell in the table is color-coded according to the expected coverage, providing an intuitive visual summary of analytical feasibility:
+</p>
+<ul style="margin-left:20px;">
+  <li><strong>&lt;0.01× coverage:</strong> Below recommended threshold (insufficient for reliable detection).</li>
+  <li><strong>0.01–1× coverage:</strong> Suitable for taxonomic profiling.</li>
+  <li><strong>1–10× coverage:</strong> Suitable for functional profiling.</li>
+  <li><strong>&gt;10× coverage:</strong> Suitable for MAG recovery.</li>
+</ul>
+<p>
+These thresholds reflect widely used benchmarks in metagenomic analysis and provide a practical framework for interpreting the coverage landscape across different sequencing and community composition scenarios.
+</p>
+<p>
+The coverage estimation table enables rapid assessment of how sequencing depth, genome size, relative abundance, and DNA quantity jointly determine achievable coverage. High-abundance organisms and small genomes achieve higher coverage for a given sequencing depth, while low-abundance organisms require substantially more sequencing to reach the same coverage thresholds. This table provides a quantitative foundation for study design, allowing users to evaluate the feasibility of taxonomic profiling, functional analysis, and genome assembly under a range of realistic conditions.
+</p>
+
+
+
+
   <p><strong>1. Bases sequenced for the species</strong><br>
      Total sequencing depth is measured in gigabases (Gb), where 1 Gb = 10<sup>9</sup> bases.
      If a species has relative abundance A (e.g., 1% = 0.01), then the number of bases
