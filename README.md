@@ -162,8 +162,24 @@ This provides a formal validation for users.
 
 # References
 
-Singer, E., Andreopoulos, B., Bowers, R.M. *et al.* (2016). **Next generation sequencing data of a defined microbial mock community.** *Scientific Data* 3:160081.  
-https://doi.org/10.1038/sdata.2016.81
+## References
 
-ADD MORE OF THESE!!!!
+1. Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. *Genome Biol.* 2015;16(1):51. doi:10.1186/s13059-015-0611-7
+
+2. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. *Nature Microbiology.* Accessed June 24, 2026. https://www.nature.com/articles/s41564-026-02334-2
+
+3. Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. *Cell.* 2016;166(5):1103–1116. doi:10.1016/j.cell.2016.08.007
+
+4. Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? *Brief Bioinform.* 2022;23(6):bbac443. doi:10.1093/bib/bbac443
+
+5. Lander ES, Waterman MS. Genomic mapping by fingerprinting random clones: A mathematical analysis. *Genomics.* 1988;2(3):231–239. doi:10.1016/0888-7543(88)90007-9
+
+6. Riesco R, Trujillo ME. Update on the proposed minimal standards for the use of genome data for the taxonomy of prokaryotes. *Int J Syst Evol Microbiol.* 2024;74(3). doi:10.1099/ijsem.0.006300
+
+7. McNulty SN, Mann PR, Robinson JA, Duncavage EJ, Pfeifer JD. Impact of Reducing DNA Input on Next-Generation Sequencing Library Complexity and Variant Detection. *J Mol Diagn.* 2020;22(5):720–727. doi:10.1016/j.jmoldx.2020.02.003
+
+8. Deng C, Daley T, Calabrese P, Ren J, Smith AD. Predicting the Number of Bases to Attain Sufficient Coverage in High-Throughput Sequencing Experiments. *J Comput Biol.* 2020;27(7):1130–1143. doi:10.1089/cmb.2019.0264
+
+9. Singer E, Andreopoulos B, Bowers RM, et al. Next generation sequencing data of a defined microbial mock community. *Sci Data.* 2016;3(1):160081. doi:10.1038/sdata.2016.81
+
 
