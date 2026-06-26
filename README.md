@@ -20,7 +20,6 @@ The tool is fully client‑side (HTML/JS/CSS) and requires **no installation**, 
 
 Meta‑CD is designed for microbial ecologists, metagenomic researchers, and sequencing‑based study designers who need fast, reporducible, interpretable, and intuitive predictions.
 
----
 
 # Overview
 
@@ -45,7 +44,6 @@ The tool implements coverage equations commonly used in metagenomics, including:
 - Minimum relative abundance for detection  
 - Adjustment by genome size and DNA quantity  
 
----
 
 # How Meta‑CD Works
 
@@ -71,7 +69,6 @@ A pre-generated depth × abundance matrix to help users quickly evaluate:
 - Rare taxon/gene detection  
 - MAG recovery likelihood  
 
----
 
 # How To Use Meta-CD
 
@@ -81,7 +78,6 @@ Meta‑CD is live, free to use, and is available at:
 
 This web-based tool requires no installation or registration to use.
 
----
 
 # Running Meta‑CD Locally
 
@@ -92,7 +88,7 @@ To run the tool locally:
 git clone https://github.com/cysteger/Meta-CD
 cd Meta-CD
 ```
----
+
 
 # Validation Test Suite (MBARC‑26)
 
@@ -136,7 +132,6 @@ Documentation describing:
 - How each expected value is computed  
 - How to validate Meta‑CD against the MBARC‑26 dataset  
 
----
 
 ## How to use the test suite
 
@@ -153,7 +148,6 @@ Meta‑CD should match the expected values within rounding error.
 
 This provides formal validation for users.
 
----
 
 ## References
 
