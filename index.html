@@ -1185,7 +1185,7 @@ function computeRequiredRA() {
   const useG = document.getElementById('use_genome').checked;
   let G;
   if (!useG || G_raw === "") {
-    defaultsUsed.push("Genome size: 3 Mb (typical bacterial genome)");
+    defaultsUsed.push("Genome size: 3 Mb");
     G = DEFAULTS.genome;
   } else {
     G = parseFloat(G_raw);
