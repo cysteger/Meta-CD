@@ -846,7 +846,7 @@ th {
 const DEFAULTS = {
   genome: 3,            // Mb
   abundance: 0.01,      // 1%
-  depth: 10,            // Gb
+  depth: 1,            // Gb
   targetCoverage: 1,    // 1×
   dnaCap: Infinity      // No DNA limit
 };
@@ -1117,77 +1117,98 @@ function computeCoverage() {
 }
 
 function computeRequiredDepth() {
+  const defaultsUsed = [];
+
+  // Target coverage
+  let C_raw = document.getElementById('targetCoverage').value;
   const useC = document.getElementById('use_targetCoverage').checked;
+  let C;
+  if (!useC || C_raw === "") {
+    defaultsUsed.push("Target coverage: 1× (minimum meaningful detection threshold)");
+    C = DEFAULTS.targetCoverage;
+  } else {
+    C = parseFloat(C_raw);
+  }
+
+  // Abundance
+  let A_raw = document.getElementById('abundance').value;
   const useA = document.getElementById('use_abundance').checked;
+  let A;
+  if (!useA || A_raw === "") {
+    defaultsUsed.push("Relative abundance: 1% (standard detectability benchmark)");
+    A = DEFAULTS.abundance;
+  } else {
+    A = parseFloat(A_raw) / 100;
+  }
+
+  // Genome size
+  let G_raw = document.getElementById('genome').value;
   const useG = document.getElementById('use_genome').checked;
-
-  const C_raw = document.getElementById('targetCoverage').value;
-  const A_raw = document.getElementById('abundance').value;
-  const G_raw = document.getElementById('genome').value;
-
-  if (!useC || !useA || !useG) {
-    document.getElementById('depthResult').innerText =
-      "Cannot compute required depth — please enable and enter target coverage, relative abundance, and genome size.";
-    return;
+  let G;
+  if (!useG || G_raw === "") {
+    defaultsUsed.push("Genome size: 3 Mb (typical bacterial genome)");
+    G = DEFAULTS.genome;
+  } else {
+    G = parseFloat(G_raw);
   }
 
-  if (C_raw === "" || A_raw === "" || G_raw === "") {
-    document.getElementById('depthResult').innerText =
-      "Missing required input: target coverage, relative abundance, or genome size.";
-    return;
-  }
-
-  const C = parseFloat(C_raw);
-  const A = parseFloat(A_raw) / 100;
-  const G = parseFloat(G_raw);
-
-  const dnaCap = getDnaCapGbp();
+  const dnaCap = getDnaCapGbp(defaultsUsed);
   const needed = (C * G) / (1000 * A);
 
+  let msg;
   if (needed > dnaCap) {
-    if (dnaCap === Infinity) {
-      document.getElementById('depthResult').innerText =
-        `Required depth: ${needed.toFixed(2)} Gb (no DNA quantity cap applied).`;
-    } else {
-      document.getElementById('depthResult').innerText =
-        `Required depth: ${needed.toFixed(2)} Gb (IMPOSSIBLE — DNA‑limited; cap = ${dnaCap.toFixed(2)} Gb).`;
-    }
+    msg = `Required depth: ${needed.toFixed(2)} Gb (IMPOSSIBLE — DNA‑limited; cap = ${dnaCap.toFixed(2)} Gb).`;
   } else {
-    document.getElementById('depthResult').innerText =
-      `Required depth (DNA‑quantity adjusted): ${needed.toFixed(2)} Gb`;
+    msg = `Required depth (DNA‑quantity adjusted): ${needed.toFixed(2)} Gb`;
   }
+
+  document.getElementById('depthResult').innerHTML = msg;
+  document.getElementById('depthNote').innerHTML = buildDefaultNote(defaultsUsed);
 }
 
 function computeRequiredRA() {
+  const defaultsUsed = [];
+
+  // Target coverage
+  let C_raw = document.getElementById('minRAcoverage').value;
   const useC = document.getElementById('use_minRAcoverage').checked;
+  let C;
+  if (!useC || C_raw === "") {
+    defaultsUsed.push("Target coverage: 1× (minimum meaningful detection threshold)");
+    C = DEFAULTS.targetCoverage;
+  } else {
+    C = parseFloat(C_raw);
+  }
+
+  // Genome size
+  let G_raw = document.getElementById('genome').value;
   const useG = document.getElementById('use_genome').checked;
+  let G;
+  if (!useG || G_raw === "") {
+    defaultsUsed.push("Genome size: 3 Mb (typical bacterial genome)");
+    G = DEFAULTS.genome;
+  } else {
+    G = parseFloat(G_raw);
+  }
+
+  // Depth
+  let D_raw = document.getElementById('depth').value;
   const useD = document.getElementById('use_depth').checked;
-
-  const C_raw = document.getElementById('minRAcoverage').value;
-  const G_raw = document.getElementById('genome').value;
-  const D_raw = document.getElementById('depth').value;
-
-  if (!useC || !useG || !useD) {
-    document.getElementById('raResult').innerText =
-      "Cannot compute minimum RA — please enable and enter target coverage, genome size, and sequencing depth.";
-    return;
+  let D;
+  if (!useD || D_raw === "") {
+    defaultsUsed.push("Sequencing depth: 10 Gb (typical shallow metagenomic depth)");
+    D = DEFAULTS.depth;
+  } else {
+    D = parseFloat(D_raw);
   }
 
-  if (C_raw === "" || G_raw === "" || D_raw === "") {
-    document.getElementById('raResult').innerText =
-      "Missing required input: target coverage, genome size, or sequencing depth.";
-    return;
-  }
-
-  const C = parseFloat(C_raw);
-  const G = parseFloat(G_raw);
-  const D = parseFloat(D_raw);
-
-  const effective = getEffectiveDepth(D);
+  const effective = getEffectiveDepth(D, defaultsUsed);
   const A = (C * G) / (1000 * effective);
 
-  document.getElementById('raResult').innerText =
+  document.getElementById('raResult').innerHTML =
     `Minimum RA (DNA‑quantity adjusted): ${(A * 100).toFixed(4)}%`;
+
+  document.getElementById('raNote').innerHTML = buildDefaultNote(defaultsUsed);
 }
 
 /* ============================================================
