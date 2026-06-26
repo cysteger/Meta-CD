@@ -85,44 +85,68 @@ p  { color: var(--text-muted); line-height: 1.5; }
 
 <h1>How These Calculations Work</h1>
 <p class="explain">
-  This page summarizes the mathematical framework used by Meta‑CD to compute species‑specific coverage, required sequencing depth, minimum detectable abundance, and MAG recovery potential.
+  This page summarizes the mathematical framework used by Meta‑CD to compute species‑specific coverage, required sequencing depth, minimum detectable abundance, and MAG recovery potential. All calculations follow standard metagenomic coverage theory with explicit incorporation of DNA‑input constraints.
 </p>
 
 <!-- ============================================================
-     CORE COVERAGE MODEL (NEW CONSOLIDATED SECTION)
+     CORE COVERAGE MODEL (EXPANDED)
 ============================================================ -->
 <div class="section-card">
   <h3>Core Coverage Model</h3>
 
-  <p>All Meta‑CD outputs derive from the standard metagenomic coverage equation:</p>
+  <p>
+    Meta‑CD is built around the standard definition of genomic coverage, which describes how many times each base of a genome is represented in the sequencing data:
+  </p>
+
   <p style="margin-left:20px;">
     C = D<sub>species</sub> / G
   </p>
 
-  <p>Where:</p>
-  <ul style="margin-left:20px;">
-    <li><strong>G</strong> = genome size (Mb)</li>
-    <li><strong>D<sub>species</sub></strong> = bases sequenced from the species</li>
-  </ul>
+  <p>
+    Where <strong>G</strong> is the genome size (Mb) and <strong>D<sub>species</sub></strong> is the total number of bases sequenced from that organism.
+  </p>
 
-  <p>Because shotgun sequencing distributes reads in proportion to relative abundance (<strong>A</strong>):</p>
+  <h4>Where D<sub>community</sub> Comes From</h4>
+  <p>
+    In metagenomics, sequencing effort is typically reported as <strong>total community sequencing depth</strong>, measured in gigabases (Gb). This value represents the total number of bases generated across the entire microbial community:
+  </p>
+
+  <p style="margin-left:20px;">
+    D<sub>community</sub> (bases) = D<sub>community</sub> (Gb) × 10<sup>9</sup>
+  </p>
+
+  <p>
+    Because shotgun sequencing samples DNA fragments approximately in proportion to their abundance, the number of bases originating from a species is:
+  </p>
+
   <p style="margin-left:20px;">
     D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
   </p>
 
+  <p>
+    The factor of 1000 converts gigabases to megabases, and <strong>A</strong> is relative abundance (fraction).
+  </p>
+
   <h4>DNA‑Limited Effective Depth</h4>
-  <p>Meta‑CD incorporates DNA‑input constraints using:</p>
+  <p>
+    Meta‑CD incorporates DNA‑input constraints using:
+  </p>
 
   <p style="margin-left:20px;">
     D<sub>effective</sub> = min(D<sub>community</sub>, D<sub>max</sub>)
   </p>
 
-  <p>Where:</p>
+  <p>
+    Where:
+  </p>
+
   <p style="margin-left:20px;">
     D<sub>max</sub> = DNA<sub>ng</sub>
   </p>
 
-  <p>This reflects the empirical approximation that 1 ng DNA ≈ 1 Gbp unique sequence. If sequencing depth exceeds this limit, coverage becomes DNA‑limited.</p>
+  <p>
+    This reflects the empirical approximation that <strong>1 ng DNA ≈ 1 Gbp of unique sequence</strong>. If sequencing depth exceeds this limit, coverage becomes DNA‑limited.
+  </p>
 </div>
 
 <!-- ============================================================
@@ -130,13 +154,17 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>Required Sequencing Depth</h3>
-  <p>The sequencing depth needed to reach a target coverage is obtained by solving the coverage equation for community depth:</p>
+  <p>
+    To determine how much sequencing is needed to reach a target coverage, the coverage equation is solved for community depth:
+  </p>
 
   <p style="margin-left:20px;">
     D<sub>required</sub> = (C<sub>target</sub> × G) / (1000 × A)
   </p>
 
-  <p>This value is DNA‑adjusted using the effective depth defined in the Core Coverage Model.</p>
+  <p>
+    This value increases linearly with genome size and desired coverage, and inversely with abundance. If the required depth exceeds the DNA‑limited maximum, the target coverage is not achievable with the available DNA.
+  </p>
 </div>
 
 <!-- ============================================================
@@ -144,13 +172,17 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>Minimum Relative Abundance Required</h3>
-  <p>The minimum abundance needed to reach a target coverage is:</p>
+  <p>
+    The minimum abundance needed to reach a target coverage is obtained by solving the coverage equation for A:
+  </p>
 
   <p style="margin-left:20px;">
     A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)
   </p>
 
-  <p>Lower sequencing depth or larger genomes increase the required abundance.</p>
+  <p>
+    Lower sequencing depth or larger genomes increase the required abundance. DNA‑limited samples have higher A<sub>min</sub> because D<sub>effective</sub> is capped.
+  </p>
 </div>
 
 <!-- ============================================================
@@ -158,13 +190,17 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>Bases Sequenced for This Species</h3>
-  <p>The expected number of bases originating from a species is:</p>
+  <p>
+    The expected number of bases originating from a species is:
+  </p>
 
   <p style="margin-left:20px;">
     B<sub>species</sub> = D<sub>community</sub> × 10<sup>9</sup> × A
   </p>
 
-  <p>This determines how deeply a species is represented in the dataset.</p>
+  <p>
+    This determines how deeply a species is represented in the dataset and forms the basis for all coverage‑based analyses.
+  </p>
 </div>
 
 <!-- ============================================================
@@ -172,13 +208,17 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>Coverage From Sequencing Depth</h3>
-  <p>Substituting abundance‑scaled depth into the coverage equation yields:</p>
+  <p>
+    Substituting abundance‑scaled depth into the coverage equation yields:
+  </p>
 
   <p style="margin-left:20px;">
     C = (D<sub>effective</sub> × 1000 × A) / G
   </p>
 
-  <p>Coverage increases with sequencing depth and abundance, and decreases with genome size.</p>
+  <p>
+    Coverage increases with sequencing depth and abundance, and decreases with genome size. DNA‑limited samples exhibit proportionally reduced coverage.
+  </p>
 </div>
 
 <!-- ============================================================
@@ -186,7 +226,9 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>MAG Recovery Potential</h3>
-  <p>MAG recovery likelihood is interpreted using coverage thresholds:</p>
+  <p>
+    MAG recovery likelihood is interpreted using coverage thresholds:
+  </p>
 
   <ul style="margin-left:20px;">
     <li><strong>&gt;20×</strong> — high likelihood</li>
@@ -195,7 +237,9 @@ p  { color: var(--text-muted); line-height: 1.5; }
     <li><strong>&lt;1×</strong> — very unlikely</li>
   </ul>
 
-  <p>These thresholds reflect typical assembly performance across metagenomic datasets.</p>
+  <p>
+    These thresholds reflect typical assembly performance across metagenomic datasets and provide a practical guide for evaluating genome reconstruction feasibility.
+  </p>
 </div>
 
 <!-- ============================================================
@@ -203,7 +247,9 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>Coverage Estimation Table</h3>
-  <p>The table applies the same coverage formula across a grid of sequencing depths and abundances, incorporating DNA‑limited depth where applicable. It provides a rapid reference for evaluating feasibility of detection, profiling, and assembly.</p>
+  <p>
+    The coverage estimation table applies the same coverage formula across a grid of sequencing depths and abundances, incorporating DNA‑limited depth where applicable. It provides a rapid reference for evaluating feasibility of detection, profiling, and assembly.
+  </p>
 </div>
 
 <!-- ============================================================
