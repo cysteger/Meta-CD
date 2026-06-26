@@ -78,14 +78,14 @@ p  { color: var(--text-muted); line-height: 1.5; }
 
 <!-- Back to Calculator -->
 <div class="side-tab">
-  <a href="index.html">← Back to Calculator</a>
+  <a href="index.html">← Back <br> to <br> Calculator</a>
 </div>
 
 <div class="app-shell">
 
 <h1>How These Calculations Work</h1>
 <p class="explain">
-  This page summarizes the mathematical framework used by Meta‑CD to compute species‑specific coverage, required sequencing depth, minimum detectable abundance, and MAG recovery potential. All calculations follow standard metagenomic coverage theory with explicit incorporation of DNA‑input constraints.
+  This page provides the mathematical framework used by Meta‑CD to compute WGS coverage, required sequencing depth, minimum detectable abundance, and MAG recovery potential. All calculations follow standard metagenomic coverage theory with explicit incorporation of DNA‑input constraints.
 </p>
 
 <!-- ============================================================
@@ -226,6 +226,23 @@ p  { color: var(--text-muted); line-height: 1.5; }
 ============================================================ -->
 <div class="section-card">
   <h3>MAG Recovery Potential</h3>
+
+<p>
+  Metagenome-assembled genome (MAG) recovery depends primarily on the sequencing coverage achieved for each organism in the community. Coverage determines the extent to which genomic regions are represented in the sequencing data, influencing both the contiguity and completeness of assembled genomes. Because shotgun metagenomic sequencing distributes reads approximately in proportion to the underlying taxonomic composition, MAG recovery potential can be estimated directly from the expected coverage of each species.
+</p>
+
+<p>
+Coverage (C) for a species is computed as:
+</p>
+
+<p style="margin-left:20px;">
+C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+
+<p>
+where D<sub>effective</sub> is the sequencing depth after applying any DNA quantity constraints, A is the relative abundance of the organism (fraction), G is the genome size in megabases (Mb), and the factor of 1000 converts gigabases (Gb) to megabases (Mb). This formulation is consistent with standard definitions of metagenomic coverage and provides a quantitative basis for evaluating the feasibility of genome reconstruction.
+</p>
+  
   <p>
     MAG recovery likelihood is interpreted using coverage thresholds:
   </p>
