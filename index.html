@@ -254,12 +254,14 @@ th {
   font-size: 16px;
 }
 
-/* Icons */
-.icon-img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  display: block;
+/* Tighten spacing specifically for the Pre-Sequencing section */
+.preseq h2 {
+  margin-bottom: 4px;
+}
+
+.preseq p {
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 /* ============================
@@ -603,12 +605,12 @@ th {
          COLUMN 2 — PRE-SEQUENCING ESTIMATION
          ============================ -->
     <div class="analysis-box">
-  
-      <h2>Pre‑Sequencing Estimation</h2>
-      <p class="explain">
-        These outputs describe what sequencing depth is required to reach a target coverage
-        or what minimum abundance is detectable at a given depth.
-      </p>
+
+      <div class="preseq">
+        <h2>Pre-Sequencing Estimation</h2>
+        <p>These outputs describe what sequencing depth is required to reach a target coverage
+        or what minimum abundance is detectable at a given depth.</p>
+      </div>
   
       <!-- Required Depth -->
       <div class="section-card">
