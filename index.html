@@ -1055,41 +1055,49 @@ function updateMagTable() {
    CALCULATORS
    ============================================================ */
 function computeCoverage() {
+  const defaultsUsed = [];
+
+  // Abundance (fraction)
+  let A_raw = document.getElementById('abundance').value;
   const useA = document.getElementById('use_abundance').checked;
+  let A;
+  if (!useA || A_raw === "") {
+    defaultsUsed.push("Relative abundance: 1% (standard detectability benchmark)");
+    A = DEFAULTS.abundance;
+  } else {
+    A = parseFloat(A_raw) / 100;
+  }
+
+  // Genome size (Mb)
+  let G_raw = document.getElementById('genome').value;
   const useG = document.getElementById('use_genome').checked;
+  let G;
+  if (!useG || G_raw === "") {
+    defaultsUsed.push("Genome size: 3 Mb (typical bacterial genome)");
+    G = DEFAULTS.genome;
+  } else {
+    G = parseFloat(G_raw);
+  }
+
+  // Depth (Gb)
+  let D_raw = document.getElementById('depth').value;
   const useD = document.getElementById('use_depth').checked;
-
-  const A_raw = document.getElementById('abundance').value;
-  const G_raw = document.getElementById('genome').value;
-  const D_raw = document.getElementById('depth').value;
-
-  if (!useA || !useG || !useD) {
-    document.getElementById('coverageResult').innerText =
-      "Cannot compute coverage — please enable and enter relative abundance, genome size, and sequencing depth.";
-    document.getElementById('speciesBases').innerText = "";
-    return;
+  let D;
+  if (!useD || D_raw === "") {
+    defaultsUsed.push("Sequencing depth: 10 Gb (typical shallow metagenomic depth)");
+    D = DEFAULTS.depth;
+  } else {
+    D = parseFloat(D_raw);
   }
 
-  if (A_raw === "" || G_raw === "" || D_raw === "") {
-    document.getElementById('coverageResult').innerText =
-      "Missing required input: relative abundance, genome size, or sequencing depth.";
-    document.getElementById('speciesBases').innerText = "";
-    return;
-  }
-
-  const A = parseFloat(A_raw) / 100;
-  const G = parseFloat(G_raw);
-  const D = parseFloat(D_raw);
-
-  const effective = getEffectiveDepth(D);
+  const effective = getEffectiveDepth(D, defaultsUsed);
   const cov = (effective * 1000 * A) / G;
 
-  document.getElementById('coverageResult').innerText =
+  document.getElementById('coverageResult').innerHTML =
     `Estimated coverage (DNA‑quantity adjusted): ${cov.toFixed(2)}×`;
 
-  // ===== Bases sequenced for this species =====
+  // Bases sequenced
   const speciesBases = D * 1e9 * A;
-
   let formattedBases;
   if (speciesBases >= 1e9) {
     formattedBases = (speciesBases / 1e9).toFixed(2) + " Gb";
@@ -1099,8 +1107,13 @@ function computeCoverage() {
     formattedBases = speciesBases.toFixed(0) + " bases";
   }
 
-  document.getElementById('speciesBases').innerText =
+  document.getElementById('speciesBases').innerHTML =
     `Bases sequenced for this species: ${formattedBases}`;
+
+  // Default notes (only if defaults used)
+  const noteHtml = buildDefaultNote(defaultsUsed);
+  document.getElementById('coverageNote').innerHTML = noteHtml;
+  document.getElementById('basesNote').innerHTML = noteHtml;
 }
 
 function computeRequiredDepth() {
