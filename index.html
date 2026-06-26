@@ -642,13 +642,15 @@ th {
        COLUMN 1 — POST-SEQUENCING ANALYSIS
        ============================ -->
   <div class="analysis-box">
-  
+
+    <div> class="preseq">
     <h2>Post‑Sequencing Analysis</h2>
-    <p class="explain">
-      These outputs describe what coverage was actually achieved based on the observed
+    <p>
+      These outputs describe what coverage was achieved based on the observed
       sequencing depth, relative abundance, genome size, and DNA quantity.
     </p>
-  
+    </div>
+    
     <!-- Bases Sequenced -->
     <div class="section-card">
       <div class="section-title"><span>Bases Sequenced for This Species</span></div>
@@ -722,16 +724,11 @@ th {
   </div>
 
 <div class="explain" style="margin-top:16px; font-size:12px; line-height:1.45;">
-  <strong>Footnote — Interpreting MAG Recovery Requirements</strong><br><br>
+  <strong>Interpreting MAG Recovery Requirements</strong><br><br>
 
   To successfully recover high‑quality Metagenome‑Assembled Genomes (MAGs), the amount of sequencing 
   required depends on sample complexity and the abundance of target organisms. Typical recommended 
   sequencing depths per sample are:<br><br>
-
-  <strong>Suggested Data Outputs</strong><br>
-  • <em>Low complexity</em> (e.g., simplified mock communities): 5–10 Gb (~10–15M reads)<br>
-  • <em>Moderate complexity</em> (e.g., wastewater): 10–20 Gb (~20–30M reads)<br>
-  • <em>High complexity</em> (e.g., soil): 30–50+ Gb (~60M+ reads)<br><br>
 
   <strong>Key Factors for MAG Recovery</strong><br>
   • <em>De novo assembly requires deep sequencing</em> — far more than taxonomic profiling.<br>
@@ -756,7 +753,7 @@ th {
   <div class="section-card">
     <div class="section-title"><span>Coverage Estimation Table</span></div>
 
-    <p style="font-size:14px;">
+    <p>
       Values are automatically adjusted based on genome size and DNA quantity.
     </p>
 
