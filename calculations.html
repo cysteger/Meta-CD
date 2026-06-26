@@ -78,7 +78,7 @@ p  { color: var(--text-muted); line-height: 1.5; }
 
 <!-- Back to Calculator -->
 <div class="side-tab">
-  <a href="index.html">← Back <br> to <br> Calculator</a>
+  <a href="index.html">← Back to <br> Calculator</a>
 </div>
 
 <div class="app-shell">
@@ -269,6 +269,100 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
   </p>
 </div>
 
+
+<!-- =============================================================
+  TABLE SUMMARY
+  ================================================================ -->
+
+<div class="section-card">
+  <h3>Table Summary of Formulas</h3>
+  <p>Mathematical calculations used in Meta‑CD to compute species‑specific sequencing bases, coverage, detection limits, and required sequencing depth. Variables are defined as follows:</p>
+
+  <table>
+  <thead>
+    <tr>
+      <th>Output</th>
+      <th>Formula / Calculation</th>
+      <th>Explanation</th>
+      <th>Ref</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr>
+      <td>D<sub>community</sub> (base conversion)</td>
+      <td>D<sub>community</sub> (bases) = D<sub>community</sub> (Gb) × 10<sup>9</sup></td>
+      <td>Total sequencing depth converted from gigabases to bases.</td>
+      <td>5</td>
+    </tr>
+
+    <tr>
+      <td>Maximum Unique Depth (DNA‑limited)</td>
+      <td>D<sub>max</sub> = DNA<sub>ng</sub></td>
+      <td>Approximation that 1 ng DNA yields ~1 Gbp of unique sequence.</td>
+      <td>7</td>
+    </tr>
+
+    <tr>
+      <td>Species‑Specific Sequencing Bases</td>
+      <td>B<sub>species</sub> = D<sub>community</sub> × 10<sup>9</sup> × A</td>
+      <td>Total bases sequenced from the species, proportional to abundance.</td>
+      <td>5</td>
+    </tr>
+
+    <tr>
+      <td>Coverage From Sequencing Depth</td>
+      <td>C = (D<sub>effective</sub> × 1000 × A) / G</td>
+      <td>Expected average coverage for a genome of size G at abundance A.</td>
+      <td>5</td>
+    </tr>
+
+    <tr>
+      <td>Effective Sequencing Depth (DNA‑Limited)</td>
+      <td>D<sub>effective</sub> = min(D<sub>community</sub>, D<sub>max</sub>)</td>
+      <td>Usable depth capped by DNA‑input constraints.</td>
+      <td>7</td>
+    </tr>
+
+    <tr>
+      <td>Required Sequencing Depth</td>
+      <td>D<sub>required</sub> = (C<sub>target</sub> × G) / (1000 × A)</td>
+      <td>Depth needed to reach target coverage for a species at abundance A.</td>
+      <td>5</td>
+    </tr>
+
+    <tr>
+      <td>Minimum Detectable Relative Abundance</td>
+      <td>A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)</td>
+      <td>Lowest abundance at which target coverage is achievable.</td>
+      <td>5, 7</td>
+    </tr>
+
+    <tr>
+      <td>Naive Coverage (No DNA Limit)</td>
+      <td>C<sub>naive</sub> = (D<sub>total</sub> × 1000 × A) / G</td>
+      <td>Coverage assuming unlimited DNA molecules.</td>
+      <td>7</td>
+    </tr>
+
+    <tr>
+      <td>MAG Recovery Coverage</td>
+      <td>C = (D<sub>effective</sub> × 1000 × A) / G</td>
+      <td>Same coverage formula, interpreted using MAG thresholds.</td>
+      <td>7</td>
+    </tr>
+
+    <tr>
+      <td>Coverage Estimation Table Values</td>
+      <td>Computed using C<sub>effective</sub> across depth–abundance grid</td>
+      <td>Expected coverage across combinations of depth and abundance.</td>
+      <td>5, 7, 9</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+  
 <!-- ============================================================
      REFERENCES
 ============================================================ -->
@@ -276,7 +370,7 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
   <h3>References</h3>
   <ol>
     <li>Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. <i>Genome Biology</i>. 2015;16(1):51.</li>
-    <li>Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. <i>Nature Microbiology</i>. 2026.</li>
+    <li>Treichel, N.S., Pauvert, C., Séneca, J. et al. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. <i>Nat Microbiol 11</i>, 1233–1244 (2026). https://doi.org/10.1038/s41564-026-02334-2</li>
     <li>Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. <i>Cell</i>. 2016;166(5):1103–1116.</li>
     <li>Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? <i>Brief Bioinform</i>. 2022;23(6).</li>
     <li>Lander ES, Waterman MS. Genomic mapping by fingerprinting random clones: A mathematical analysis. <i>Genomics</i>. 1988;2(3):231–239.</li>
