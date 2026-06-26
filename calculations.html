@@ -95,7 +95,7 @@ p  { color: var(--text-muted); line-height: 1.5; }
   <h3>Core Coverage Model</h3>
 
   <p>
-    Meta‑CD is built around the standard definition of genomic coverage, which describes how many times each base of a genome is represented in the sequencing data:
+    Estimating the sequencing depth required to achieve a target coverage for a specific microbial genome follows directly from the standard definition of coverage in metagenomics. Coverage (C) is defined as the ratio of the total number of bases sequenced from a species to the size of its genome. When the genome size, relative abundance, and desired coverage are known, the required community sequencing depth can be solved algebraically.
   </p>
 
   <p style="margin-left:20px;">
@@ -104,27 +104,6 @@ p  { color: var(--text-muted); line-height: 1.5; }
 
   <p>
     Where <strong>G</strong> is the genome size (Mb) and <strong>D<sub>species</sub></strong> is the total number of bases sequenced from that organism.
-  </p>
-
-  <h4>Where D<sub>community</sub> Comes From</h4>
-  <p>
-    In metagenomics, sequencing effort is typically reported as <strong>total community sequencing depth</strong>, measured in gigabases (Gb). This value represents the total number of bases generated across the entire microbial community:
-  </p>
-
-  <p style="margin-left:20px;">
-    D<sub>community</sub> (bases) = D<sub>community</sub> (Gb) × 10<sup>9</sup>
-  </p>
-
-  <p>
-    Because shotgun sequencing samples DNA fragments approximately in proportion to their abundance, the number of bases originating from a species is:
-  </p>
-
-  <p style="margin-left:20px;">
-    D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
-  </p>
-
-  <p>
-    The factor of 1000 converts gigabases to megabases, and <strong>A</strong> is relative abundance (fraction).
   </p>
 
   <h4>DNA‑Limited Effective Depth</h4>
@@ -146,6 +125,27 @@ p  { color: var(--text-muted); line-height: 1.5; }
 
   <p>
     This reflects the empirical approximation that <strong>1 ng DNA ≈ 1 Gbp of unique sequence</strong>. If sequencing depth exceeds this limit, coverage becomes DNA‑limited.
+  </p>
+
+   <h4>Where D<sub>community</sub> Comes From</h4>
+  <p>
+    In metagenomics, sequencing effort is typically reported as <strong>total community sequencing depth</strong>, measured in gigabases (Gb). This value represents the total number of bases generated across the entire microbial community:
+  </p>
+
+  <p style="margin-left:20px;">
+    D<sub>community</sub> (bases) = D<sub>community</sub> (Gb) × 10<sup>9</sup>
+  </p>
+
+  <p>
+    Because shotgun sequencing samples DNA fragments approximately in proportion to their abundance, the number of bases originating from a species is:
+  </p>
+
+  <p style="margin-left:20px;">
+    D<sub>species</sub> = D<sub>effective</sub> × 1000 × A
+  </p>
+
+  <p>
+    The factor of 1000 converts gigabases to megabases, and <strong>A</strong> is relative abundance (fraction).
   </p>
 </div>
 
