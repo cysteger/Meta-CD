@@ -1,25 +1,24 @@
 # Meta‑CD  
-written by Callie Claiborne — Lyu Lab, North Carolina State University (cysteger@ncsu.edu) 
+Written by Callie Claiborne (cysteger@ncsu.edu), PhD student in Bioinformatics, from the Lyu Lab, Department of PLant and Microbial Biology, North Carolina State University
 
 **Live Tool:** https://cysteger.github.io/Meta-CD/  
 **Repository:** https://github.com/cysteger/Meta-CD
 
----
 
 # Description
 
-Meta‑CD is a browser‑based tool for **species‑specific metagenomic sequencing evaluation**. It provides both **post‑sequencing analysis** and **pre‑sequencing experimental planning**, enabling researchers to estimate:
+Meta‑CD is a browser‑based tool to facilitate **WGS metagenomic sequencing design and analysis**. It provides both **pre‑sequencing experimental planning** and **post‑sequencing analysis**, enabling researchers to estimate:
 
-- Achieved sequencing coverage  
 - Required sequencing depth  
+- Achieved sequencing coverage  
 - Minimum detectable relative abundance  
 - MAG recovery potential  
 - Coverage matrices across depth × abundance  
-- DNA‑quantity‑adjusted effective depth  
+- Adjusted calculations by genome size and DNA quantity
 
-The tool is fully client‑side (HTML/JS/CSS) and requires **no installation**, **no dependencies**, and **no data upload**. All calculations run locally in the user’s browser.
+The tool is fully client‑side (HTML/JS/CSS) and requires **no installation**, **no dependencies**, and **no data upload**. All calculations run locally in the user’s browser. A web tool is also available at Github for convient access. 
 
-Meta‑CD is designed for microbial ecologists, metagenomic researchers, and sequencing‑based study designers who need fast, interpretable, species‑level coverage predictions.
+Meta‑CD is designed for microbial ecologists, metagenomic researchers, and sequencing‑based study designers who need fast, reporducible, interpretable, and intuitive predictions.
 
 ---
 
@@ -28,52 +27,48 @@ Meta‑CD is designed for microbial ecologists, metagenomic researchers, and seq
 Meta‑CD integrates four key parameters:
 
 - Genome size (Mbp)  
-- Relative abundance (%)  
-- Community sequencing depth (Gb)  
+- Relative abundance of target species (%)  
+- Sequencing depth (Gb)  
 - Sample DNA quantity (ng)  
 
-These parameters determine the number of bases sequenced for a species, the achievable coverage, and the feasibility of downstream analyses such as:
+These parameters determine the theoretical number of bases sequenced for a target species, the achievable coverage, and the feasibility of downstream analyses such as:
 
 - Taxonomic profiling  
 - Functional profiling  
-- Rare gene detection  
+- Rare taxon/gene detection  
 - MAG recovery  
 
 The tool implements coverage equations commonly used in metagenomics, including:
 
-- **Achieved coverage**  
-- **Required depth for target coverage**  
-- **Minimum relative abundance for detection**  
-- **DNA‑quantity‑limited effective depth**  
-
-MAG recovery thresholds are based on typical coverage requirements for high‑quality genome assembly.
+- Achieved coverage  
+- Required depth for target coverage  
+- Minimum relative abundance for detection  
+- Adjustment by genome size and DNA quantity  
 
 ---
 
 # How Meta‑CD Works
 
-## 1. Post‑Sequencing Analysis
-Given observed sequencing depth and relative abundance, the tool calculates:
-
-- Bases sequenced for the species  
-- Achieved coverage  
-- DNA‑quantity‑adjusted coverage  
-- MAG recovery potential  
-- Coverage estimation table  
-
-## 2. Pre‑Sequencing Estimation
-Given a target coverage, the tool estimates:
+## 1. Pre‑Sequencing Estimation
+Given the desired coverage of a target species, the tool estimates:
 
 - Required sequencing depth  
 - Minimum detectable relative abundance  
-- DNA‑quantity‑adjusted detection thresholds  
+- Adjusted detection thresholds by genome size and DNA quantity  
+
+## 2. Post‑Sequencing Analysis
+Given the total sequencing depth and relative abundance of a target species, the tool calculates:
+
+- Total bases sequenced for the species  
+- Achieved coverage, adjusted by genome size and DNA quantity  
+- MAG recovery potential  
 
 ## 3. Coverage Estimation Table
-A depth × abundance matrix is generated to help users quickly evaluate:
+A pre-generated depth × abundance matrix to help users quickly evaluate:
 
 - Feasibility of taxonomic profiling  
 - Functional profiling thresholds  
-- Rare gene detection  
+- Rare taxon/gene detection  
 - MAG recovery likelihood  
 
 ---
@@ -101,7 +96,7 @@ cd Meta-CD
 
 # Validation Test Suite (MBARC‑26)
 
-Meta‑CD includes a fully reproducible validation suite based on the **MBARC‑26 mock community**, a defined mixture of 26 microbial genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation. This dataset was published by Singer et al. (2016) as a benchmark for evaluating metagenomic sequencing and analysis tools.
+Meta‑CD includes a fully reproducible validation suite based on the **MBARC‑26 mock community**, a defined mixture of 26 microbial genomes from b oth bacteria and archaea with known genome sizes, molarity, genome copy numbers, and sequencing representation. This dataset was published by Singer et al. (2016) as a benchmark for evaluating metagenomic sequencing and analysis tools.
 
 The MBARC‑26 test suite allows users to verify that Meta‑CD’s calculations match experimentally measured sequencing outcomes.
 
@@ -156,11 +151,9 @@ Documentation describing:
 
 Meta‑CD should match the expected values within rounding error.
 
-This provides a formal validation for users.
+This provides formal validation for users.
 
 ---
-
-# References
 
 ## References
 
