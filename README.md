@@ -153,7 +153,7 @@ This provides formal validation for users.
 
 1. Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. *Genome Biol.* 2015;16(1):51. doi:10.1186/s13059-015-0611-7
 
-2. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. *Nature Microbiology.* Accessed June 24, 2026. https://www.nature.com/articles/s41564-026-02334-2
+2. Treichel, N.S., Pauvert, C., Séneca, J. et al. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. <i>Nat Microbiol 11</i>, 1233–1244 (2026). https://doi.org/10.1038/s41564-026-02334-2 
 
 3. Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. *Cell.* 2016;166(5):1103–1116. doi:10.1016/j.cell.2016.08.007
 
@@ -168,5 +168,4 @@ This provides formal validation for users.
 8. Deng C, Daley T, Calabrese P, Ren J, Smith AD. Predicting the Number of Bases to Attain Sufficient Coverage in High-Throughput Sequencing Experiments. *J Comput Biol.* 2020;27(7):1130–1143. doi:10.1089/cmb.2019.0264
 
 9. Singer E, Andreopoulos B, Bowers RM, et al. Next generation sequencing data of a defined microbial mock community. *Sci Data.* 2016;3(1):160081. doi:10.1038/sdata.2016.81
-
 
