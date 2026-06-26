@@ -1062,7 +1062,7 @@ function computeCoverage() {
   const useA = document.getElementById('use_abundance').checked;
   let A;
   if (!useA || A_raw === "") {
-    defaultsUsed.push("Relative abundance: 1% (standard detectability benchmark)");
+    defaultsUsed.push("Relative abundance: 1%");
     A = DEFAULTS.abundance;
   } else {
     A = parseFloat(A_raw) / 100;
@@ -1073,7 +1073,7 @@ function computeCoverage() {
   const useG = document.getElementById('use_genome').checked;
   let G;
   if (!useG || G_raw === "") {
-    defaultsUsed.push("Genome size: 3 Mb (typical bacterial genome)");
+    defaultsUsed.push("Genome size: 3 Mb");
     G = DEFAULTS.genome;
   } else {
     G = parseFloat(G_raw);
@@ -1084,7 +1084,7 @@ function computeCoverage() {
   const useD = document.getElementById('use_depth').checked;
   let D;
   if (!useD || D_raw === "") {
-    defaultsUsed.push("Sequencing depth: 10 Gb (typical shallow metagenomic depth)");
+    defaultsUsed.push("Sequencing depth: 10 Gb");
     D = DEFAULTS.depth;
   } else {
     D = parseFloat(D_raw);
@@ -1124,7 +1124,7 @@ function computeRequiredDepth() {
   const useC = document.getElementById('use_targetCoverage').checked;
   let C;
   if (!useC || C_raw === "") {
-    defaultsUsed.push("Target coverage: 1× (minimum meaningful detection threshold)");
+    defaultsUsed.push("Target coverage: 1×");
     C = DEFAULTS.targetCoverage;
   } else {
     C = parseFloat(C_raw);
@@ -1135,7 +1135,7 @@ function computeRequiredDepth() {
   const useA = document.getElementById('use_abundance').checked;
   let A;
   if (!useA || A_raw === "") {
-    defaultsUsed.push("Relative abundance: 1% (standard detectability benchmark)");
+    defaultsUsed.push("Relative abundance: 1%");
     A = DEFAULTS.abundance;
   } else {
     A = parseFloat(A_raw) / 100;
@@ -1146,7 +1146,7 @@ function computeRequiredDepth() {
   const useG = document.getElementById('use_genome').checked;
   let G;
   if (!useG || G_raw === "") {
-    defaultsUsed.push("Genome size: 3 Mb (typical bacterial genome)");
+    defaultsUsed.push("Genome size: 3 Mb");
     G = DEFAULTS.genome;
   } else {
     G = parseFloat(G_raw);
@@ -1174,7 +1174,7 @@ function computeRequiredRA() {
   const useC = document.getElementById('use_minRAcoverage').checked;
   let C;
   if (!useC || C_raw === "") {
-    defaultsUsed.push("Target coverage: 1× (minimum meaningful detection threshold)");
+    defaultsUsed.push("Target coverage: 1×");
     C = DEFAULTS.targetCoverage;
   } else {
     C = parseFloat(C_raw);
@@ -1196,7 +1196,7 @@ function computeRequiredRA() {
   const useD = document.getElementById('use_depth').checked;
   let D;
   if (!useD || D_raw === "") {
-    defaultsUsed.push("Sequencing depth: 10 Gb (typical shallow metagenomic depth)");
+    defaultsUsed.push("Sequencing depth: 10 Gb");
     D = DEFAULTS.depth;
   } else {
     D = parseFloat(D_raw);
