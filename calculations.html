@@ -5,7 +5,7 @@
   <title>How These Calculations Work</title>
 
 <style>
-/* ====== THEME VARIABLES ====== */
+/* THEME VARIABLES */
 :root {
   --bg-page: #f3f5f9;
   --bg-card: #ffffff;
@@ -18,7 +18,7 @@
   --radius-card: 10px;
 }
 
-/* ====== PAGE LAYOUT ====== */
+/* PAGE LAYOUT */
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   margin: 0;
@@ -33,13 +33,13 @@ body {
   margin: 0 auto;
 }
 
-/* ====== TYPOGRAPHY ====== */
+/* TYPOGRAPHY */
 h1 { margin-bottom: 6px; font-size: 28px; font-weight: 700; }
 h2 { margin-top: 32px; margin-bottom: 10px; font-size: 22px; font-weight: 650; }
 h3 { margin-top: 20px; margin-bottom: 8px; font-size: 18px; }
 p  { color: var(--text-muted); line-height: 1.5; }
 
-/* ====== SECTION CARDS ====== */
+/* SECTION CARDS */
 .section-card {
   background: var(--bg-card);
   border: 1px solid var(--border-card);
@@ -49,7 +49,7 @@ p  { color: var(--text-muted); line-height: 1.5; }
   box-shadow: var(--shadow-soft);
 }
 
-/* ====== SIDE TAB ====== */
+/* SIDE TAB */
 .side-tab {
   position: fixed;
   left: 0;
@@ -75,11 +75,11 @@ p  { color: var(--text-muted); line-height: 1.5; }
 table {
   border-collapse: collapse;
   width: 100%;
-  border: 2px solid #b8c0cc; /* outer border */
+  border: 2px solid #b8c0cc; 
 }
 
 th, td {
-  border: 1px solid #b8c0cc; /* inner grid lines */
+  border: 1px solid #b8c0cc; 
   padding: 8px 10px;
 }
 </style>
@@ -87,7 +87,6 @@ th, td {
 
 <body>
 
-<!-- Back to Calculator -->
 <div class="side-tab">
   <a href="index.html">← Back to <br> Calculator</a>
 </div>
@@ -99,9 +98,7 @@ th, td {
   This page provides the mathematical framework used by Meta‑CD to compute WGS coverage, required sequencing depth, minimum detectable abundance, and MAG recovery potential. All calculations follow standard metagenomic coverage theory with explicit incorporation of DNA‑input constraints.
 </p>
 
-<!-- ============================================================
-     CORE COVERAGE MODEL (EXPANDED)
-============================================================ -->
+<!-- CORE COVERAGE MODEL -->
 <div class="section-card">
   <h3>Core Coverage Model</h3>
 
@@ -160,9 +157,7 @@ th, td {
   </p>
 </div>
 
-<!-- ============================================================
-     REQUIRED SEQUENCING DEPTH
-============================================================ -->
+<!-- REQUIRED SEQUENCING DEPTH -->
 <div class="section-card">
   <h3>Required Sequencing Depth</h3>
   <p>
@@ -178,9 +173,7 @@ th, td {
   </p>
 </div>
 
-<!-- ============================================================
-     MINIMUM RELATIVE ABUNDANCE
-============================================================ -->
+<!-- MINIMUM RELATIVE ABUNDANCE -->
 <div class="section-card">
   <h3>Minimum Relative Abundance Required</h3>
   <p>
@@ -196,9 +189,7 @@ th, td {
   </p>
 </div>
 
-<!-- ============================================================
-     BASES SEQUENCED
-============================================================ -->
+<!-- BASES SEQUENCED -->
 <div class="section-card">
   <h3>Bases Sequenced for This Species</h3>
   <p>
@@ -214,9 +205,7 @@ th, td {
   </p>
 </div>
 
-<!-- ============================================================
-     COVERAGE FROM DEPTH
-============================================================ -->
+<!-- COVERAGE FROM DEPTH -->
 <div class="section-card">
   <h3>Coverage From Sequencing Depth</h3>
   <p>
@@ -232,9 +221,7 @@ th, td {
   </p>
 </div>
 
-<!-- ============================================================
-     MAG RECOVERY POTENTIAL
-============================================================ -->
+<!-- MAG RECOVERY POTENTIAL -->
 <div class="section-card">
   <h3>MAG Recovery Potential</h3>
 
@@ -270,9 +257,7 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
   </p>
 </div>
 
-<!-- ============================================================
-     COVERAGE ESTIMATION TABLE
-============================================================ -->
+<!-- COVERAGE ESTIMATION TABLE -->
 <div class="section-card">
   <h3>Coverage Estimation Table</h3>
   <p>
@@ -281,9 +266,7 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
 </div>
 
 
-<!-- =============================================================
-  TABLE SUMMARY
-  ================================================================ -->
+<!-- TABLE SUMMARY -->
 
 <div class="section-card">
   <h3>Table Summary of Formulas</h3>
@@ -374,9 +357,7 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
 </table>
 </div>
   
-<!-- ============================================================
-     REFERENCES
-============================================================ -->
+<!-- REFERENCES -->
 <div class="section-card">
   <h3>References</h3>
   <ol>
