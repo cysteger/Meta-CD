@@ -413,7 +413,7 @@ th {
     <div class="input-field">
       <div class="input-label-row">
         <span class="main-label">Relative abundance (%)</span>
-        <span class="helper">Post‑processing RA</span>
+        <span class="helper">What is the expected or observed relative abundance of the target species in this sample?</span>
       </div>
       <div class="input-inline">
         <input id="abundance" type="number" value="1" step="0.01">
@@ -425,7 +425,7 @@ th {
     <div class="input-field">
       <div class="input-label-row">
         <span class="main-label">Genome size (Mb)</span>
-        <span class="helper">Species genome length</span>
+        <span class="helper">What is the approximate genome size of the species you are evaluating?</span>
       </div>
       <div class="input-inline">
         <input id="genome" type="number" value="4" step="0.1">
@@ -436,7 +436,7 @@ th {
     <!-- Sequencing Depth -->
     <div class="input-field">
       <div class="input-label-row">
-        <span class="main-label">Sequencing depth (Gb)</span>
+        <span class="main-label">What is the total sequencing depth that is available or planned for this metagenomic dataset?</span>
         <span class="helper">Community depth</span>
       </div>
       <div class="input-inline">
@@ -449,7 +449,7 @@ th {
     <div class="input-field">
       <div class="input-label-row">
         <span class="main-label">Target coverage (×)</span>
-        <span class="helper">Depth calculator</span>
+        <span class="helper">What coverage do you want this species to reach for detection, profiling, or MAG recovery?</span>
       </div>
       <div class="input-inline">
         <input id="targetCoverage" type="number" value="10" step="0.1">
@@ -461,7 +461,7 @@ th {
     <div class="input-field">
       <div class="input-label-row">
         <span class="main-label">Target coverage for minimum RA (×)</span>
-        <span class="helper">Detection threshold</span>
+        <span class="helper">What coverage threshold must the species reach to be considered detectable at its minimum abundance?</span>
       </div>
       <div class="input-inline">
         <select id="minRAcoverage">
@@ -483,7 +483,7 @@ th {
 <div class="input-field">
   <div class="input-label-row">
     <span class="main-label">DNA quantity (ng)</span>
-    <span class="helper">Limits effective depth</span>
+    <span class="helper">How much DNA is entering library preparation, and does it limit the maximum unique sequencing depth?</span>
   </div>
 
   <div class="input-inline">
