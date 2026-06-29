@@ -542,9 +542,13 @@ th {
   </p>
   <ul>
     <li><strong>Relative abundance (%)</strong> — Expected abundance before sequencing; used to estimate required depth.</li>
+      <ul>Used in the coverage calculation, in determining bases sequenced, and in computing the required sequencing depth</ul>
     <li><strong>Target coverage for minimum RA (x)</strong> — Minimum coverage required at the lowest expected abundance.</li>
+      <ul>Used in calculating both the required sequencing depth and the minimum relative abundance.</ul>
     <li><strong>Genome size (Mb)</strong> — Larger genomes require more sequencing to reach the same coverage.</li>
+      <ul>Used when calculating coverage, bases sequenced, required sequencing depth, minimum relative abundance, and also in generating the coverage estimation and the MAG Recovery table.</ul>
     <li><strong>DNA quantity (ng)</strong> — Limits maximum effective depth due to library complexity.</li>
+      <ul>Used to determine whether the sequencing depth is DNA‑limited, which affects the coverage, required sequencing depth, and minimum relative abundance, and it also influences the coverage estimation and the MAG recovery table.</ul>
   </ul>
 
   <h4>Post-Sequencing Parameters</h4>
@@ -553,8 +557,11 @@ th {
   </p>
   <ul>
     <li><strong>Relative abundance (%)</strong> — Observed abundance in the final dataset.</li>
+        <ul>Used in the coverage calculation, in determining bases sequenced, and in computing the required sequencing depth</ul>
     <li><strong>Sequencing depth (Gb)</strong> — Total gigabases sequenced for the community.</li>
+      <ul>Used to compute coverage, to estimate bases sequenced, and to determine the minimum relative abundance.</ul>
     <li><strong>Target coverage (x)</strong> — Coverage you want to evaluate using observed abundance and depth.</li>
+      <ul>Used in calculating both the required sequencing depth and the minimum relative abundance.</ul>
   </ul>
 
   <h4>Uses and Interpretations</h4>
