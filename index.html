@@ -264,16 +264,13 @@ th {
   font-size: 16px;
 }
 
-/* ============================
-   TWO-COLUMN LAYOUT (CLEANED)
-   ============================ */
+/* TWO-COLUMN LAYOUT */
 
-/* Stack sections instead of side-by-side */
+/* Stack sections */
 .two-col-wrapper {
   margin-top: 30px;
 }
 
-/* Column boxes (now just stacked cards) */
 .analysis-box {
   background: #e0e8f2;
   border: 1px solid var(--border-card);
@@ -283,7 +280,7 @@ th {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  margin-top: 24px; /* space between sections */
+  margin-top: 24px; 
 }
 
 .analysis-box:nth-child(2) {
@@ -403,9 +400,7 @@ th {
   sequencing depth, and sample DNA quantity.
 </p>
 
-<!-- ============================
-     UNIFIED INPUT PANEL
-     ============================ -->
+<!-- UNIFIED INPUT PANEL -->
 
 <div class="input-panel">
   <div class="section-title">
@@ -494,13 +489,13 @@ th {
   <div class="input-inline">
     <input id="dnaInput" type="number" value="10" step="0.1">
 
-    <!-- MATCHING SQUARE POPUP BUTTON -->
+    <!-- SQUARE POPUP BUTTON -->
   <button id="dnaInfoBtn" class="popup-trigger">?</button>
 
     <label><input type="checkbox" id="use_dna" checked> Use</label>
   </div>
 
-  <!-- MATCHING POPUP BOX -->
+  <!-- POPUP BOX -->
   <div id="dnaInfoPopup"
        style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%);
               background:white; border:1px solid #888; padding:20px; width:350px;
@@ -602,15 +597,11 @@ th {
 
     
 
-<!-- ============================
-     TWO-COLUMN RESULTS LAYOUT
-     ============================ -->
+<!-- TWO-COLUMN RESULTS LAYOUT -->
   <section class="two-col-wrapper">
   
   
-    <!-- ============================
-         COLUMN 2 — PRE-SEQUENCING ESTIMATION
-         ============================ -->
+    <!-- SECTOION 1 — PRE-SEQUENCING ESTIMATION -->
     <div class="analysis-box">
 
       <div class="preseq">
@@ -651,11 +642,9 @@ th {
   </p>
 </div>
 
-</div> <!-- END COLUMN 2 -->
+</div> <!-- END SECTION 1 -->
 
-    <!-- ============================
-       COLUMN 1 — POST-SEQUENCING ANALYSIS
-       ============================ -->
+    <!-- SECTION 2 — POST-SEQUENCING ANALYSIS -->
   <div class="analysis-box">
 
     <div class="preseq">
@@ -763,15 +752,13 @@ th {
   
 </div>
   
-  </div> <!-- END COLUMN 1 -->
+  </div> <!-- END SECTION 2 -->
   
 
 </section> <!-- END TWO-COLUMN WRAPPER -->
 
 
-<!-- ============================
-     COVERAGE ESTIMATION TABLE — STANDALONE
-     ============================ -->
+<!-- COVERAGE ESTIMATION TABLE — STANDALONE -->
 <section>
   <div class="section-card">
     <div class="section-title"><span>Coverage Estimation Table</span></div>
@@ -851,7 +838,7 @@ const DEFAULTS = {
   dnaCap: Infinity      // No DNA limit
 };
 
-// ===== HELPER: build default note =====
+// HELPER: build default note
 function buildDefaultNote(defaultsUsed) {
   if (!defaultsUsed || defaultsUsed.length === 0) return "";
   let note = "Note: Using default values for missing inputs:<br>";
@@ -862,9 +849,7 @@ function buildDefaultNote(defaultsUsed) {
 }
 
   
-/* ============================================================
-   DNA QUANTITY CAP
-   ============================================================ */
+/* DNA QUANTITY CAP */
 function getDnaCapGbp(defaultsUsed) {
   const useDna = document.getElementById('use_dna').checked;
   const dna_ng_raw = document.getElementById('dnaInput').value;
@@ -883,9 +868,7 @@ function getEffectiveDepth(D_raw, defaultsUsed) {
   return Math.min(D_raw, cap);
 }
 
-/* ============================================================
-   LEGEND
-   ============================================================ */
+/*  LEGEND */
 function updateLegend() {
   document.getElementById("legendBox").innerHTML = `
     <div class="legend-title"><strong>Coverage Tiers</strong></div>
@@ -913,9 +896,7 @@ function updateLegend() {
 }
 
 
-/* ============================================================
-   COLOR CODING — UPDATED TO NEW COVERAGE TIERS
-   ============================================================ */
+/* COLOR CODING — UPDATED TO NEW COVERAGE TIERS */
 function getColorClass(cov) {
 
   // MAG: 10× and above
@@ -932,9 +913,7 @@ function getColorClass(cov) {
 }
 
 
-/* ============================================================
-   CHEAT SHEET
-   ============================================================ */
+/* COVERAGE ESTIMATION TABLE */
 function updateCheatSheet() {
   const useGenome = document.getElementById('use_genome').checked;
   const G_raw = document.getElementById('genome').value;
@@ -976,9 +955,7 @@ function updateCheatSheet() {
   });
 }
 
-/* ============================================================
-   MAG RECOVERY TABLE
-   ============================================================ */
+/* MAG RECOVERY TABLE */
 function updateMagTable() {
   const G_raw = document.getElementById('genome').value;
   const useG = document.getElementById('use_genome').checked;
@@ -1002,7 +979,7 @@ function updateMagTable() {
   // Depths to evaluate
   const depths = [1, 5, 10, 20, 40, 80];
 
-  // Relative abundances (fractions)
+  // Relative abundances 
   const abundances = [
     { val: 0.10 }, 
     { val: 0.05 }, 
@@ -1030,7 +1007,7 @@ function updateMagTable() {
       // Show numeric coverage
       cell.textContent = cov.toFixed(2) + "×";
 
-      // Apply your new MAG thresholds
+      // Apply new MAG thresholds
       if (cov > 20) {
         cell.className = "mag-high";        // green
       } 
@@ -1051,13 +1028,11 @@ function updateMagTable() {
   });
 }
 
-/* ============================================================
-   CALCULATORS
-   ============================================================ */
+/* CALCULATORS */
 function computeCoverage() {
   const defaultsUsed = [];
 
-  // Abundance (fraction)
+  // Abundance
   let A_raw = document.getElementById('abundance').value;
   const useA = document.getElementById('use_abundance').checked;
   let A;
@@ -1211,9 +1186,7 @@ function computeRequiredRA() {
   document.getElementById('raNote').innerHTML = buildDefaultNote(defaultsUsed);
 }
 
-/* ============================================================
-   GENERATE ALL
-   ============================================================ */
+/* GENERATE ALL */
 function generateAll() {
   updateLegend();
   updateCheatSheet();
