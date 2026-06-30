@@ -5,45 +5,142 @@ Written by Callie Claiborne (cysteger@ncsu.edu), PhD student in Bioinformatics, 
 **Repository:** https://github.com/cysteger/Meta-CD
 
 
-# Description
+<h2>Description</h2>
 
-Meta‑CD is a browser‑based tool to facilitate **WGS metagenomic sequencing design and analysis**. It provides both **pre‑sequencing experimental planning** and **post‑sequencing analysis**, enabling researchers to estimate:
+<p>
+Accurately determining whether a target microbial species can be detected or profiled in a WGS metagenomic study requires understanding how biological and sequencing parameters interact (1–3). The former includes genome size and relative abundance, while the latter includes sequencing depth and DNA input. However, this interaction is poorly modeled, hindering biologically motivated experimental design and sequencing analysis (2–4). As a result, researchers lack a simple way to evaluate whether a target species can be detected under biologically relevant sequencing constraints (2,5). Beyond taxonomic profiling, additional parameters must be integrated to inform functional pathway analysis and MAG (metagenome-assembled genome) recovery (6).
+</p>
 
-- Required sequencing depth  
-- Achieved sequencing coverage  
-- Minimum detectable relative abundance  
-- MAG recovery potential  
-- Coverage matrices across depth × abundance  
-- Adjusted calculations by genome size and DNA quantity
+<p>
+Meta‑CD fills this gap by offering a browser‑based tool that integrates both biological and sequencing parameters to support two primary use cases:
+</p>
 
-The tool is fully client‑side (HTML/JS/CSS) and requires **no installation**, **no dependencies**, and **no data upload**. All calculations run locally in the user’s browser. A web tool is also available at Github for convient access. 
+<ol>
+  <li><strong>Pre‑Sequencing Estimation</strong> — determining the sequencing depth required to reach a target coverage threshold.</li>
+  <li><strong>Post‑Sequencing Analysis</strong> — estimating species‑specific coverage given sequencing depth and abundance.</li>
+</ol>
 
-Meta‑CD is designed for microbial ecologists, metagenomic researchers, and sequencing‑based study designers who need fast, reporducible, interpretable, and intuitive predictions.
+<hr>
 
+<h2>Workflow Overview</h2>
 
-# Overview
+<p>
+The workflow supported by Meta-CD is illustrated in Figure 1, outlining how users may utilize Meta-CD at any stage of a metagenomic study to refine experimental planning or evaluate sequencing outcomes.
+</p>
 
-Meta‑CD integrates four key parameters:
+<div align="center">
+  <h3>Figure 1. Meta‑CD Integration into Metagenomic Study</h3>
+  <p>Meta‑CD supports both pre‑sequencing planning and post‑sequencing evaluation. Users may enter the cycle at any stage (Design, Sequence, Analyze, Review).</p>
+  <img src="assets/MetaCD_Workflow.png" alt="Meta-CD Workflow Diagram" width="600">
+</div>
 
-- Genome size (Mbp)  
-- Relative abundance of target species (%)  
-- Sequencing depth (Gb)  
-- Sample DNA quantity (ng)  
+<hr>
 
-These parameters determine the theoretical number of bases sequenced for a target species, the achievable coverage, and the feasibility of downstream analyses such as:
+<h2>Model Summary</h2>
 
-- Taxonomic profiling  
-- Functional profiling  
-- Rare taxon/gene detection  
-- MAG recovery  
+<p>
+Meta-CD implements a deterministic model and integrates user-defined biological and sequencing parameters—relative abundance, genome size, sequencing depth, and DNA input quantity—to estimate species-specific coverage (1,2,4,7). It calculates the expected number of sequencing bases originating from a species and converts this into per-base coverage (1,3,7). When nominal sequencing depth exceeds the number of unique DNA base pairs available in a sample, Meta-CD applies a DNA‑quantity‑constrained correction to ensure coverage estimates remain biologically relevant (3,4,8,9). Users may select coverage thresholds from 1×–30× to support applications ranging from genome-level taxonomic detection and functional profiling to high-confidence variant calling for MAG recovery (2,6).
+</p>
 
-The tool implements coverage equations commonly used in metagenomics, including:
+<p>
+Meta‑CD is available as a browser-based application using HTML, CSS, and JavaScript. All computations occur locally in the user’s browser. The interface provides real‑time updates, interactive input fields, and two visual reference components: a MAG Recovery Potential Table and a Coverage Estimation Table summarizing expected coverage across sequencing depth and relative abundance. The full source code is publicly available with version control, documentation, a permissive license, and an issue tracker. No registration is required, and the tool does not rely on external datasets.
+</p>
 
-- Achieved coverage  
-- Required depth for target coverage  
-- Minimum relative abundance for detection  
-- Adjustment by genome size and DNA quantity  
+<p>
+All calculations performed by Meta‑CD follow the mathematical framework summarized in Table 1, outlining how sequencing depth, relative abundance, genome size, and DNA quantity are integrated to generate each output (1,7,8). These equations form the basis of all values reported by the tool and ensure transparent, reproducible interpretation of species‑level coverage estimates (3). The results have been validated using the MBARC‑26 mock community, a defined mixture of 26 bacteria and archaea genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation (10).
+</p>
 
+<div align="center">
+  <h3>Table 1. Summary of Calculations Implemented in Meta‑CD</h3>
+
+  <table>
+    <tr>
+      <th>Output</th>
+      <th>Formula / Calculation</th>
+      <th>Description</th>
+      <th>Ref</th>
+    </tr>
+
+    <tr>
+      <td>Dcommunity (Base conversion)</td>
+      <td>Dcommunity (bases) = Dcommunity (Gb) × 10⁹</td>
+      <td>Total sequencing depth converted from gigabases to bases.</td>
+      <td>(7)</td>
+    </tr>
+
+    <tr>
+      <td>Maximum Unique Depth (DNA‑limited)</td>
+      <td>Dmax = DNAng</td>
+      <td>Approximation that 1 ng DNA yields ~1 Gbp of unique sequence.</td>
+      <td>(4,8)</td>
+    </tr>
+
+    <tr>
+      <td>Species‑Specific Sequencing Bases</td>
+      <td>Bspecies = Dcommunity × 10⁹ × A</td>
+      <td>Total number of DNA bases sequenced from target species. Sequencing depth (in Gb) is converted to bases and multiplied by relative abundance.</td>
+      <td>(3,7)</td>
+    </tr>
+
+    <tr>
+      <td>Coverage From Sequencing Depth</td>
+      <td>C = (D_effective × 1000 × A) / G</td>
+      <td>Expected average coverage for a genome of size G at abundance A, using effective depth adjusted for DNA‑input constraint.</td>
+      <td>(7,11)</td>
+    </tr>
+
+    <tr>
+      <td>Effective Sequencing Depth (DNA‑Limited)</td>
+      <td>D_effective = min(D_total, D_max)</td>
+      <td>If DNA input constrains library complexity, the effective depth is capped at Dmax (1 ng ≈ 1 Gb DNA base pairs).</td>
+      <td>(4,8)</td>
+    </tr>
+
+    <tr>
+      <td>Required Sequencing Depth</td>
+      <td>D_required = (C_target × G) / (1000 × A)</td>
+      <td>Sequencing depth needed to reach target coverage for a species at a given relative abundance.</td>
+      <td>(3,7,11)</td>
+    </tr>
+
+    <tr>
+      <td>Minimum Detectable Relative Abundance</td>
+      <td>A_min = (C_target × G) / (1000 × D_effective)</td>
+      <td>Lowest relative abundance at which the species reaches the target coverage under the available effective depth.</td>
+      <td>(3,7,11)</td>
+    </tr>
+
+    <tr>
+      <td>Naive Coverage (No DNA Limit)</td>
+      <td>C_naive = (D_total × 1000 × A) / G</td>
+      <td>Coverage assuming unlimited DNA input.</td>
+      <td>(3,7)</td>
+    </tr>
+
+    <tr>
+      <td>MAG Recovery Coverage</td>
+      <td>C = (D_effective × 1000 × A) / G</td>
+      <td>Same formula as coverage; interpreted using MAG thresholds (1×, 5×, 10×, 20×).</td>
+      <td>(6,12)</td>
+    </tr>
+
+    <tr>
+      <td>Coverage Estimation Table Values</td>
+      <td>Computed using C_effective across a matrix of depths and relative abundances</td>
+      <td>Table shows expected coverage for the pre‑computed matrix automatically adjusted for genome size and DNA quantity.</td>
+      <td>(7,8,10)</td>
+    </tr>
+
+  </table>
+</div>
+
+<hr>
+
+<h2>Summary</h2>
+
+<p>
+Meta-CD predicts the required sequencing depth for a given experimental design (pre-sequencing estimation) and the likelihood of performing taxonomic detection, functional profiling, and MAG recovery for a given metagenomic dataset (post-sequencing analysis). Meta-CD enables quantitative, biologically informed decisions throughout the cycle of metagenomic studies.
+</p>
 
 # How Meta‑CD Works
 
@@ -149,23 +246,71 @@ Meta‑CD should match the expected values within rounding error.
 This provides formal validation for users.
 
 
-## References
+<h2>References</h2>
 
-1. Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. *Genome Biol.* 2015;16(1):51. doi:10.1186/s13059-015-0611-7
+<ol>
+  <li>
+    Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. 
+    <em>Genome Biol.</em> 2015 Mar 25;16(1):51. doi:10.1186/s13059-015-0611-7
+  </li>
 
-2. Treichel, N.S., Pauvert, C., Séneca, J. et al. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. <i>Nat Microbiol 11</i>, 1233–1244 (2026). https://doi.org/10.1038/s41564-026-02334-2 
+  <li>
+    Treichel NS, Pauvert C, Séneca J, Pjevac P, Berry D, Penders J, et al. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. 
+    <em>Nat Microbiol.</em> 2026 May;11(5):1233–44. doi:10.1038/s41564-026-02334-2
+  </li>
 
-3. Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. *Cell.* 2016;166(5):1103–1116. doi:10.1016/j.cell.2016.08.007
+  <li>
+    Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. 
+    <em>Cell.</em> 2016 Aug 25;166(5):1103–16. doi:10.1016/j.cell.2016.08.007 
+    PubMed PMID: 27565341; PubMed Central PMCID: PMC5080976.
+  </li>
 
-4. Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? *Brief Bioinform.* 2022;23(6):bbac443. doi:10.1093/bib/bbac443
+  <li>
+    Daley T, Smith AD. Predicting the molecular complexity of sequencing libraries. 
+    <em>Nat Methods.</em> 2013 Apr;10(4):325–7. doi:10.1038/nmeth.2375 
+    PubMed PMID: 23435259; PubMed Central PMCID: PMC3612374.
+  </li>
 
-5. Lander ES, Waterman MS. Genomic mapping by fingerprinting random clones: A mathematical analysis. *Genomics.* 1988;2(3):231–239. doi:10.1016/0888-7543(88)90007-9
+  <li>
+    Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? 
+    <em>Brief Bioinform.</em> 2022 Nov 19;23(6):bbac443. doi:10.1093/bib/bbac443 
+    PubMed PMID: 36352504.
+  </li>
 
-6. Riesco R, Trujillo ME. Update on the proposed minimal standards for the use of genome data for the taxonomy of prokaryotes. *Int J Syst Evol Microbiol.* 2024;74(3). doi:10.1099/ijsem.0.006300
+  <li>
+    Parks DH, Rinke C, Chuvochina M, Chaumeil PA, Woodcroft BJ, Evans PN, et al. Recovery of nearly 8,000 metagenome-assembled genomes substantially expands the tree of life. 
+    <em>Nat Microbiol.</em> 2017 Nov;2(11):1533–42. doi:10.1038/s41564-017-0012-7
+  </li>
 
-7. McNulty SN, Mann PR, Robinson JA, Duncavage EJ, Pfeifer JD. Impact of Reducing DNA Input on Next-Generation Sequencing Library Complexity and Variant Detection. *J Mol Diagn.* 2020;22(5):720–727. doi:10.1016/j.jmoldx.2020.02.003
+  <li>
+    Lander ES, Waterman MS. Genomic mapping by fingerprinting random clones: A mathematical analysis. 
+    <em>Genomics.</em> 1988 Apr;2(3):231–9. doi:10.1016/0888-7543(88)90007-9
+  </li>
 
-8. Deng C, Daley T, Calabrese P, Ren J, Smith AD. Predicting the Number of Bases to Attain Sufficient Coverage in High-Throughput Sequencing Experiments. *J Comput Biol.* 2020;27(7):1130–1143. doi:10.1089/cmb.2019.0264
+  <li>
+    McNulty SN, Mann PR, Robinson JA, Duncavage EJ, Pfeifer JD. Impact of Reducing DNA Input on Next-Generation Sequencing Library Complexity and Variant Detection. 
+    <em>J Mol Diagn.</em> 2020 May;22(5):720–7. doi:10.1016/j.jmoldx.2020.02.003
+  </li>
 
-9. Singer E, Andreopoulos B, Bowers RM, et al. Next generation sequencing data of a defined microbial mock community. *Sci Data.* 2016;3(1):160081. doi:10.1038/sdata.2016.81
+  <li>
+    Deng C, Daley T, Calabrese P, Ren J, Smith AD. Predicting the Number of Bases to Attain Sufficient Coverage in High-Throughput Sequencing Experiments. 
+    <em>J Comput Biol.</em> 2020 Jul 1;27(7):1130–43. doi:10.1089/cmb.2019.0264 
+    PubMed PMID: 31725321; PubMed Central PMCID: PMC7398442.
+  </li>
+
+  <li>
+    Singer E, Andreopoulos B, Bowers RM, Lee J, Deshpande S, Chiniquy J, et al. Next generation sequencing data of a defined microbial mock community. 
+    <em>Sci Data.</em> 2016 Sep 27;3(1):160081. doi:10.1038/sdata.2016.81
+  </li>
+
+  <li>
+    Wendl MC, Kota K, Weinstock GM, Mitreva M. Coverage theories for metagenomic DNA sequencing based on a generalization of Stevens’ theorem. 
+    <em>J Math Biol.</em> 2013 Nov 1;67(5):1141–61. doi:10.1007/s00285-012-0586-x
+  </li>
+
+  <li>
+    Alneberg J, Bjarnason BS, de Bruijn I, Schirmer M, Quick J, Ijaz UZ, et al. Binning metagenomic contigs by coverage and composition. 
+    <em>Nat Methods.</em> 2014 Nov;11(11):1144–6. doi:10.1038/nmeth.3103
+  </li>
+</ol>
 
