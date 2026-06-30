@@ -183,20 +183,17 @@ This provides formal validation for users.
 
   <li>
     Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. 
-    <em>Cell.</em> 2016 Aug 25;166(5):1103–16. doi:10.1016/j.cell.2016.08.007 
-    PubMed PMID: 27565341; PubMed Central PMCID: PMC5080976.
+    <em>Cell.</em> 2016 Aug 25;166(5):1103–16. doi:10.1016/j.cell.2016.08.007
   </li>
 
   <li>
     Daley T, Smith AD. Predicting the molecular complexity of sequencing libraries. 
-    <em>Nat Methods.</em> 2013 Apr;10(4):325–7. doi:10.1038/nmeth.2375 
-    PubMed PMID: 23435259; PubMed Central PMCID: PMC3612374.
+    <em>Nat Methods.</em> 2013 Apr;10(4):325–7. doi:10.1038/nmeth.2375
   </li>
 
   <li>
     Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? 
-    <em>Brief Bioinform.</em> 2022 Nov 19;23(6):bbac443. doi:10.1093/bib/bbac443 
-    PubMed PMID: 36352504.
+    <em>Brief Bioinform.</em> 2022 Nov 19;23(6):bbac443. doi:10.1093/bib/bbac443
   </li>
 
   <li>
@@ -216,8 +213,7 @@ This provides formal validation for users.
 
   <li>
     Deng C, Daley T, Calabrese P, Ren J, Smith AD. Predicting the Number of Bases to Attain Sufficient Coverage in High-Throughput Sequencing Experiments. 
-    <em>J Comput Biol.</em> 2020 Jul 1;27(7):1130–43. doi:10.1089/cmb.2019.0264 
-    PubMed PMID: 31725321; PubMed Central PMCID: PMC7398442.
+    <em>J Comput Biol.</em> 2020 Jul 1;27(7):1130–43. doi:10.1089/cmb.2019.0264
   </li>
 
   <li>
