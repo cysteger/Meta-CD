@@ -34,10 +34,6 @@ The workflow supported by Meta-CD is illustrated in Figure 1, outlining how user
   <img src="assets/MetaCD_Workflow.png" alt="Meta-CD Workflow Diagram" width="600">
 </div>
 
-<hr>
-
-<h2>Model Summary</h2>
-
 <p>
 Meta-CD implements a deterministic model and integrates user-defined biological and sequencing parameters—relative abundance, genome size, sequencing depth, and DNA input quantity—to estimate species-specific coverage (1,2,4,7). It calculates the expected number of sequencing bases originating from a species and converts this into per-base coverage (1,3,7). When nominal sequencing depth exceeds the number of unique DNA base pairs available in a sample, Meta-CD applies a DNA‑quantity‑constrained correction to ensure coverage estimates remain biologically relevant (3,4,8,9). Users may select coverage thresholds from 1×–30× to support applications ranging from genome-level taxonomic detection and functional profiling to high-confidence variant calling for MAG recovery (2,6).
 </p>
@@ -50,93 +46,21 @@ Meta‑CD is available as a browser-based application using HTML, CSS, and JavaS
 All calculations performed by Meta‑CD follow the mathematical framework summarized in Table 1, outlining how sequencing depth, relative abundance, genome size, and DNA quantity are integrated to generate each output (1,7,8). These equations form the basis of all values reported by the tool and ensure transparent, reproducible interpretation of species‑level coverage estimates (3). The results have been validated using the MBARC‑26 mock community, a defined mixture of 26 bacteria and archaea genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation (10).
 </p>
 
-<div align="center">
-  <h3>Table 1. Summary of Calculations Implemented in Meta‑CD</h3>
+### Table 1. Summary of Calculations Implemented in Meta‑CD
 
-  <table>
-    <tr>
-      <th>Output</th>
-      <th>Formula / Calculation</th>
-      <th>Description</th>
-      <th>Ref</th>
-    </tr>
+| Output                                   | Formula / Calculation                                   | Description                                                                                                                       | Ref        |
+|------------------------------------------|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|-----------|
+| Dcommunity (Base conversion)             | Dcommunity (bases) = Dcommunity (Gb) × 10^9            | Total sequencing depth converted from gigabases to bases.                                                                        | (7)        |
+| Maximum Unique Depth (DNA-limited)       | Dmax = DNAng                                           | Approximation that 1 ng DNA yields ~1 Gbp of unique sequence.                                                                    | (4,8)      |
+| Species‑Specific Sequencing Bases        | Bspecies = Dcommunity × 10^9 × A                       | Total number of DNA bases sequenced from target species. Sequencing depth (in Gb) is converted to bases and multiplied by relative abundance. | (3,7)      |
+| Coverage From Sequencing Depth           | C = (D_effective × 1000 × A) / G                       | Expected average coverage for a genome of size G at abundance A, using effective depth adjusted for DNA‑input constraint.        | (7,11)     |
+| Effective Sequencing Depth (DNA-Limited) | D_effective = min(D_total, D_max)                      | If DNA input constrains library complexity, the effective depth is capped at Dmax (1 ng ≈ 1 Gb DNA base pairs).                  | (4,8)      |
+| Required Sequencing Depth                | D_required = (C_target × G) / (1000 × A)               | Sequencing depth needed to reach target coverage for a species at a given relative abundance.                                    | (3,7,11)   |
+| Minimum Detectable Relative Abundance    | A_min = (C_target × G) / (1000 × D_effective)          | Lowest relative abundance at which the species reaches the target coverage under the available effective depth.                  | (3,7,11)   |
+| Naive Coverage (No DNA Limit)            | C_naive = (D_total × 1000 × A) / G                     | Coverage assuming unlimited DNA input.                                                                                            | (3,7)      |
+| MAG Recovery Coverage                    | C = (D_effective × 1000 × A) / G                       | Same formula as coverage; interpreted using MAG thresholds (1×, 5×, 10×, 20×).                                                   | (6,12)     |
+| Coverage Estimation Table Values         | Computed using C_effective across depth × abundance    | Table shows expected coverage for the pre‑computed matrix automatically adjusted for genome size and DNA quantity.              | (7,8,10)   |
 
-    <tr>
-      <td>Dcommunity (Base conversion)</td>
-      <td>Dcommunity (bases) = Dcommunity (Gb) × 10⁹</td>
-      <td>Total sequencing depth converted from gigabases to bases.</td>
-      <td>(7)</td>
-    </tr>
-
-    <tr>
-      <td>Maximum Unique Depth (DNA‑limited)</td>
-      <td>Dmax = DNAng</td>
-      <td>Approximation that 1 ng DNA yields ~1 Gbp of unique sequence.</td>
-      <td>(4,8)</td>
-    </tr>
-
-    <tr>
-      <td>Species‑Specific Sequencing Bases</td>
-      <td>Bspecies = Dcommunity × 10⁹ × A</td>
-      <td>Total number of DNA bases sequenced from target species. Sequencing depth (in Gb) is converted to bases and multiplied by relative abundance.</td>
-      <td>(3,7)</td>
-    </tr>
-
-    <tr>
-      <td>Coverage From Sequencing Depth</td>
-      <td>C = (D_effective × 1000 × A) / G</td>
-      <td>Expected average coverage for a genome of size G at abundance A, using effective depth adjusted for DNA‑input constraint.</td>
-      <td>(7,11)</td>
-    </tr>
-
-    <tr>
-      <td>Effective Sequencing Depth (DNA‑Limited)</td>
-      <td>D_effective = min(D_total, D_max)</td>
-      <td>If DNA input constrains library complexity, the effective depth is capped at Dmax (1 ng ≈ 1 Gb DNA base pairs).</td>
-      <td>(4,8)</td>
-    </tr>
-
-    <tr>
-      <td>Required Sequencing Depth</td>
-      <td>D_required = (C_target × G) / (1000 × A)</td>
-      <td>Sequencing depth needed to reach target coverage for a species at a given relative abundance.</td>
-      <td>(3,7,11)</td>
-    </tr>
-
-    <tr>
-      <td>Minimum Detectable Relative Abundance</td>
-      <td>A_min = (C_target × G) / (1000 × D_effective)</td>
-      <td>Lowest relative abundance at which the species reaches the target coverage under the available effective depth.</td>
-      <td>(3,7,11)</td>
-    </tr>
-
-    <tr>
-      <td>Naive Coverage (No DNA Limit)</td>
-      <td>C_naive = (D_total × 1000 × A) / G</td>
-      <td>Coverage assuming unlimited DNA input.</td>
-      <td>(3,7)</td>
-    </tr>
-
-    <tr>
-      <td>MAG Recovery Coverage</td>
-      <td>C = (D_effective × 1000 × A) / G</td>
-      <td>Same formula as coverage; interpreted using MAG thresholds (1×, 5×, 10×, 20×).</td>
-      <td>(6,12)</td>
-    </tr>
-
-    <tr>
-      <td>Coverage Estimation Table Values</td>
-      <td>Computed using C_effective across a matrix of depths and relative abundances</td>
-      <td>Table shows expected coverage for the pre‑computed matrix automatically adjusted for genome size and DNA quantity.</td>
-      <td>(7,8,10)</td>
-    </tr>
-
-  </table>
-</div>
-
-<hr>
-
-<h2>Summary</h2>
 
 <p>
 Meta-CD predicts the required sequencing depth for a given experimental design (pre-sequencing estimation) and the likelihood of performing taxonomic detection, functional profiling, and MAG recovery for a given metagenomic dataset (post-sequencing analysis). Meta-CD enables quantitative, biologically informed decisions throughout the cycle of metagenomic studies.
