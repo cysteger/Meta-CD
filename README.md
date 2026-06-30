@@ -20,8 +20,6 @@ Meta‑CD fills this gap by offering a browser‑based tool that integrates both
   <li><strong>Post‑Sequencing Analysis</strong> — estimating species‑specific coverage given sequencing depth and abundance.</li>
 </ol>
 
-<hr>
-
 <h2>Workflow Overview</h2>
 
 <p>
@@ -29,13 +27,13 @@ The workflow supported by Meta-CD is illustrated in Figure 1, outlining how user
 </p>
 
 <div align="center">
+  <img src="assets/MetaCD_Workflow.png" alt="Meta-CD Workflow Diagram" width="600">
   <h3>Figure 1. Meta‑CD Integration into Metagenomic Study</h3>
   <p>Meta‑CD supports both pre‑sequencing planning and post‑sequencing evaluation. Users may enter the cycle at any stage (Design, Sequence, Analyze, Review).</p>
-  <img src="assets/MetaCD_Workflow.png" alt="Meta-CD Workflow Diagram" width="600">
 </div>
 
 <p>
-Meta-CD implements a deterministic model and integrates user-defined biological and sequencing parameters—relative abundance, genome size, sequencing depth, and DNA input quantity—to estimate species-specific coverage (1,2,4,7). It calculates the expected number of sequencing bases originating from a species and converts this into per-base coverage (1,3,7). When nominal sequencing depth exceeds the number of unique DNA base pairs available in a sample, Meta-CD applies a DNA‑quantity‑constrained correction to ensure coverage estimates remain biologically relevant (3,4,8,9). Users may select coverage thresholds from 1×–30× to support applications ranging from genome-level taxonomic detection and functional profiling to high-confidence variant calling for MAG recovery (2,6).
+Meta-CD implements a deterministic model and integrates user-defined biological and sequencing parameters: relative abundance, genome size, sequencing depth, and DNA input quantity, to estimate species-specific coverage (1,2,4,7). It calculates the expected number of sequencing bases originating from a species and converts this into per-base coverage (1,3,7). When nominal sequencing depth exceeds the number of unique DNA base pairs available in a sample, Meta-CD applies a DNA‑quantity‑constrained correction to ensure coverage estimates remain biologically relevant (3,4,8,9). Users may select coverage thresholds from 1×–30× to support applications ranging from genome-level taxonomic detection and functional profiling to high-confidence variant calling for MAG recovery (2,6).
 </p>
 
 <p>
@@ -60,7 +58,7 @@ All calculations performed by Meta‑CD follow the mathematical framework summar
 | Naive Coverage (No DNA Limit)            | C_naive = (D_total × 1000 × A) / G                     | Coverage assuming unlimited DNA input.                                                                                            | (3,7)      |
 | MAG Recovery Coverage                    | C = (D_effective × 1000 × A) / G                       | Same formula as coverage; interpreted using MAG thresholds (1×, 5×, 10×, 20×).                                                   | (6,12)     |
 | Coverage Estimation Table Values         | Computed using C_effective across depth × abundance    | Table shows expected coverage for the pre‑computed matrix automatically adjusted for genome size and DNA quantity.              | (7,8,10)   |
-
+<p><strong>Table 1. Explanation of calculations performed by Meta-CD.</strong> Mathematical calculations used in Meta‑CD to compute species‑specific sequencing bases, coverage, detection limits, and required sequencing depth. Variables are defined as follows: Dcommunity (total sequencing depth, Gb), Deffective (effective sequencing depth adjusted for DNA‑input constraints), Dmax (maximum sequencing depth constrained by DNA quantity), G (genome size, Mb), A (relative abundance as a fraction), Amin (minimum relative abundance required to reach target coverage), C (coverage), Ctarget (user‑defined target coverage), Bspecies (bases sequenced from the target species), and Ceffective (effective coverage adjusted for DNA-input constraint). All calculations follow the standard metagenomic coverage equation and incorporate DNA‑quantity constraints where applicable.</p>
 
 <p>
 Meta-CD predicts the required sequencing depth for a given experimental design (pre-sequencing estimation) and the likelihood of performing taxonomic detection, functional profiling, and MAG recovery for a given metagenomic dataset (post-sequencing analysis). Meta-CD enables quantitative, biologically informed decisions throughout the cycle of metagenomic studies.
