@@ -428,7 +428,7 @@ th {
         <span class="helper">What is the approximate genome size of the species you are evaluating?</span>
       </div>
       <div class="input-inline">
-        <input id="genome" type="number" value="4" step="0.1">
+        <input id="genome" type="number" value="3" step="0.1">
         <label><input type="checkbox" id="use_genome" checked> Use</label>
       </div>
     </div>
@@ -452,7 +452,7 @@ th {
         <span class="helper">What coverage do you want this species to reach for detection, profiling, or MAG recovery?</span>
       </div>
       <div class="input-inline">
-        <input id="targetCoverage" type="number" value="10" step="0.1">
+        <input id="targetCoverage" type="number" value="1" step="0.1">
         <label><input type="checkbox" id="use_targetCoverage" checked> Use</label>
       </div>
     </div>
@@ -535,6 +535,15 @@ th {
 
 <div class="input-explain">
   <h3>Input Parameter Description</h3>
+
+  <p class="default-note">
+  Default values (used when inputs are disabled or left blank):<br>
+  – Genome size: 3 Mb<br>
+  – Relative abundance: 1%<br>
+  – Sequencing depth: 10 Gb<br>
+  – Target coverage: 1×<br>
+  – DNA input: no cap (Infinity)
+  </p>
 
   <h4>Pre-Sequencing Parameters</h4>
   <p>
@@ -705,7 +714,7 @@ th {
         <thead>
           <tr>
             <th>Sequencing Depth (Gb)</th>
-            <th colspan="6">Relative Abundance (fraction of community)</th>
+            <th colspan="6">Relative Abundance (%)</th>
           </tr>
           <tr>
             <th></th>
@@ -746,8 +755,7 @@ th {
 <div class="explain" style="margin-top:16px; font-size:12px; line-height:1.45;">
   <strong>Interpreting MAG Recovery Requirements</strong><br>
   To successfully recover high‑quality Metagenome‑Assembled Genomes (MAGs), the amount of sequencing 
-  required depends on sample complexity and the abundance of target organisms. Typical recommended 
-  sequencing depths per sample are:<br><br>
+  required depends on sample complexity and the abundance of target organisms.<br><br>
 
   <strong>Key Factors for MAG Recovery</strong><br>
   • <em>De novo assembly requires deep sequencing</em> — far more than taxonomic profiling.<br>
