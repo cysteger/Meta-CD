@@ -272,7 +272,7 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
   <h3>Table Summary of Formulas</h3>
   <p>Mathematical calculations used in Meta‑CD to compute species‑specific sequencing bases, coverage, detection limits, and required sequencing depth. Variables are defined as follows:</p>
 
-  <table>
+<table>
   <thead>
     <tr>
       <th>Output</th>
@@ -284,93 +284,154 @@ where D<sub>effective</sub> is the sequencing depth after applying any DNA quant
   <tbody>
 
     <tr>
-      <td>D<sub>community</sub> (base conversion)</td>
-      <td>D<sub>community</sub> (bases) = D<sub>community</sub> (Gb) × 10<sup>9</sup></td>
+      <td>Dcommunity (Base conversion)</td>
+      <td>Dcommunity (bases) = Dcommunity (Gb) × 10<sup>9</sup></td>
       <td>Total sequencing depth converted from gigabases to bases.</td>
-      <td>5</td>
+      <td>(5)</td>
     </tr>
 
     <tr>
-      <td>Maximum Unique Depth (DNA‑limited)</td>
-      <td>D<sub>max</sub> = DNA<sub>ng</sub></td>
+      <td>Maximum Unique Depth (DNA-limited)</td>
+      <td>Dmax = DNA<sub>ng</sub></td>
       <td>Approximation that 1 ng DNA yields ~1 Gbp of unique sequence.</td>
-      <td>7</td>
+      <td>(7,10)</td>
     </tr>
 
     <tr>
       <td>Species‑Specific Sequencing Bases</td>
-      <td>B<sub>species</sub> = D<sub>community</sub> × 10<sup>9</sup> × A</td>
-      <td>Total bases sequenced from the species, proportional to abundance.</td>
-      <td>5</td>
+      <td>Bspecies = Dcommunity × 10<sup>9</sup> × A</td>
+      <td>Total number of DNA bases sequenced from target species. Sequencing depth (in Gb) is converted to bases and multiplied by relative abundance of target species.</td>
+      <td>(3,5)</td>
     </tr>
 
     <tr>
       <td>Coverage From Sequencing Depth</td>
       <td>C = (D<sub>effective</sub> × 1000 × A) / G</td>
-      <td>Expected average coverage for a genome of size G at abundance A.</td>
-      <td>5</td>
+      <td>Expected average coverage for a genome of size G at abundance A, using effective depth adjusted for DNA-input constraint.</td>
+      <td>(5,11)</td>
     </tr>
 
     <tr>
-      <td>Effective Sequencing Depth (DNA‑Limited)</td>
-      <td>D<sub>effective</sub> = min(D<sub>community</sub>, D<sub>max</sub>)</td>
-      <td>Usable depth capped by DNA‑input constraints.</td>
-      <td>7</td>
+      <td>Effective Sequencing Depth (DNA-Limited)</td>
+      <td>D<sub>effective</sub> = min(D<sub>total</sub>, D<sub>max</sub>)</td>
+      <td>If DNA input constrains library complexity, the effective depth is capped at Dmax (1 ng ≈ 1 Gb DNA base pairs).</td>
+      <td>(7,10)</td>
     </tr>
 
     <tr>
       <td>Required Sequencing Depth</td>
       <td>D<sub>required</sub> = (C<sub>target</sub> × G) / (1000 × A)</td>
-      <td>Depth needed to reach target coverage for a species at abundance A.</td>
-      <td>5</td>
+      <td>Sequencing depth needed to reach target coverage for a species at a given relative abundance.</td>
+      <td>(3,5,11)</td>
     </tr>
 
     <tr>
       <td>Minimum Detectable Relative Abundance</td>
       <td>A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)</td>
-      <td>Lowest abundance at which target coverage is achievable.</td>
-      <td>5, 7</td>
+      <td>Lowest relative abundance at which the species reaches the target coverage under the available effective depth.</td>
+      <td>(3,5,11)</td>
     </tr>
 
     <tr>
       <td>Naive Coverage (No DNA Limit)</td>
       <td>C<sub>naive</sub> = (D<sub>total</sub> × 1000 × A) / G</td>
-      <td>Coverage assuming unlimited DNA molecules.</td>
-      <td>7</td>
+      <td>Coverage assuming unlimited DNA input.</td>
+      <td>(3,5)</td>
     </tr>
 
     <tr>
       <td>MAG Recovery Coverage</td>
       <td>C = (D<sub>effective</sub> × 1000 × A) / G</td>
-      <td>Same coverage formula, interpreted using MAG thresholds.</td>
-      <td>7</td>
+      <td>Same formula as coverage; interpreted using MAG thresholds (1×, 5×, 10×, 20×).</td>
+      <td>(12,13)</td>
     </tr>
 
     <tr>
       <td>Coverage Estimation Table Values</td>
-      <td>Computed using C<sub>effective</sub> across depth–abundance grid</td>
-      <td>Expected coverage across combinations of depth and abundance.</td>
-      <td>5, 7, 9</td>
+      <td>Computed using C<sub>effective</sub> across a matrix of depths and relative abundances</td>
+      <td>Table shows expected coverage for the pre-computed matrix automatically adjusted for genome size and DNA quantity.</td>
+      <td>(5,7,9)</td>
     </tr>
 
   </tbody>
 </table>
+
 </div>
   
 <!-- REFERENCES -->
 <div class="section-card">
   <h3>References</h3>
-  <ol>
-    <li>Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. <i>Genome Biology</i>. 2015;16(1):51.</li>
-    <li>Treichel, N.S., Pauvert, C., Séneca, J. et al. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. <i>Nat Microbiol 11</i>, 1233–1244 (2026). https://doi.org/10.1038/s41564-026-02334-2</li>
-    <li>Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. <i>Cell</i>. 2016;166(5):1103–1116.</li>
-    <li>Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? <i>Brief Bioinform</i>. 2022;23(6).</li>
-    <li>Lander ES, Waterman MS. Genomic mapping by fingerprinting random clones: A mathematical analysis. <i>Genomics</i>. 1988;2(3):231–239.</li>
-    <li>Riesco R, Trujillo ME. Minimal standards for the use of genome data in prokaryotic taxonomy. <i>IJSEM</i>. 2024;74.</li>
-    <li>McNulty SN et al. Impact of reducing DNA input on NGS library complexity. <i>J Mol Diagn</i>. 2020;22:720–727.</li>
-    <li>Deng C et al. Predicting bases required for sufficient coverage. <i>J Comput Biol</i>. 2020;27:1130–1143.</li>
-    <li>Singer E et al. Mock community sequencing dataset. <i>Sci Data</i>. 2016;3:160081.</li>
-  </ol>
+<ol>
+  <li>
+    Nayfach S, Pollard KS. Average genome size estimation improves comparative metagenomics and sheds light on the functional ecology of the human microbiome. 
+    <em>Genome Biol.</em> 2015 Mar 25;16(1):51. doi:10.1186/s13059-015-0611-7
+  </li>
+
+  <li>
+    Treichel NS, Pauvert C, Séneca J, Pjevac P, Berry D, Penders J, et al. Benchmarking of shotgun sequencing depth reveals the potential and limitations of shallow metagenomics and strain-level analysis. 
+    <em>Nat Microbiol.</em> 2026 May;11(5):1233–44. doi:10.1038/s41564-026-02334-2
+  </li>
+
+  <li>
+    Nayfach S, Pollard KS. Toward Accurate and Quantitative Comparative Metagenomics. 
+    <em>Cell.</em> 2016 Aug 25;166(5):1103–16. doi:10.1016/j.cell.2016.08.007 
+    PubMed PMID: 27565341; PubMed Central PMCID: PMC5080976.
+  </li>
+
+  <li>
+    Tremblay J, Schreiber L, Greer CW. High-resolution shotgun metagenomics: the more data, the better? 
+    <em>Brief Bioinform.</em> 2022 Nov 19;23(6):bbac443. doi:10.1093/bib/bbac443 
+    PubMed PMID: 36352504.
+  </li>
+
+  <li>
+    Lander ES, Waterman MS. Genomic mapping by fingerprinting random clones: A mathematical analysis. 
+    <em>Genomics.</em> 1988 Apr;2(3):231–9. doi:10.1016/0888-7543(88)90007-9
+  </li>
+
+  <li>
+    Riesco R, Trujillo ME. Update on the proposed minimal standards for the use of genome data for the taxonomy of prokaryotes. 
+    <em>Int J Syst Evol Microbiol.</em> 2024 Mar 21;74(3). doi:10.1099/ijsem.0.006300
+  </li>
+
+  <li>
+    McNulty SN, Mann PR, Robinson JA, Duncavage EJ, Pfeifer JD. Impact of Reducing DNA Input on Next-Generation Sequencing Library Complexity and Variant Detection. 
+    <em>J Mol Diagn.</em> 2020 May;22(5):720–7. doi:10.1016/j.jmoldx.2020.02.003
+  </li>
+
+  <li>
+    Deng C, Daley T, Calabrese P, Ren J, Smith AD. Predicting the Number of Bases to Attain Sufficient Coverage in High-Throughput Sequencing Experiments. 
+    <em>J Comput Biol.</em> 2020 Jul 1;27(7):1130–43. doi:10.1089/cmb.2019.0264 
+    PubMed PMID: 31725321; PubMed Central PMCID: PMC7398442.
+  </li>
+
+  <li>
+    Singer E, Andreopoulos B, Bowers RM, Lee J, Deshpande S, Chiniquy J, et al. Next generation sequencing data of a defined microbial mock community. 
+    <em>Sci Data.</em> 2016 Sep 27;3(1):160081. doi:10.1038/sdata.2016.81
+  </li>
+
+  <li>
+    Daley T, Smith AD. Predicting the molecular complexity of sequencing libraries. 
+    <em>Nat Methods.</em> 2013 Apr;10(4):325–7. doi:10.1038/nmeth.2375 
+    PubMed PMID: 23435259; PubMed Central PMCID: PMC3612374.
+  </li>
+
+  <li>
+    Wendl MC, Kota K, Weinstock GM, Mitreva M. Coverage theories for metagenomic DNA sequencing based on a generalization of Stevens’ theorem. 
+    <em>J Math Biol.</em> 2013 Nov 1;67(5):1141–61. doi:10.1007/s00285-012-0586-x
+  </li>
+
+  <li>
+    Parks DH, Rinke C, Chuvochina M, Chaumeil PA, Woodcroft BJ, Evans PN, et al. Recovery of nearly 8,000 metagenome-assembled genomes substantially expands the tree of life. 
+    <em>Nat Microbiol.</em> 2017 Nov;2(11):1533–42. doi:10.1038/s41564-017-0012-7
+  </li>
+
+  <li>
+    Alneberg J, Bjarnason BS, de Bruijn I, Schirmer M, Quick J, Ijaz UZ, et al. Binning metagenomic contigs by coverage and composition. 
+    <em>Nat Methods.</em> 2014 Nov;11(11):1144–6. doi:10.1038/nmeth.3103
+  </li>
+</ol>
+
 </div>
 
 </div>
