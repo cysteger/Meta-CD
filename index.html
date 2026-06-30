@@ -534,50 +534,51 @@ th {
   <button onclick="generateAll()">Generate All Results</button>
 
 <div class="input-explain">
-  <h3>Input Parameter Description</h3>
+ <h3>Input Parameter Description</h3>
 
-  <p class="default-note">
-  Default values (used when inputs are disabled or left blank):<br>
+<p class="default-note">
+  If an input is disabled or left blank, Meta‑CD uses the following defaults:<br>
   – Genome size: 3 Mb<br>
   – Relative abundance: 1%<br>
   – Sequencing depth: 10 Gb<br>
   – Target coverage: 1×<br>
   – DNA input: no cap (Infinity)
-  </p>
+</p>
 
-  <h4>Pre-Sequencing Parameters</h4>
-  <p>
-    Estimate what is theoretically required before sequencing:
-  </p>
-  <ul>
-    <li><strong>Relative abundance (%)</strong> — Expected abundance before sequencing; used to estimate required depth.</li>
-      <ul>Used in the coverage calculation, in determining bases sequenced, and in computing the required sequencing depth</ul>
-    <li><strong>Target coverage for minimum RA (x)</strong> — Minimum coverage required at the lowest expected abundance.</li>
-      <ul>Used in calculating both the required sequencing depth and the minimum relative abundance.</ul>
-    <li><strong>Genome size (Mb)</strong> — Larger genomes require more sequencing to reach the same coverage.</li>
-      <ul>Used when calculating coverage, bases sequenced, required sequencing depth, minimum relative abundance, and also in generating the coverage estimation and the MAG Recovery table.</ul>
-    <li><strong>DNA quantity (ng)</strong> — Limits maximum effective depth due to library complexity.</li>
-      <ul>Used to determine whether the sequencing depth is DNA‑limited, which affects the coverage, required sequencing depth, and minimum relative abundance, and it also influences the coverage estimation and the MAG recovery table.</ul>
-  </ul>
+<h4>Pre‑Sequencing Parameters</h4>
+<p>These inputs help estimate what is theoretically required before sequencing.</p>
+<ul>
+  <li><strong>Relative abundance (%)</strong> — What is the expected relative abundance of the target species in this community?<br>
+      Used for estimating required depth, coverage, and bases sequenced.</li>
 
-  <h4>Post-Sequencing Parameters</h4>
-  <p>
-    Calculate what was actually achieved after sequencing:
-  </p>
-  <ul>
-    <li><strong>Relative abundance (%)</strong> — Observed abundance in the final dataset.</li>
-        <ul>Used in the coverage calculation, in determining bases sequenced, and in computing the required sequencing depth</ul>
-    <li><strong>Sequencing depth (Gb)</strong> — Total gigabases sequenced for the community.</li>
-      <ul>Used to compute coverage, to estimate bases sequenced, and to determine the minimum relative abundance.</ul>
-    <li><strong>Target coverage (x)</strong> — Coverage you want to evaluate using observed abundance and depth.</li>
-      <ul>Used in calculating both the required sequencing depth and the minimum relative abundance.</ul>
-  </ul>
+  <li><strong>Target coverage for minimum RA (×)</strong> — What minimum coverage must the species reach at its lowest expected abundance?<br>
+      Used for determining required depth and minimum detectable abundance.</li>
 
-  <h4>Uses and Interpretations</h4>
-  <p>
-    Use <em>pre-sequencing outputs</em> for planning and feasibility.  
-    Use <em>post-sequencing outputs</em> for evaluating achieved coverage, detection limits, and MAG recovery potential.
-  </p>
+  <li><strong>Genome size (Mb)</strong> — What is the approximate genome size of the species you are evaluating?<br>
+      Used in all coverage‑related calculations, including MAG recovery.</li>
+
+  <li><strong>DNA quantity (ng)</strong> — How much DNA enters library preparation, and does it limit the maximum unique sequencing depth?<br>
+      Used to determine whether sequencing depth becomes DNA‑limited.</li>
+</ul>
+
+<h4>Post‑Sequencing Parameters</h4>
+<p>These inputs help you evaluate what was actually achieved after sequencing.</p>
+<ul>
+  <li><strong>Relative abundance (%)</strong> — What is the observed abundance of the species in the final dataset?<br>
+      Used for calculating achieved coverage and bases sequenced.</li>
+
+  <li><strong>Sequencing depth (Gb)</strong> — How much total sequencing depth was generated for this sample?<br>
+      Used for computing coverage, bases sequenced, and minimum detectable abundance.</li>
+
+  <li><strong>Target coverage (×)</strong> — What coverage do you want to evaluate using the observed abundance and depth?<br>
+      Used for required depth and minimum RA calculations.</li>
+</ul>
+
+<h4>Uses and Interpretations</h4>
+<p>
+  Use <em>pre‑sequencing outputs</em> for planning and feasibility.<br>
+  Use <em>post‑sequencing outputs</em> for evaluating achieved coverage, detection limits, and MAG recovery potential.
+</p>
 </div>
 
   
