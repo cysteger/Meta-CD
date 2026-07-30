@@ -1,7 +1,7 @@
 # Meta‑CD  
 Written by Callie Claiborne (cysteger@ncsu.edu), PhD student in Bioinformatics, from the Lyu Lab, Department of Plant and Microbial Biology, North Carolina State University
 
-<img width="191" height="20" alt="image" src="https://github.com/user-attachments/assets/88b6dd53-dcc2-4b41-93f8-a38521d3c3ed" />
+<a href="https://doi.org/10.5281/zenodo.21705874"><img src="https://zenodo.org/badge/1272339118.svg" alt="DOI"></a>
 
 **Live Tool:** https://cysteger.github.io/Meta-CD/  
 **Repository:** https://github.com/cysteger/Meta-CD
