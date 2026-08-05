@@ -22,7 +22,7 @@
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   margin: 0;
-  padding: 40px 20px;
+  padding: 20px 0px;
   background: var(--bg-page);
   color: var(--text-main);
 }
@@ -316,14 +316,14 @@ th {
 
 /* TOP TAB BAR */
 .top-tab-bar {
+  width: 100%;
   display: flex;
   gap: 16px;
   background: #2d2f33; /* dark gray */
   padding: 14px 24px;
   border-radius: 8px;
   box-shadow: var(--shadow-soft);
-  margin: 0 auto 28px auto;
-  max-width: 1000px; /* matches your app-shell width */
+  margin-bottom: 28px;
 }
 
 .top-tab-bar a {
@@ -333,12 +333,12 @@ th {
   font-size: 15px;
   padding: 8px 16px;
   border-radius: 6px;
-  background: rgba(255,255,255,0.12);
+  background: var(--accent); /* BLUE BUTTONS */
   transition: background 0.2s;
 }
 
 .top-tab-bar a:hover {
-  background: rgba(255,255,255,0.22);
+  background: #2457b0; /* darker blue hover */
 }
 
 .input-explain {
