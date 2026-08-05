@@ -49,7 +49,7 @@ p  { color: var(--text-muted); line-height: 1.5; }
   box-shadow: var(--shadow-soft);
 }
 
-/* SIDE TAB — identical to calculations page */
+/* SIDE TAB */
 .side-tab {
   position: fixed;
   left: 0;
@@ -87,6 +87,7 @@ th, td {
   font-size: 14px;
 }
 
+/* FLOWCHART */
 .flowchart-box {
   background: var(--accent-soft);
   border: 1px solid var(--border-card);
@@ -103,7 +104,6 @@ th, td {
   margin: 6px 0;
   color: var(--accent);
 }
-  
 </style>
 </head>
 
@@ -131,7 +131,7 @@ th, td {
 
 <!-- SECTION 2: Practical Scenarios Using All Meta‑CD Parameters -->
 <div class="section-card">
-  <h2>2. How to Use Meta‑CD: Three Practical Scenarios</h2>
+  <h2>2. How to Use Meta‑CD: Four Practical Scenarios</h2>
   <p>
     The examples below demonstrate how each user‑controlled parameter in Meta‑CD influences coverage,
     detection, and sequencing requirements. These scenarios use real values from the MBARC‑26 dataset
@@ -151,22 +151,11 @@ th, td {
     <li><strong>Target coverage (desired):</strong> 20× (MAG recovery threshold)</li>
   </ul>
 
-  <p>
-    Meta‑CD uses these values to compute the required community sequencing depth:
-  </p>
-
   <p style="margin-left:20px;">
     D<sub>required</sub> = (C<sub>target</sub> × G) / (1000 × A)
   </p>
 
-  <p>
-    Result: <strong>5.04 Gb</strong> of sequencing is required to reach 20× coverage for <em>T. roseus</em>.
-  </p>
-
-  <p>
-    This scenario demonstrates how <strong>Genome Size</strong>, <strong>Relative Abundance</strong>, and
-    <strong>Target Coverage</strong> interact to determine sequencing requirements.
-  </p>
+  <p><strong>Result:</strong> 5.04 Gb required to reach 20× coverage.</p>
 
   <hr>
 
@@ -181,37 +170,20 @@ th, td {
     <li><strong>Sequencing depth:</strong> 155.8 Gb</li>
     <li><strong>Relative abundance:</strong> 2.07%</li>
     <li><strong>Genome size:</strong> 5.23 Mb</li>
-    <li><strong>DNA input:</strong> 0.000888 ng (from MBARC‑26 molarity)</li>
+    <li><strong>DNA input:</strong> 0.000888 ng</li>
   </ul>
-
-  <p>
-    Meta‑CD computes the expected number of bases sequenced:
-  </p>
 
   <p style="margin-left:20px;">
     B<sub>species</sub> = D<sub>community</sub> × 10⁹ × A
   </p>
 
-  <p>
-    Result: <strong>3.225 × 10⁹ bases</strong> sequenced for <em>T. roseus</em>.
-  </p>
-
-  <p>
-    Coverage is then computed using:
-  </p>
+  <p><strong>Result:</strong> 3.225 × 10⁹ bases sequenced.</p>
 
   <p style="margin-left:20px;">
     C = (D<sub>effective</sub> × 1000 × A) / G
   </p>
 
-  <p>
-    Result: <strong>616.9× coverage</strong>, matching the observed value (~617×).
-  </p>
-
-  <p>
-    This scenario demonstrates how <strong>Sequencing Depth</strong>, <strong>Relative Abundance</strong>,
-    <strong>Genome Size</strong>, and <strong>DNA Input</strong> determine post‑sequencing coverage.
-  </p>
+  <p><strong>Result:</strong> 616.9× coverage (matches observed ~617×).</p>
 
   <hr>
 
@@ -225,29 +197,19 @@ th, td {
   <ul>
     <li><strong>Genome size:</strong> 4.64 Mb</li>
     <li><strong>Sequencing depth:</strong> 30 Gb</li>
-    <li><strong>Minimum Detectable Coverage:</strong> 5× (permissive detection threshold)</li>
-    <li><strong>DNA input:</strong> 1 ng (user‑specified)</li>
+    <li><strong>Minimum Detectable Coverage:</strong> 5×</li>
+    <li><strong>DNA input:</strong> 1 ng</li>
   </ul>
-
-  <p>
-    Meta‑CD computes the minimum relative abundance required to reach 5× coverage:
-  </p>
 
   <p style="margin-left:20px;">
     A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)
   </p>
 
-  <p>
-    Result: <strong>0.00077%</strong> minimum abundance required for detection.
-  </p>
+  <p><strong>Result:</strong> 0.00077% minimum abundance required.</p>
 
-  <p>
-    This scenario demonstrates how <strong>Minimum Detectable Coverage</strong>, <strong>Sequencing Depth</strong>,
-    <strong>Genome Size</strong>, and <strong>DNA Input</strong> determine detection limits.
-  </p>
-</div>
+  <hr>
 
- <!-- Scenario 4 -->
+  <!-- Scenario 4 -->
   <h3>Scenario 4 — Evaluating DNA‑Limited Coverage</h3>
   <p>
     A researcher has only <strong>0.5 ng</strong> of DNA available from a low‑biomass sample and wants to know
