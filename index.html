@@ -477,8 +477,8 @@ th {
     <!-- Minimum RA Coverage -->
     <div class="input-field">
       <div class="input-label-row">
-        <span class="main-label">Target coverage for minimum RA (×)</span>
-        <span class="helper">What coverage threshold must the species reach to be considered detectable at its minimum abundance?</span>
+        <span class="main-label">TMinimum Detectable Coverage (×)</span>
+        <span class="helper">What coverage must the species reach to be considered detectable at its minimum abundance?</span>
       </div>
       <div class="input-inline">
         <select id="minRAcoverage">
@@ -568,8 +568,8 @@ th {
   <li><strong>Relative abundance (%)</strong> — What is the expected relative abundance of the target species in this community?<br>
       Used for estimating required depth, coverage, and bases sequenced.</li>
 
-  <li><strong>Target coverage for minimum RA (×)</strong> — What minimum coverage must the species reach at its lowest expected abundance?<br>
-      Used for determining required depth and minimum detectable abundance.</li>
+  <li><strong>Minimum Detactable Coverage (×)</strong> — What minimum coverage must the species reach at its lowest expected abundance?<br>
+      Used to calculate the minimum relative abundance needed for detection.</li>
 
   <li><strong>Genome size (Mb)</strong> — What is the approximate genome size of the species you are evaluating?<br>
       Used in all coverage‑related calculations, including MAG recovery.</li>
@@ -588,7 +588,7 @@ th {
       Used for computing coverage, bases sequenced, and minimum detectable abundance.</li>
 
   <li><strong>Target coverage (×)</strong> — What coverage do you want to evaluate using the observed abundance and depth?<br>
-      Used for required depth and minimum RA calculations.</li>
+      Used to calculate required sequencing depth and evaluate post‑sequencing coverage.</li>
 </ul>
 
 <p>Note: Meta‑CD’s post‑sequencing coverage estimates are based on species‑specific sequencing depth and do not incorporate read length or platform‑specific error rates. These factors can influence downstream analyses; longer reads may improve assembly and MAG recovery, while higher error rates may reduce effective coverage for variant calling. Users should interpret Meta‑CD’s post‑sequencing outputs alongside the characteristics of their sequencing platform.</p>
@@ -611,7 +611,7 @@ th {
   <h3>Coverage Thresholds Explained</h3>
 
   <p style="font-size:14px; line-height:1.45; margin-bottom:12px;">
-    <strong>Target coverage for minimum RA</strong> is the minimum sequencing coverage 
+    <strong>Minimum Detactable Coverage</strong> is the minimum sequencing coverage 
     required for an organism to be considered detectable. This value determines the 
     coverage threshold used when calculating the <strong>minimum relative abundance</strong> 
     needed for detection. Higher thresholds provide more confident detection but require 
