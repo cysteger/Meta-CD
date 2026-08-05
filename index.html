@@ -477,7 +477,7 @@ th {
     <!-- Minimum RA Coverage -->
     <div class="input-field">
       <div class="input-label-row">
-        <span class="main-label">TMinimum Detectable Coverage (×)</span>
+        <span class="main-label">Minimum Detectable Coverage (×)</span>
         <span class="helper">What coverage must the species reach to be considered detectable at its minimum abundance?</span>
       </div>
       <div class="input-inline">
@@ -612,15 +612,13 @@ th {
 
   <p style="font-size:14px; line-height:1.45; margin-bottom:12px;">
     <strong>Minimum Detactable Coverage</strong> is the minimum sequencing coverage 
-    required for an organism to be considered detectable. This value determines the 
-    coverage threshold used when calculating the <strong>minimum relative abundance</strong> 
-    needed for detection. Higher thresholds provide more confident detection but require 
-    higher abundance or deeper sequencing.
+    a species must reach to be considered detectable in the dataset. This value defines the coverage threhold used when calculating the <strong>minimum relative abundance</strong> 
+    required for detection. It does not represent the user’s desired coverage goal; instead, it represents the <strong>coverage required to confidently call presence</strong>.
   </p>
 
   <ul style="font-size:14px; line-height:1.4; margin-top:0;">
-    <li><strong>1×-5x</strong> — Minimal coverage required; permissive and shallow coverage.</li>
-    <li><strong>10×-30x</strong> — Strongly recommended; higher confidence and deeper coverage.</li>
+    <li><strong>1×-5x</strong> — Minimal evidence of presence; permissive and shallow coverage.</li>
+    <li><strong>10×-30x</strong> — Strongly evidence of presence (recommended); higher confidence and deeper coverage.</li>
   </ul>
 
   <button id="closeMinRApopup" 
