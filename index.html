@@ -29,9 +29,10 @@ body {
 
 
 .app-shell {
-  max-width: 1000px;
+  max-width: 900px; /* slightly narrower */
   width: 100%;
-  margin: 0 auto; 
+  margin: 0 auto;
+  padding: 0 20px; /* adds comfortable side padding */
 }
 
 
@@ -316,12 +317,13 @@ th {
 /* TOP TAB BAR */
 .top-tab-bar {
   display: flex;
-  gap: 12px;
-  background: var(--accent);
-  padding: 12px 20px;
+  gap: 16px;
+  background: #2d2f33; /* dark gray */
+  padding: 14px 24px;
   border-radius: 8px;
   box-shadow: var(--shadow-soft);
-  margin-bottom: 24px;
+  margin: 0 auto 28px auto;
+  max-width: 1000px; /* matches your app-shell width */
 }
 
 .top-tab-bar a {
@@ -329,7 +331,7 @@ th {
   font-weight: 600;
   text-decoration: none;
   font-size: 15px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 6px;
   background: rgba(255,255,255,0.12);
   transition: background 0.2s;
