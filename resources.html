@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resources & Contact | Meta‑CD</title>
+
+<style>
+:root {
+  --bg-page: #f3f5f9;
+  --bg-card: #ffffff;
+  --border-card: #d4d9e2;
+  --accent: #2f6fde;
+  --accent-soft: #e3ecff;
+  --text-main: #1f2933;
+  --text-muted: #4b5563;
+  --shadow-soft: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --radius-card: 10px;
+}
+
+/* PAGE LAYOUT */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+.app-shell {
+  width: min(100% - 120px, 1100px);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* TOP TAB BAR */
+.top-tab-bar {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+  background: #2d2f33;
+  padding: 14px 24px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 28px;
+}
+
+.top-tab-bar a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 15px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  background: var(--accent);
+  transition: background 0.2s;
+}
+
+.top-tab-bar a:hover {
+  background: #2457b0;
+}
+
+/* SECTION CARDS */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  margin-top: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+h1 { margin-bottom: 6px; font-size: 28px; font-weight: 700; }
+h2 { margin-top: 24px; margin-bottom: 10px; font-size: 22px; font-weight: 650; }
+p  { color: var(--text-muted); line-height: 1.5; }
+ul { color: var(--text-muted); }
+</style>
+</head>
+
+<body>
+
+<div class="top-tab-bar">
+  <a href="index.html">Meta-CD Calculator</a>
+  <a href="tutorial.html">Tutorial</a>
+  <a href="calculations.html">Calculation Methods & References</a>
+  <a href="resources.html">Resources & Contact</a>
+</div>
+
+<div class="app-shell">
+
+<h1>Resources & Contact</h1>
+<p>
+  This page provides access to Meta‑CD’s source code, documentation,
+  and contact details. It also summarizes key project metadata and acknowledgements.
+</p>
+
+<!-- ABOUT META-CD -->
+<div class="section-card">
+  <h2>About Meta‑CD</h2>
+  <p>
+    Meta‑CD is a biologist‑friendly calculator for species‑specific coverage estimation in
+    metagenomic sequencing. It models how genome size, relative abundance, sequencing depth,
+    and DNA quantity interact to determine whether a target species can be detected,
+    profiled, or assembled. All computations run locally in the browser.
+  </p>
+</div>
+
+<!-- GITHUB -->
+<div class="section-card">
+  <h2>GitHub Repository</h2>
+  <p>
+    Full source code, documentation, version history, and issue tracking are available at:
+  </p>
+
+  <p><strong>
+    <a href="https://github.com/cysteger/Meta-CD" target="_blank">
+      github.com/cysteger/Meta-CD
+    </a>
+  </strong></p>
+
+  <p><strong>DOI:</strong>  
+    <a href="https://doi.org/10.5281/zenodo.21705875" target="_blank">
+      10.5281/zenodo.21705875
+    </a>
+  </p>
+
+  <p>
+    The repository includes installation instructions, a README, example inputs, a test suite,
+    and licensing. Users may submit issues or pull requests without registration.
+  </p>
+</div>
+
+<!-- CONTACT -->
+<div class="section-card">
+  <h2>Contact</h2>
+  <p><strong>Corresponding Author:</strong></p>
+  <p style="margin-left:20px;">
+    Dr. Zhe Lyu  
+    Department of Plant & Microbial Biology  
+    North Carolina State University  
+    <strong>Email:</strong> zlyu3@ncsu.edu
+  </p>
+
+  <p><strong>Project Lead & Developer:</strong></p>
+  <p style="margin-left:20px;">
+    Callie Claiborne  
+    Department of Plant & Microbial Biology  
+    North Carolina State University
+    <strong>Email:</strong> cysteger@ncsu.edu
+  </p>
+</div>
+
+<!-- VERSION -->
+<div class="section-card">
+  <h2>Version & License</h2>
+  <p><strong>Current Version:</strong> Meta‑CD v1.0 (June 2026)</p>
+  <p><strong>License:</strong> MIT License — free for academic and commercial use.</p>
+</div>
+
+<!-- ACKNOWLEDGEMENTS -->
+<div class="section-card">
+  <h2>Acknowledgements</h2>
+  <p>
+    Meta‑CD was supported by seed funds from North Carolina State University, the USDA Research
+    Capacity Fund (HATCH), and the NIH (Award R01DK147125). We thank Kairi Tanaka for insightful
+    feedback that improved the tool’s clarity and usability.
+  </p>
+</div>
+
+<!-- FAQ -->
+<div class="section-card">
+  <h2>Frequently Asked Questions</h2>
+  <ul>
+    <li><strong>Does Meta‑CD store user data?</strong>  
+      No — all calculations run locally in your browser.</li>
+
+    <li><strong>Does Meta‑CD require installation?</strong>  
+      No — it runs entirely as a static web application.</li>
+
+    <li><strong>Does DNA quantity always limit coverage?</strong>  
+      Only when sequencing depth exceeds the number of unique molecules in the sample.</li>
+
+    <li><strong>Is Meta‑CD validated?</strong>  
+      Yes — validated using the MBARC‑26 mock community with known genome sizes and abundances.</li>
+  </ul>
+</div>
+
+</div> <!-- end app-shell -->
+</body>
+</html>
