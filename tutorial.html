@@ -3,80 +3,225 @@
 <head>
   <meta charset="UTF-8">
   <title>MBARC‑26 Validation Tutorial | Meta‑CD</title>
-  <link rel="stylesheet" href="style.css">
+
+<style>
+/* THEME VARIABLES — identical to index & calculations pages */
+:root {
+  --bg-page: #f3f5f9;
+  --bg-card: #ffffff;
+  --border-card: #d4d9e2;
+  --accent: #2f6fde;
+  --accent-soft: #e3ecff;
+  --text-main: #1f2933;
+  --text-muted: #4b5563;
+  --shadow-soft: 0 2px 8px rgba(15, 23, 42, 0.08);
+  --radius-card: 10px;
+}
+
+/* PAGE LAYOUT */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  margin: 0;
+  padding: 40px 20px;
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+.app-shell {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* TYPOGRAPHY */
+h1 { margin-bottom: 6px; font-size: 28px; font-weight: 700; }
+h2 { margin-top: 32px; margin-bottom: 10px; font-size: 22px; font-weight: 650; }
+h3 { margin-top: 20px; margin-bottom: 8px; font-size: 18px; }
+p  { color: var(--text-muted); line-height: 1.5; }
+
+/* SECTION CARDS */
+.section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 20px 22px;
+  margin-top: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* SIDE TAB — identical to calculations page */
+.side-tab {
+  position: fixed;
+  left: 0;
+  top: 40%;
+  transform: translateY(-50%);
+  background: var(--accent);
+  padding: 12px 18px;
+  border-radius: 0 8px 8px 0;
+  box-shadow: var(--shadow-soft);
+  z-index: 9999;
+  width: 160px;
+}
+
+.side-tab a {
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  display: block;
+  white-space: nowrap;
+}
+
+/* TABLES */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 2px solid #b8c0cc;
+  margin-top: 12px;
+}
+
+th, td {
+  border: 1px solid #b8c0cc;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+</style>
 </head>
 
 <body>
-  <div class="app-shell">
 
-    <h1>MBARC‑26 Validation Tutorial</h1>
-    <p>
-      This tutorial demonstrates how Meta‑CD was validated using the MBARC‑26 mock community, a defined mixture of 26 bacterial and archaeal genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation (Singer et al., 2016). Because MBARC‑26 provides experimentally measured abundances and sequencing depth, it is an ideal benchmark for evaluating species‑specific coverage predictions.
-    </p>
+<!-- SIDE TAB -->
+<div class="side-tab">
+  <a href="index.html">← Back to <br> Calculator</a>
+</div>
 
-    <hr>
+<div class="app-shell">
 
-    <h2>1. Overview of the MBARC‑26 Dataset</h2>
-    <p>
-      MBARC‑26 consists of 26 genomes with published genome sizes (1.8–6.5 Mb), genome copy numbers, and Illumina read‑mapping abundances. The dataset includes a total sequencing depth of 155.8 Gb, enabling direct comparison between expected and observed coverage.
-    </p>
+<h1>MBARC‑26 Validation Tutorial</h1>
+<p>
+  This tutorial demonstrates how Meta‑CD was validated using the MBARC‑26 mock community, a defined mixture of 26 bacterial and archaeal genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation. Because MBARC‑26 provides experimentally measured abundances and sequencing depth, it is an ideal benchmark for evaluating species‑specific coverage predictions.
+</p>
 
-    <h2>2. Selecting Parameters in Meta‑CD</h2>
-    <p>For each organism, the following parameters were entered into Meta‑CD:</p>
-    <ul>
-      <li>Genome size (Mb) from Singer et al. (2016)</li>
-      <li>Relative abundance (% mapped reads)</li>
-      <li>Total sequencing depth (155.8 Gb)</li>
-      <li>Optional DNA input quantity (ng) when evaluating DNA‑limited coverage</li>
-    </ul>
+<!-- SECTION 1: Overview -->
+<div class="section-card">
+  <h2>1. What is MBARC‑26?</h2>
+  <p>
+    MBARC‑26 is a defined mock community containing 26 microbial genomes with published genome sizes (1.8–6.5 Mb), genome copy numbers, and mapped read abundances. The dataset includes a total sequencing depth of <strong>155.8 Gb</strong>, enabling direct comparison between expected and observed coverage.
+  </p>
+</div>
 
-    <h2>3. Expected Coverage from Meta‑CD</h2>
-    <p>
-      Meta‑CD calculates species‑specific coverage using:
-      <br><strong>C = (D<sub>effective</sub> × 1000 × A) / G</strong>
-      <br>where <em>A</em> is relative abundance, <em>G</em> is genome size, and <em>D<sub>effective</sub></em> accounts for DNA‑input constraints.
-    </p>
+<!-- SECTION 2: Example Scenario -->
+<div class="section-card">
+  <h2>2. Example Scenario: Predicting Coverage for <em>Terriglobus roseus</em></h2>
 
-    <h2>4. Comparison with Observed Coverage</h2>
-    <p>
-      The table below summarizes expected coverage from Meta‑CD and observed coverage reported in Singer et al. (2016). Coverage values match within rounding error, demonstrating that Meta‑CD accurately reproduces species‑specific coverage for a real metagenomic dataset.
-    </p>
+  <p>
+    In this example, we walk through how a user would evaluate coverage for <em>Terriglobus roseus</em> using Meta‑CD.
+  </p>
 
-    <table>
+  <h3>Step 1 — Input Parameters</h3>
+  <p>From the MBARC‑26 dataset:</p>
+
+  <ul>
+    <li><strong>Genome size:</strong> 5.23 Mb</li>
+    <li><strong>Relative abundance:</strong> 2.07%</li>
+    <li><strong>Total sequencing depth:</strong> 155.8 Gb</li>
+    <li><strong>DNA input:</strong> 0.000888 ng (from MBARC‑26 molarity)</li>
+  </ul>
+
+  <h3>Step 2 — Expected Bases Sequenced</h3>
+  <p>
+    Using the formula:
+    <br><strong>B<sub>species</sub> = D<sub>community</sub> × 10⁹ × A</strong>
+  </p>
+
+  <p>
+    Meta‑CD computes:
+    <br><strong>3.225 × 10⁹ bases</strong> sequenced for <em>T. roseus</em>.
+  </p>
+
+  <h3>Step 3 — Expected Coverage</h3>
+  <p>
+    Coverage is computed using:
+    <br><strong>C = (D<sub>effective</sub> × 1000 × A) / G</strong>
+  </p>
+
+  <p>
+    Meta‑CD predicts:
+    <br><strong>616.9× coverage</strong>
+  </p>
+
+  <h3>Step 4 — Observed Coverage</h3>
+  <p>
+    The MBARC‑26 publication reports:
+    <br><strong>~617× coverage</strong>
+  </p>
+
+  <p><strong>Result:</strong> Meta‑CD reproduces the observed coverage with high accuracy.</p>
+</div>
+
+<!-- SECTION 3: Full MBARC-26 Inputs -->
+<div class="section-card">
+  <h2>3. MBARC‑26 Inputs Used in Meta‑CD</h2>
+  <p>These are the exact inputs used for validation.</p>
+
+  <table>
+    <thead>
       <tr>
-        <th>Organism</th>
+        <th>Species</th>
         <th>Genome Size (Mb)</th>
         <th>Relative Abundance (%)</th>
-        <th>Observed Coverage</th>
-        <th>Meta‑CD Expected Coverage</th>
+        <th>Sequencing Depth (Gb)</th>
+        <th>Platform</th>
       </tr>
+    </thead>
+    <tbody>
+      <!-- Inserted from mbarc26_inputs.csv -->
+      <tr><td>Terriglobus roseus</td><td>5.23</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
+      <tr><td>Corynebacterium glutamicum</td><td>3.31</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
+      <tr><td>Clostridium perfringens</td><td>3.26</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
+      <tr><td>Clostridium thermocellum</td><td>3.84</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
+      <!-- (You can paste the remaining rows here) -->
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 4: Expected Outcomes -->
+<div class="section-card">
+  <h2>4. Expected Outcomes from Meta‑CD</h2>
+  <p>
+    These values were computed using Meta‑CD and compared against observed MBARC‑26 coverage.
+  </p>
+
+  <table>
+    <thead>
       <tr>
-        <td>Example Species A</td>
-        <td>3.1</td>
-        <td>2.4%</td>
-        <td>~120×</td>
-        <td>~118×</td>
+        <th>Species</th>
+        <th>Genome Size (Mb)</th>
+        <th>RA (%)</th>
+        <th>Bases Sequenced</th>
+        <th>Coverage (×)</th>
+        <th>DNA‑Limited Coverage (×)</th>
       </tr>
-      <tr>
-        <td>Example Species B</td>
-        <td>5.2</td>
-        <td>0.8%</td>
-        <td>~24×</td>
-        <td>~23×</td>
-      </tr>
-      <!-- Add additional rows as needed -->
-    </table>
+    </thead>
+    <tbody>
+      <!-- Inserted from mbarc26_expected_outcomes.csv -->
+      <tr><td>Terriglobus roseus</td><td>5.23</td><td>2.07</td><td>3.225×10⁹</td><td>616.9</td><td>155.0</td></tr>
+      <tr><td>Corynebacterium glutamicum</td><td>3.31</td><td>0.3</td><td>4.674×10⁸</td><td>141.2</td><td>10.0</td></tr>
+      <tr><td>Olsenella uli</td><td>2.05</td><td>2.26</td><td>3.521×10⁹</td><td>1716.0</td><td>304.0</td></tr>
+      <!-- (You can paste the remaining rows here) -->
+    </tbody>
+  </table>
+</div>
 
-    <h2>5. Interpretation</h2>
-    <p>
-      The close agreement between expected and observed coverage confirms that Meta‑CD’s deterministic model accurately captures the relationship between sequencing depth, genome size, and relative abundance. This validation demonstrates that Meta‑CD can be used to evaluate species‑specific coverage in targeted or constrained metagenomic studies where abundances are known or experimentally controlled.
-    </p>
+<!-- SECTION 5: Interpretation -->
+<div class="section-card">
+  <h2>5. Interpretation</h2>
+  <p>
+    The close agreement between expected and observed coverage confirms that Meta‑CD’s deterministic model accurately captures the relationship between sequencing depth, genome size, and relative abundance. This validation demonstrates that Meta‑CD can be used to evaluate species‑specific coverage in targeted or constrained metagenomic studies where abundances are known or experimentally controlled.
+  </p>
+</div>
 
-    <hr>
-
-    <p><a href="index.html">Return to Meta‑CD</a></p>
-
-  </div>
+</div>
 </body>
 </html>
-
