@@ -86,6 +86,24 @@ th, td {
   padding: 8px 10px;
   font-size: 14px;
 }
+
+.flowchart-box {
+  background: var(--accent-soft);
+  border: 1px solid var(--border-card);
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin: 12px 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.flowchart-arrow {
+  text-align: center;
+  font-size: 22px;
+  margin: 6px 0;
+  color: var(--accent);
+}
+  
 </style>
 </head>
 
@@ -111,112 +129,191 @@ th, td {
   </p>
 </div>
 
-<!-- SECTION 2: Example Scenario -->
+<!-- SECTION 2: Practical Scenarios Using All Meta‑CD Parameters -->
 <div class="section-card">
-  <h2>2. Example Scenario: Predicting Coverage for <em>Terriglobus roseus</em></h2>
-
+  <h2>2. How to Use Meta‑CD: Three Practical Scenarios</h2>
   <p>
-    In this example, we walk through how a user would evaluate coverage for <em>Terriglobus roseus</em> using Meta‑CD.
+    The examples below demonstrate how each user‑controlled parameter in Meta‑CD influences coverage,
+    detection, and sequencing requirements. These scenarios use real values from the MBARC‑26 dataset
+    to illustrate how the tool behaves under different experimental goals.
   </p>
 
-  <h3>Step 1 — Input Parameters</h3>
-  <p>From the MBARC‑26 dataset:</p>
+  <!-- Scenario 1 -->
+  <h3>Scenario 1 — Planning Sequencing Depth for MAG Recovery</h3>
+  <p>
+    A researcher wants to recover a high‑quality MAG for <em>Terriglobus roseus</em>. They know the genome size
+    and estimated abundance from a pilot experiment and want to determine how much sequencing is required.
+  </p>
 
   <ul>
     <li><strong>Genome size:</strong> 5.23 Mb</li>
     <li><strong>Relative abundance:</strong> 2.07%</li>
-    <li><strong>Total sequencing depth:</strong> 155.8 Gb</li>
+    <li><strong>Target coverage (desired):</strong> 20× (MAG recovery threshold)</li>
+  </ul>
+
+  <p>
+    Meta‑CD uses these values to compute the required community sequencing depth:
+  </p>
+
+  <p style="margin-left:20px;">
+    D<sub>required</sub> = (C<sub>target</sub> × G) / (1000 × A)
+  </p>
+
+  <p>
+    Result: <strong>5.04 Gb</strong> of sequencing is required to reach 20× coverage for <em>T. roseus</em>.
+  </p>
+
+  <p>
+    This scenario demonstrates how <strong>Genome Size</strong>, <strong>Relative Abundance</strong>, and
+    <strong>Target Coverage</strong> interact to determine sequencing requirements.
+  </p>
+
+  <hr>
+
+  <!-- Scenario 2 -->
+  <h3>Scenario 2 — Evaluating Coverage After Sequencing</h3>
+  <p>
+    After sequencing the MBARC‑26 community at <strong>155.8 Gb</strong>, the researcher wants to evaluate
+    how deeply <em>Terriglobus roseus</em> was sequenced.
+  </p>
+
+  <ul>
+    <li><strong>Sequencing depth:</strong> 155.8 Gb</li>
+    <li><strong>Relative abundance:</strong> 2.07%</li>
+    <li><strong>Genome size:</strong> 5.23 Mb</li>
     <li><strong>DNA input:</strong> 0.000888 ng (from MBARC‑26 molarity)</li>
   </ul>
 
-  <h3>Step 2 — Expected Bases Sequenced</h3>
   <p>
-    Using the formula:
-    <br><strong>B<sub>species</sub> = D<sub>community</sub> × 10⁹ × A</strong>
+    Meta‑CD computes the expected number of bases sequenced:
+  </p>
+
+  <p style="margin-left:20px;">
+    B<sub>species</sub> = D<sub>community</sub> × 10⁹ × A
   </p>
 
   <p>
-    Meta‑CD computes:
-    <br><strong>3.225 × 10⁹ bases</strong> sequenced for <em>T. roseus</em>.
-  </p>
-
-  <h3>Step 3 — Expected Coverage</h3>
-  <p>
-    Coverage is computed using:
-    <br><strong>C = (D<sub>effective</sub> × 1000 × A) / G</strong>
+    Result: <strong>3.225 × 10⁹ bases</strong> sequenced for <em>T. roseus</em>.
   </p>
 
   <p>
-    Meta‑CD predicts:
-    <br><strong>616.9× coverage</strong>
+    Coverage is then computed using:
   </p>
 
-  <h3>Step 4 — Observed Coverage</h3>
+  <p style="margin-left:20px;">
+    C = (D<sub>effective</sub> × 1000 × A) / G
+  </p>
+
   <p>
-    The MBARC‑26 publication reports:
-    <br><strong>~617× coverage</strong>
+    Result: <strong>616.9× coverage</strong>, matching the observed value (~617×).
   </p>
 
-  <p><strong>Result:</strong> Meta‑CD reproduces the observed coverage with high accuracy.</p>
+  <p>
+    This scenario demonstrates how <strong>Sequencing Depth</strong>, <strong>Relative Abundance</strong>,
+    <strong>Genome Size</strong>, and <strong>DNA Input</strong> determine post‑sequencing coverage.
+  </p>
+
+  <hr>
+
+  <!-- Scenario 3 -->
+  <h3>Scenario 3 — Determining Minimum Abundance Required for Detection</h3>
+  <p>
+    A researcher wants to know the lowest abundance at which <em>Escherichia coli</em> would be detectable
+    in a metagenomic sample sequenced at <strong>30 Gb</strong>.
+  </p>
+
+  <ul>
+    <li><strong>Genome size:</strong> 4.64 Mb</li>
+    <li><strong>Sequencing depth:</strong> 30 Gb</li>
+    <li><strong>Minimum Detectable Coverage:</strong> 5× (permissive detection threshold)</li>
+    <li><strong>DNA input:</strong> 1 ng (user‑specified)</li>
+  </ul>
+
+  <p>
+    Meta‑CD computes the minimum relative abundance required to reach 5× coverage:
+  </p>
+
+  <p style="margin-left:20px;">
+    A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)
+  </p>
+
+  <p>
+    Result: <strong>0.00077%</strong> minimum abundance required for detection.
+  </p>
+
+  <p>
+    This scenario demonstrates how <strong>Minimum Detectable Coverage</strong>, <strong>Sequencing Depth</strong>,
+    <strong>Genome Size</strong>, and <strong>DNA Input</strong> determine detection limits.
+  </p>
 </div>
 
-<!-- SECTION 3: Full MBARC-26 Inputs -->
-<div class="section-card">
-  <h2>3. MBARC‑26 Inputs Used in Meta‑CD</h2>
-  <p>These are the exact inputs used for validation.</p>
-
-  <table>
-    <thead>
-      <tr>
-        <th>Species</th>
-        <th>Genome Size (Mb)</th>
-        <th>Relative Abundance (%)</th>
-        <th>Sequencing Depth (Gb)</th>
-        <th>Platform</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Inserted from mbarc26_inputs.csv -->
-      <tr><td>Terriglobus roseus</td><td>5.23</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
-      <tr><td>Corynebacterium glutamicum</td><td>3.31</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
-      <tr><td>Clostridium perfringens</td><td>3.26</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
-      <tr><td>Clostridium thermocellum</td><td>3.84</td><td>1.0</td><td>155.8</td><td>Illumina</td></tr>
-      <!-- (You can paste the remaining rows here) -->
-    </tbody>
-  </table>
-</div>
-
-<!-- SECTION 4: Expected Outcomes -->
-<div class="section-card">
-  <h2>4. Expected Outcomes from Meta‑CD</h2>
+ <!-- Scenario 4 -->
+  <h3>Scenario 4 — Evaluating DNA‑Limited Coverage</h3>
   <p>
-    These values were computed using Meta‑CD and compared against observed MBARC‑26 coverage.
+    A researcher has only <strong>0.5 ng</strong> of DNA available from a low‑biomass sample and wants to know
+    how this constraint affects coverage for <em>Segniliparus rotundus</em>.
   </p>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Species</th>
-        <th>Genome Size (Mb)</th>
-        <th>RA (%)</th>
-        <th>Bases Sequenced</th>
-        <th>Coverage (×)</th>
-        <th>DNA‑Limited Coverage (×)</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Inserted from mbarc26_expected_outcomes.csv -->
-      <tr><td>Terriglobus roseus</td><td>5.23</td><td>2.07</td><td>3.225×10⁹</td><td>616.9</td><td>155.0</td></tr>
-      <tr><td>Corynebacterium glutamicum</td><td>3.31</td><td>0.3</td><td>4.674×10⁸</td><td>141.2</td><td>10.0</td></tr>
-      <tr><td>Olsenella uli</td><td>2.05</td><td>2.26</td><td>3.521×10⁹</td><td>1716.0</td><td>304.0</td></tr>
-      <!-- (You can paste the remaining rows here) -->
-    </tbody>
-  </table>
+  <ul>
+    <li><strong>Genome size:</strong> 3.16 Mb</li>
+    <li><strong>Relative abundance:</strong> 1.41%</li>
+    <li><strong>Sequencing depth:</strong> 80 Gb</li>
+    <li><strong>DNA input:</strong> 0.5 ng (limits D<sub>effective</sub> to 0.5 Gb)</li>
+    <li><strong>Target coverage:</strong> 10×</li>
+  </ul>
+
+  <p>
+    Because DNA input limits library complexity:
+  </p>
+
+  <p style="margin-left:20px;">
+    D<sub>effective</sub> = min(80 Gb, 0.5 Gb) = 0.5 Gb
+  </p>
+
+  <p style="margin-left:20px;">
+    C = (0.5 × 1000 × 0.0141) / 3.16
+  </p>
+
+  <p><strong>Result:</strong> 2.23× coverage (DNA‑limited; cannot reach 10×).</p>
+
+  <p>
+    This scenario demonstrates how <strong>DNA Input</strong> caps effective sequencing depth and can prevent
+    a species from reaching the desired coverage even with high sequencing effort.
+  </p>
 </div>
 
-<!-- SECTION 5: Interpretation -->
+<!-- SECTION 3: Flowchart -->
 <div class="section-card">
-  <h2>5. Interpretation</h2>
+  <h2>3. How Meta‑CD Parameters Interact</h2>
+  <p>This flowchart summarizes how each parameter influences the calculations.</p>
+
+  <div class="flowchart-box">Genome Size (Mb)</div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">Relative Abundance (%)</div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">Sequencing Depth (Gb)</div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">DNA Input (ng) → determines D<sub>effective</sub></div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">Bases Sequenced</div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">Coverage (×)</div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">Target Coverage (desired) → Required Depth</div>
+  <div class="flowchart-arrow">↓</div>
+
+  <div class="flowchart-box">Minimum Detectable Coverage → Minimum RA</div>
+</div>
+
+<!-- SECTION 4: Interpretation -->
+<div class="section-card">
+  <h2>4. Interpretation</h2>
   <p>
     The close agreement between expected and observed coverage confirms that Meta‑CD’s deterministic model accurately captures the relationship between sequencing depth, genome size, and relative abundance. This validation demonstrates that Meta‑CD can be used to evaluate species‑specific coverage in targeted or constrained metagenomic studies where abundances are known or experimentally controlled.
   </p>
