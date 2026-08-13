@@ -749,7 +749,7 @@ th {
 
   <div class="mag-legend-item">
     <div class="mag-legend-color" style="background:#f7d3b7;"></div>
-    1×–5× — Potentially Low‑quality MAG
+    >1× — Potentially Low‑quality MAG
   </div>
 
   <div class="mag-legend-item">
@@ -1034,7 +1034,7 @@ function updateMagTable() {
       else if (cov > 10) {
         cell.className = "mag-moderate";    // yellow
       } 
-      else if (cov >= 1 && cov <= 5) {
+      else if (cov >= 1 && cov <= 10) {
         cell.className = "mag-low";         // orange
       } 
       else {
