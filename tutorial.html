@@ -90,46 +90,33 @@ th, td {
   font-size: 14px;
 }
 
-/* FLOWCHART */
-.flowchart-box {
-  background: var(--accent-soft);
-  border: 1px solid var(--border-card);
-  padding: 14px 18px;
-  border-radius: 8px;
-  margin: 12px 0;
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.flowchart-arrow {
-  text-align: center;
-  font-size: 22px;
-  margin: 6px 0;
-  color: var(--accent);
-}
-
 .title-with-logo {
   display: flex;
-  align-items: flex-start;
-  gap: 18px;
+  align-items: stretch;   /* forces both columns to equal height */
+  gap: 22px;
   margin-top: 10px;
 }
 
+.logo-column {
+  display: flex;
+  align-items: center;    /* centers the logo vertically */
+}
+
 .title-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 8px;
-  object-fit: cover;
-  box-shadow: var(--shadow-soft);
+  width: 120px;           /* square logo */
+  height: 120px;          /* same height as width */
+  object-fit: contain;
+  border-radius: 10px;
   border: 1px solid var(--border-card);
   background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
 }
 
 .title-text h1 {
   margin-top: 0;
 }
-
 </style>
+
 </head>
 
 <body>
@@ -144,7 +131,9 @@ th, td {
 <div class="app-shell">
 
 <div class="title-with-logo">
-  <img src="assets/Meta-CD_v3.png" alt="Meta-CD Logo" class="title-logo">
+  <div class="logo-column">
+    <img src="assets/Meta-CD_v3.png" alt="Meta-CD Logo" class="title-logo">
+  </div>
 
   <div class="title-text">
     <h1>MBARC‑26 Validation Tutorial</h1>
