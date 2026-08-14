@@ -107,6 +107,28 @@ th, td {
   margin: 6px 0;
   color: var(--accent);
 }
+
+.title-with-logo {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.title-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+}
+
+.title-text h1 {
+  margin-top: 0;
+}
+
 </style>
 </head>
 
@@ -121,13 +143,22 @@ th, td {
 
 <div class="app-shell">
 
-<h1>MBARC‑26 Validation Tutorial</h1>
-<p>
-  This tutorial demonstrates how Meta‑CD was validated using the MBARC‑26 mock community, a defined mixture of 26 bacterial and archaeal genomes with known genome sizes, molarity, genome copy numbers, and sequencing representation. Because MBARC‑26 provides experimentally measured abundances and sequencing depth, it is an ideal benchmark for evaluating species‑specific coverage predictions.
-</p>
+<div class="title-with-logo">
+  <img src="assets/Meta-CD_v3.png" alt="Meta-CD Logo" class="title-logo">
+
+  <div class="title-text">
+    <h1>MBARC‑26 Validation Tutorial</h1>
+    <p>
+      This tutorial demonstrates how Meta‑CD was validated using the MBARC‑26 mock community, a defined
+      mixture of 26 bacterial and archaeal genomes with known genome sizes, molarity, genome copy numbers,
+      and sequencing representation. Because MBARC‑26 provides experimentally measured abundances and
+      sequencing depth, it is an ideal benchmark for evaluating species‑specific coverage predictions.
+    </p>
+  </div>
+</div>
 
 <div class="section-card">
-  <h2>Background: THe Purpose of Meta‑CD</h2>
+  <h2>Background: The Purpose of Meta‑CD</h2>
 
   <p>
     Accurately determining whether a target microbial species can be detected in a shotgun metagenomic
