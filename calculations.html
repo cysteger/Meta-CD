@@ -86,6 +86,33 @@ th, td {
   border: 1px solid #b8c0cc;
   padding: 8px 10px;
 }
+
+.title-with-logo {
+  display: flex;
+  align-items: stretch;   /* forces both columns to equal height */
+  gap: 22px;
+  margin-top: 10px;
+}
+
+.logo-column {
+  display: flex;
+  align-items: center;    /* centers the logo vertically */
+}
+
+.title-logo {
+  width: 120px;           /* square logo */
+  height: 120px;          /* same height as width */
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.title-text h1 {
+  margin-top: 0;
+}
+
 </style>
 </head>
 
@@ -100,10 +127,20 @@ th, td {
 
 <div class="app-shell">
 
-<h1>How These Calculations Work</h1>
-<p class="explain">
-  This page provides the mathematical framework used by Meta‑CD to compute WGS coverage, required sequencing depth, minimum detectable abundance, and MAG recovery potential. All calculations follow standard metagenomic coverage theory with explicit incorporation of DNA‑input constraints.
-</p>
+<div class="title-with-logo">
+  <div class="logo-column">
+    <img src="assets/Meta-CD_v3.png" alt="Meta-CD Logo" class="title-logo">
+  </div>
+
+  <div class="title-text">
+    <h1>How These Calculations Work</h1>
+    <p class="explain">
+      This page provides the mathematical framework used by Meta‑CD to compute metagenomic shotgun sequencing coverage, required
+      sequencing depth, minimum detectable abundance, and MAG recovery potential. All calculations follow
+      standard metagenomic coverage theory with explicit incorporation of DNA‑input constraints.
+    </p>
+  </div>
+</div>
 
 <!-- CORE COVERAGE MODEL -->
 <div class="section-card">
