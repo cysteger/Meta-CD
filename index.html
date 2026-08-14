@@ -380,6 +380,27 @@ th {
   line-height: 1.4;
 }
 
+.title-with-logo {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.title-logo {
+  width: 70px;        /* square logo */
+  height: 70px;
+  border-radius: 8px; /* matches your card radius aesthetic */
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-card);
+  background: var(--bg-card);
+}
+
+.title-text h1 {
+  margin-top: 0;
+}
+
 </style>
 
 </head>
@@ -395,6 +416,20 @@ th {
   
 <div class="app-shell">
 
+<div class="title-with-logo">
+  <img src="assets/Meta-CD_v3.png" alt="Meta-CD Logo" class="title-logo">
+
+  <div class="title-text">
+    <h1>Meta‑CD: Metagenomic Sequencing Coverage and Depth Calculator</h1>
+    <p>
+      This tool is designed for species-specific metagenomic evaluation. Allowing researchers to estimate
+      the sequencing coverage, required depth, minimum detectable abundance, and MAG recovery potential
+      for an individual microbial species; based on its genome size, relative abundance, sequencing depth,
+      and sample DNA quantity.
+    </p>
+  </div>
+</div>
+  
 <h1>Meta-CD: Metagenomic Sequencing Coverage and Depth Calculator</h1>
 
 <p style="font-size:16px; margin-top:10px;">
