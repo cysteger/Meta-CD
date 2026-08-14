@@ -1,3 +1,9 @@
+<div style="text-align:center; margin-top:20px;">
+  <img src="assets/Meta-CD_v3.png"
+       alt="Meta-CD Logo"
+       style="width:140px; height:140px; object-fit:contain;">
+</div>
+
 # Meta‑CD  
 Written by Callie Claiborne (cysteger@ncsu.edu), PhD student in Bioinformatics, from the Lyu Lab, Department of Plant and Microbial Biology, North Carolina State University
 
@@ -10,11 +16,25 @@ Written by Callie Claiborne (cysteger@ncsu.edu), PhD student in Bioinformatics, 
 <h2>Description</h2>
 
 <p>
-Accurately determining whether a target microbial species can be detected or profiled in a WGS metagenomic study requires understanding how biological and sequencing parameters interact (1–3). The former includes genome size and relative abundance, while the latter includes sequencing depth and DNA input. However, this interaction is poorly modeled, hindering biologically motivated experimental design and sequencing analysis (2–4). As a result, researchers lack a simple way to evaluate whether a target species can be detected under biologically relevant sequencing constraints (2,5). Beyond taxonomic profiling, additional parameters must be integrated to inform functional pathway analysis and MAG (metagenome-assembled genome) recovery (6).
+Accurately determining whether a target microbial species can be detected in a shotgun metagenomic
+sequencing study requires understanding how biological and sequencing parameters interact (1–3).
+Meta‑CD determines coverage and depth for targeted metagenomic applications where the abundance of the
+organism of interest is known, estimated, or experimentally controlled, including enrichment cultures,
+selective growth conditions, and mock communities where species‑specific coverage predictions are
+biologically meaningful. In these settings, genome size and relative abundance shape the biological
+context, while sequencing depth and DNA input constrain the number of unique molecules available;
+however, this interaction is poorly modeled, hindering biologically motivated experimental design and
+sequencing analysis (2–4). Consequently, researchers lack a simple way to assess detectability of a
+target species under biologically relevant sequencing constraints (2,5), and additional parameters must
+be integrated to inform functional pathway analysis and MAG recovery (6).
 </p>
 
 <p>
-Meta‑CD fills this gap by offering a browser‑based tool that integrates both biological and sequencing parameters to support two primary use cases:
+Meta‑CD addresses this gap by integrating biological and sequencing parameters to support two primary
+use cases: (1) pre‑sequencing estimation of required sequencing depth to reach a target coverage
+threshold, and (2) post‑sequencing analysis of species‑specific coverage given sequencing depth and
+relative abundance. Users may utilize Meta‑CD at any stage of a metagenomic study to refine
+experimental planning or evaluate sequencing outcomes.
 </p>
 
 <ol>
