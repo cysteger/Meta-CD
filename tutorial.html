@@ -213,54 +213,77 @@ th, td {
   <hr>
 
   <!-- Scenario 2 -->
-  <h3>Scenario 2 — Evaluating Coverage After Sequencing</h3>
-  <p>
-    After sequencing the MBARC‑26 community at <strong>155.8 Gb</strong>, the researcher wants to evaluate
-    how deeply <em>Terriglobus roseus</em> was sequenced.
-  </p>
+ <h3>Scenario 2 — Evaluating Coverage After Sequencing</h3>
+<p>
+  After sequencing the MBARC‑26 community at <strong>155.8 Gb</strong>, the researcher wants to evaluate
+  how deeply <em>Terriglobus roseus</em> was sequenced.
+</p>
 
-  <ul>
-    <li><strong>Sequencing depth:</strong> 155.8 Gb</li>
-    <li><strong>Relative abundance:</strong> 2.07%</li>
-    <li><strong>Genome size:</strong> 5.23 Mb</li>
-    <li><strong>DNA input:</strong> 0.000888 ng</li>
-  </ul>
+<ul>
+  <li><strong>Sequencing depth:</strong> 155.8 Gb</li>
+  <li><strong>Relative abundance:</strong> 2.07%</li>
+  <li><strong>Genome size:</strong> 5.23 Mb</li>
+  <li><strong>DNA input:</strong> 0.000888 ng</li>
+</ul>
 
-  <p style="margin-left:20px;">
-    B<sub>species</sub> = D<sub>community</sub> × 10⁹ × A
-  </p>
+<p style="margin-left:20px;">
+  B<sub>species</sub> = D<sub>community</sub> × 10⁹ × A
+</p>
 
-  <p><strong>Result:</strong> 3.225 × 10⁹ bases sequenced.</p>
+<p><strong>Result (naive):</strong> 3.225 × 10⁹ bases sequenced.</p>
 
-  <p style="margin-left:20px;">
-    C = (D<sub>effective</sub> × 1000 × A) / G
-  </p>
+<p style="margin-left:20px;">
+  C = (D<sub>total</sub> × 1000 × A) / G
+</p>
 
-  <p><strong>Result:</strong> 616.9× coverage (matches observed ~617×).</p>
+<p><strong>Result (naive):</strong> 616.9× coverage (matches observed ~617×).</p>
 
-  <hr>
+<p style="margin-left:20px;">
+  C = (D<sub>effective</sub> × 1000 × A) / G
+</p>
+
+<p>
+  <strong>Result (DNA‑limited):</strong> 0.0035× coverage (effective depth capped at 0.000888 Gb).
+</p>
+
+<p>
+  MBARC‑26 is <em>not</em> DNA‑limited, so the observed coverage corresponds to the naive (total‑depth)
+  calculation. The DNA‑limited value illustrates how coverage would change if DNA quantity constrained
+  library complexity.
+</p>
+
+<hr>
 
   <!-- Scenario 3 -->
-  <h3>Scenario 3 — Determining Minimum Abundance Required for Detection</h3>
-  <p>
-    A researcher wants to know the lowest abundance at which <em>Escherichia coli</em> would be detectable
-    in a metagenomic sample sequenced at <strong>30 Gb</strong>.
-  </p>
+<h3>Scenario 3 — Determining Minimum Abundance Required for Detection</h3>
 
-  <ul>
-    <li><strong>Genome size:</strong> 4.64 Mb</li>
-    <li><strong>Sequencing depth:</strong> 30 Gb</li>
-    <li><strong>Minimum Detectable Coverage:</strong> 5×</li>
-    <li><strong>DNA input:</strong> 1 ng</li>
-  </ul>
+<p>
+  A researcher wants to know the lowest abundance at which <em>Escherichia coli</em> would be detectable
+  in a metagenomic sample sequenced at <strong>30 Gb</strong>.
+</p>
 
-  <p style="margin-left:20px;">
-    A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)
-  </p>
+<ul>
+  <li><strong>Genome size:</strong> 4.64 Mb</li>
+  <li><strong>Sequencing depth:</strong> 30 Gb</li>
+  <li><strong>Minimum Detectable Coverage:</strong> 5×</li>
+  <li><strong>DNA input:</strong> 1 ng</li>
+</ul>
 
-  <p><strong>Result:</strong> 0.00077% minimum abundance required.</p>
+<p style="margin-left:20px;">
+  A<sub>min</sub> = (C<sub>target</sub> × G) / (1000 × D<sub>effective</sub>)
+</p>
 
-  <hr>
+<p><strong>Result (naive):</strong> 0.00077% minimum abundance required.</p>
+
+<p><strong>Result (DNA‑limited):</strong> identical (DNA input is sufficient, so D<sub>effective</sub> ≈ D<sub>total</sub>).</p>
+
+<p>
+  Meta‑CD reports both naive and DNA‑limited minimum detectable abundance. When DNA input is high
+  relative to sequencing depth, the two values coincide. In low‑DNA contexts, D<sub>effective</sub> is capped
+  by DNA quantity, increasing the minimum abundance required for detection.
+</p>
+
+<hr>
 
   <!-- Scenario 4 -->
   <h3>Scenario 4 — Evaluating DNA‑Limited Coverage</h3>
