@@ -52,13 +52,7 @@ From Table 2 of the paper:
 
 Total sequenced bases:
 
-
-
-\[
-155.8\ \text{Gb}
-\]
-
-
+155.8 Gb
 
 This value is used for all organisms.
 
@@ -70,83 +64,35 @@ Let:
 
 - G = genome size (bp)  
 - D = total sequencing depth (Gb)  
-- D_effective = min(D, DNA_mass_ng)  
+- D<sub>effective</sub> = min(D, DNA<sub>mass,ng</sub>)  
 - p = relative abundance (%)  
-- C_target = 5 (target coverage)  
+- C<sub>target</sub> = 5 (target coverage)  
 - N = genome copies per µL  
 
 1. **Bases sequenced (naive)**  
-   
-
-\[
-   B_{\text{naive}} = D \times 10^9 \times (p/100)
-   \]
-
-
+   B<sub>naive</sub> = D × 10<sup>9</sup> × (p/100)
 
 2. **Bases sequenced (DNA‑limited)**  
-   
-
-\[
-   B_{\text{DNA}} = D_{\text{effective}} \times 10^9 \times (p/100)
-   \]
-
-
+   B<sub>DNA</sub> = D<sub>effective</sub> × 10<sup>9</sup> × (p/100)
 
 3. **Coverage (naive)**  
-   
-
-\[
-   C_{\text{naive}} = \frac{D \times 1000 \times (p/100)}{G_{\text{Mb}}}
-   \]
-
-
+   C<sub>naive</sub> = (D × 1000 × (p/100)) / G<sub>Mb</sub>
 
 4. **Coverage (DNA‑limited)**  
-   
-
-\[
-   C_{\text{DNA}} = \frac{D_{\text{effective}} \times 1000 \times (p/100)}{G_{\text{Mb}}}
-   \]
-
-
+   C<sub>DNA</sub> = (D<sub>effective</sub> × 1000 × (p/100)) / G<sub>Mb</sub>
 
 5. **Required depth for 5×**  
    If p = 0 → “NA”  
-   
-
-\[
-   D_{\text{req}} = \frac{5 \times G_{\text{Mb}}}{1000 \times (p/100)}
-   \]
-
-
+   D<sub>req</sub> = (5 × G<sub>Mb</sub>) / (1000 × (p/100))
 
 6. **Minimum detectable RA (naive)**  
-   
-
-\[
-   p_{\min,\text{naive}} = \frac{5 \times G_{\text{Mb}}}{1000 \times D} \times 100
-   \]
-
-
+   p<sub>min,naive</sub> = (5 × G<sub>Mb</sub>) / (1000 × D) × 100
 
 7. **Minimum detectable RA (DNA‑limited)**  
-   
-
-\[
-   p_{\min,\text{DNA}} = \frac{5 \times G_{\text{Mb}}}{1000 \times D_{\text{effective}}} \times 100
-   \]
-
-
+   p<sub>min,DNA</sub> = (5 × G<sub>Mb</sub>) / (1000 × D<sub>effective</sub>) × 100
 
 8. **DNA mass (ng)**  
-   
-
-\[
-   DNA_{\text{ng}} = N \times \frac{G \times 660}{6.022 \times 10^{23}} \times 10^9
-   \]
-
-
+   DNA<sub>ng</sub> = N × (G × 660) / (6.022 × 10<sup>23</sup>) × 10<sup>9</sup>
 
 ---
 
@@ -165,14 +111,14 @@ Use the web interface or local `index.html`.
 ### **3. Compare Meta‑CD’s outputs to the CSV**
 Meta‑CD should match:
 
-- Naive coverage  
-- DNA‑limited coverage  
-- Naive bases sequenced  
-- DNA‑limited bases sequenced  
-- Required depth  
-- Minimum detectable RA (naive and DNA‑limited)  
-- DNA mass  
-- Effective depth  
+- Naive coverage (C<sub>naive</sub>)  
+- DNA‑limited coverage (C<sub>DNA</sub>)  
+- Naive bases sequenced (B<sub>naive</sub>)  
+- DNA‑limited bases sequenced (B<sub>DNA</sub>)  
+- Required depth (D<sub>req</sub>)  
+- Minimum detectable RA (p<sub>min,naive</sub> and p<sub>min,DNA</sub>)  
+- DNA mass (DNA<sub>ng</sub>)  
+- Effective depth (D<sub>effective</sub>)  
 
 within rounding error.
 
@@ -187,12 +133,12 @@ This directory includes a fully reproducible Python script that generates the fi
 
 The script computes all expected Meta‑CD outputs for each of the 26 MBARC‑26 organisms, including:
 
-- Bases sequenced (naive and DNA‑limited)  
-- Achieved coverage (naive and DNA‑limited)  
-- Required depth for 5×  
-- Minimum detectable relative abundance (naive and DNA‑limited)  
-- DNA mass (ng)  
-- Effective depth (Gb)  
+- Bases sequenced (B<sub>naive</sub> and B<sub>DNA</sub>)  
+- Achieved coverage (C<sub>naive</sub> and C<sub>DNA</sub>)  
+- Required depth for 5× (D<sub>req</sub>)  
+- Minimum detectable relative abundance (p<sub>min,naive</sub> and p<sub>min,DNA</sub>)  
+- DNA mass (DNA<sub>ng</sub>)  
+- Effective depth (D<sub>effective</sub>)  
 
 These values are calculated using the exact formulas implemented in Meta‑CD, ensuring that the test suite is:
 
@@ -217,7 +163,6 @@ All values are hard‑coded into the script for reproducibility.
 
 Running the script generates: `mbarc26_expected_outcomes.csv`
 
-
 This CSV contains one row per organism and includes:
 
 - Genome size (bp, Mb)  
@@ -225,12 +170,12 @@ This CSV contains one row per organism and includes:
 - Genome copies per µL  
 - Relative abundance (%)  
 - Sequencing depth (Gb)  
-- Bases sequenced (naive and DNA‑limited)  
-- Achieved coverage (naive and DNA‑limited)  
-- Required depth for 5×  
-- Minimum detectable RA (naive and DNA‑limited)  
-- DNA mass (ng)  
-- Effective depth (Gb)  
+- Bases sequenced (B<sub>naive</sub>, B<sub>DNA</sub>)  
+- Achieved coverage (C<sub>naive</sub>, C<sub>DNA</sub>)  
+- Required depth for 5× (D<sub>req</sub>)  
+- Minimum detectable RA (p<sub>min,naive</sub>, p<sub>min,DNA</sub>)  
+- DNA mass (DNA<sub>ng</sub>)  
+- Effective depth (D<sub>effective</sub>)  
 
 These values represent the **ground‑truth numeric expectations** that Meta‑CD should reproduce.
 
