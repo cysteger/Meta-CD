@@ -90,20 +90,18 @@ Meta-CD predicts the required sequencing depth for a given experimental design (
 
 ## Naive vs DNA‑Limited Outputs in Meta‑CD
 
-Meta‑CD reports both **naive** (total‑depth) and **DNA‑limited** (effective‑depth) values for all coverage‑related calculations:
+Meta‑CD reports both naive (total‑depth) and DNA‑limited (effective‑depth) values for all coverage‑related calculations:
 
 - Bases sequenced  
 - Coverage  
 - Minimum detectable relative abundance  
 
-**Naive values** assume unlimited DNA input and use the full sequencing depth.  
-**DNA‑limited values** apply a library‑complexity constraint based on DNA quantity, using:
+Naive values assume unlimited DNA input and use the full sequencing depth.  
+DNA‑limited values apply a library‑complexity constraint based on DNA quantity, using:
 
 D<sub>effective</sub> = min(D<sub>total</sub>, D<sub>max</sub>)
 
-
-
-where \(D_{\text{max}}\) is derived from DNA mass (1 ng ≈ 1 Gbp unique sequence).
+where D<sub>max</sub> is derived from DNA mass (1 ng ≈ 1 Gbp unique sequence).
 
 This dual‑mode output allows users to evaluate both ideal sequencing performance and realistic DNA‑limited constraints, and is fully reflected in the MBARC‑26 validation dataset.
 
