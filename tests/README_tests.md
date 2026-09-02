@@ -223,9 +223,8 @@ computes all downstream Meta‑CD outputs, including:
 
 #### How this file is used
 
-`mbarc26_inputs.csv` is read directly by  
-`generate_mbarc26_expected_outcomes_csv.py`, which applies Meta‑CD’s formulas to produce  
-the full expected‑outcomes table. 
+The script uses hard‑coded MBARC‑26 values. These values are also provided separately in the tests file under the file name "mbarc26_inputs.csv".
+`generate_mbarc26_expected_outcomes_csv.py` applies Meta‑CD’s formulas to produce the full expected‑outcomes table. 
 
 
 ## Citation
