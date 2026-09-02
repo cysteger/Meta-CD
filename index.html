@@ -889,7 +889,7 @@ th {
 const DEFAULTS = {
   genome: 3,            // Mb
   abundance: 0.01,      // 1%
-  depth: 1,            // Gb
+  depth: 10,            // Gb
   targetCoverage: 1,    // 1×
   dnaCap: Infinity      // No DNA limit
 };
@@ -1150,17 +1150,17 @@ function computeCoverage() {
 function computeRequiredDepth() {
   const defaultsUsed = [];
 
-  // Target coverage
-  let C_raw = document.getElementById('targetCoverage').value;
-  const useC = document.getElementById('use_targetCoverage').checked;
+  // Minimum detectable coverage (use same param as Minimum RA)
+  let C_raw = document.getElementById('minRAcoverage').value;
+  const useC = document.getElementById('use_minRAcoverage').checked;
   let C;
   if (!useC || C_raw === "") {
-    defaultsUsed.push("Target coverage: 1×");
+    defaultsUsed.push("Minimum detectable coverage: 1×");
     C = DEFAULTS.targetCoverage;
   } else {
     C = parseFloat(C_raw);
   }
-
+  
   // Abundance
   let A_raw = document.getElementById('abundance').value;
   const useA = document.getElementById('use_abundance').checked;
@@ -1200,12 +1200,12 @@ function computeRequiredDepth() {
 function computeRequiredRA() {
   const defaultsUsed = [];
 
-  // Target coverage
+  // Minimum detectable coverage
   let C_raw = document.getElementById('minRAcoverage').value;
   const useC = document.getElementById('use_minRAcoverage').checked;
   let C;
   if (!useC || C_raw === "") {
-    defaultsUsed.push("Target coverage: 1×");
+    defaultsUsed.push("Minimum detectable coverage: 1×");
     C = DEFAULTS.targetCoverage;
   } else {
     C = parseFloat(C_raw);
